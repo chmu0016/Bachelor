@@ -1,0 +1,109 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <script src="js/auth.js"></script>
+    <script src="js/webSocket.js"></script>
+    <script src="js/allRooms.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/imageslider.js"></script>
+    <script src="js/slidercontent.js"></script>
+    <script src="js/colorpicker.js"></script>
+
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/sliderContent.css">
+    <link rel="stylesheet" href="css/allRooms.css">
+    <link rel="stylesheet" href="css/imageSlider.css">
+    <link rel="stylesheet" href="css/colorpickerContent.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+
+<body>
+    <script>
+        $(function () {
+
+        });
+    </script>
+    <div id="backgroundTop"></div>
+    <div id="backgroundContent">
+        <button type="button" id="depBtn">Departments</button>
+        <button type="button" id="buildBtn">Buidlings</button>
+        <button type="button" id="roomBtn">Rooms</button>
+        <!--
+    <img src="img/BackgroundAbstract.jpg" class="bg">
+-->
+        <div id="topBox">
+            <div id="leftBtn"></div>
+            <div id="shadowLeft"></div>
+            <div id="shadowRight"></div>
+            <div id="rightBtn"></div>
+            <div id="shadow"></div>
+            <div id="imageSlider">
+                <div id="sliderWidth"></div>
+            </div>
+        </div>
+        <div id="sliderContentWrapper">
+            <div id="allLampsWrapper">
+            </div>
+            <div id="sliderContentParent">
+                <div id="scrollbar"></div>
+                <div id="sliderContent">
+                </div>
+            </div>
+        </div>
+        <div id="colorPickerContent">
+            <div id="currentLightName">
+                <label for="currentLightName" class="currentLightNameLabel"></label>
+            </div>
+            <div id="allColorsContent">
+                <div id="color1" class="allColors"></div>
+                <div id="color2" class="allColors"></div>
+                <div id="color3" class="allColors"></div>
+                <div id="color4" class="allColors"></div>
+                <div id="color5" class="allColors"></div>
+                <div id="color6" class="allColors"></div>
+                <div id="color7" class="allColors"></div>
+                <div id="color8" class="allColors"></div>
+                <div id="color9" class="allColors"></div>
+                <div id="color10" class="allColors"></div>
+            </div>
+
+            <div id="preview"></div>
+
+            <div id="pickedColorsContent">
+                <div id="pColor1" class="allColors pickedColors"></div>
+                <div id="pColor2" class="allColors pickedColors"></div>
+                <div id="pColor3" class="allColors pickedColors"></div>
+                <div id="pColor4" class="allColors pickedColors"></div>
+                <div id="pColor5" class="allColors pickedColors"></div>
+                <div id="pColor6" class="allColors pickedColors"></div>
+                <div id="pColor7" class="allColors pickedColors"></div>
+                <div id="pColor8" class="allColors pickedColors"></div>
+                <div id="pColor9" class="allColors pickedColors"></div>
+                <div id="pColor10" class="allColors pickedColors"></div>
+                <div id="pColor11" class="allColors pickedColors"></div>
+                <div id="pColor12" class="allColors pickedColors"></div>
+                <div id="pColor13" class="allColors pickedColors"></div>
+                <div id="pColor14" class="allColors pickedColors"></div>
+                <div id="pColor15" class="allColors pickedColors"></div>
+                <div id="pColor16" class="allColors pickedColors"></div>
+
+            </div>
+            <img id="switch" src="img/icons/BildSwitch.svg"></img>
+            <div id="btnImgUpload"></div>
+            <input type="file" id="filesToUpload" multiple="multiple" />
+            <div id="btnImgMax"></div>
+            <div id="pickerBorder"></div>
+            <div id="pickerWrapper">
+                <canvas id="picker"></canvas>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

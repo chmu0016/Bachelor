@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica;
+    /*    user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;*/
+}
+/* Image Slider */
+
+html {
+    background-color: white;
+}
+/*body {
+    width: 1200px;
+    background-color: rgba(232, 232, 232, 0.91);
+    max-height: 800px;
+    margin: auto;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, .8);
+}
+*/
+
+#backgroundTop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(103, 3, 55);
+}
+#backgroundContent {
+    position: relative;
+    width: 1200px;
+    height: 100%;
+    background-color: #f0f3f6;
+    max-height: 1200px;
+    margin: auto;
+}
+label {
+    pointer-events: none;
+}
+#depBtn {
+    position: relative;
+    width: 400px;
+    height: 20px;
+    margin-right: -4px;
+    background-color: white;
+    border-right: 0px solid black;
+    border-top: 0px solid black;
+    border-left: 0px solid black;
+    border-bottom: 0px solid black;
+}
+#buildBtn {
+    margin-right: -4px;
+    position: relative;
+    width: 400px;
+    height: 20px;
+    background-color: white;
+    border-right: 0px solid black;
+    border-top: 0px solid black;
+    border-left: 0px solid black;
+    border-bottom: 0px solid black;
+}
+#roomBtn {
+    position: relative;
+    width: 400px;
+    height: 20px;
+    background-color: white;
+    border-right: 0px solid black;
+    border-top: 0px solid black;
+    border-left: 0px solid black;
+    border-bottom: 0px solid black;
+}

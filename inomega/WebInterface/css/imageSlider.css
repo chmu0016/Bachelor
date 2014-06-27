@@ -1,0 +1,118 @@
+#topBox {
+    position: relative;
+    height: 154px;
+    width: 1200px;
+    left: 50%;
+    margin-left: -600px;
+}
+#leftBtn {
+    position: absolute;
+    left: 0;
+    width: 45px;
+    height: 154px;
+    color: rgba(255, 255, 255, .8);
+    background-image: url(../img/icons/WeiterLinks.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    cursor: default;
+    z-index: 3;
+}
+#leftBtn:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+#rightBtn {
+    position: absolute;
+    right: 0;
+    height: 154px;
+    width: 45px;
+    color: rgba(255, 255, 255, .8);
+    background-image: url(../img/icons/WeiterRechts.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    cursor: default;
+    z-index: 3;
+}
+#rightBtn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+#imageSlider {
+    position: absolute;
+    overflow: hidden;
+    height: 154px;
+    width: 1200px;
+    z-index: 1;
+}
+#sliderWidth {
+    overflow: hidden;
+    height: 154px;
+    width: 300px;
+}
+#shadow {
+    position: absolute;
+    width: 1200px;
+    height: 154px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.65) 100%);
+}
+#img0 {
+    background: url(../img/slider/Badezimmer.png);
+}
+#img1 {
+    background-image: url(../img/slider/belebend.png);
+}
+#img2 {
+    background-image: url(../img/slider/Esszimmer.png);
+}
+#img3 {
+    background-image: url(../img/slider/Relax.png);
+}
+
+.roomImage {
+    position: relative;
+    height: 154px;
+    width: 322px;
+    float: left;
+}
+.roomLabel {
+    position: absolute;
+    bottom: 0px;
+    float: left;
+    padding-left: 10px;
+    color: rgba(255, 255, 255, .6);
+    font-size: 1.3em;
+    z-index: 2;
+}
+.roomImage.toggle {
+    box-shadow: inset 0 0px 1px 3px rgb(255, 163, 38);
+}
+.roomImageWrapper {
+    position: relative;
+    float: left;
+}
+.toggleOnOff {
+    position: absolute;
+    bottom: 2px;
+    right: 30px;
+    width: 35px;
+    height: 35px;
+    opacity: 1;
+    background-image: url(../img/icons/ToggleOn2.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: 3;
+}
+.toggleOnOff.toggled {
+    background-image: url(../img/icons/ToggleOff3.svg);
+}
+.profileBtnClass {
+    position: absolute;
+    background-image: url(../img/icons/Profil2.svg);
+    opacity: 1;
+    background-repeat: no-repeat;
+    background-size: contain;
+    right: 75px;
+    bottom: 2px;
+    width: 35px;
+    height: 35px;
+}

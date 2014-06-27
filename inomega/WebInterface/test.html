@@ -1,0 +1,95 @@
+<html>
+
+<head>
+    <!--    <meta name=viewport content="user-scalable=no,width=device-width" />-->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            test();
+            startwebsocket();
+        });
+
+        var ws;
+        var lastsendmessage;
+
+        function startwebsocket() {
+            console.log('startwebsocket');
+            var bool = false;
+            ws = new WebSocket('ws://192.168.1.131:8080/inomega/websocket');
+            //            ws = new WebSocket('ws://192.168.1.130:8080/examples/websocket/echoaAnnotaion');
+            ws.onopen = function () {
+                console.log("Websocket Ready!!");
+            }
+            ws.onclose = function () {
+                console.log("Websocket Closed!!");
+            }
+            ws.onerror = function () {
+                console.log("Websocket Error!!");
+            }
+            ws.onmessage = function (data) {
+                console.log('getvalue : ' + data.data);
+            }
+
+
+
+        }
+
+        function sendMessage(msg) {
+            if (msg == lastsendmessage) {
+                console.log('samemessage!');
+            } else {
+                ws.send(msg);
+            }
+
+            lastsendmessage = msg;
+        }
+
+        function test() {
+
+
+            $('#websocketbtn').click(function (e) {
+                sendMessage(JSON.stringify({
+                    "action": "subscribe",
+                    "room": "1",
+                }));
+            });
+
+            $('#editlamp').click(function (e) {
+                sendMessage(JSON.stringify({
+                    "action": "set",
+                    "lamp": "123",
+                    "param": "color",
+                    "value": "#ffffff",
+                }));
+            });
+        }
+    </script>
+
+
+
+</head>
+
+<body>
+
+    <!-- Login -->
+    <div data-role="page" id="login">
+        <div data-role="header" class='header' id='loginheader'>
+            <h1>InOmega</h1>
+        </div>
+        <div data-role="content" id="logincontent">
+            <input type="button" id="websocketbtn" value="Websocket">
+            <input type="button" id="editlamp" value="editlamp">
+        </div>
+    </div>
+
+
+
+
+</body>
+
+</html>

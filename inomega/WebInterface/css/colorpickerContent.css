@@ -1,0 +1,199 @@
+/*Alles Colorpicker Div*/
+
+#colorPickerContent {
+    position: relative;
+    float: right;
+    margin-top: 50px;
+    background: #ffffff;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, .2);
+    margin-right: 10px;
+    width: 700px;
+    height: 480px;
+    padding: 0 10 10 10;
+    color: white;
+}
+#currentLightName {
+    width: 100%;
+    height: 30px;
+    background-color: rgb(103, 3, 55);
+    margin-left: -10px;
+    padding-left: 20px;
+    text-align: center;
+}
+.currentLightNameLabel {
+    color: rgb(255, 255, 255);
+    font-size: 1.7em;
+    line-height: 120%;
+}
+/*Alle vordefinierten farben*/
+
+.allColors {
+    float: left;
+    margin: 10 10 5 10;
+    height: 50px;
+    width: 50px;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, .2);
+}
+#allColorsContent {
+    height: 70px;
+}
+#preview {
+    height: 50;
+    width: auto;
+    margin: 0 5 20 5;
+    /*   border-bottom: 2px solid rgb(0, 128, 255);*/
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, .2);
+}
+/*Picked Colors Content*/
+
+#pickedColorsContent {
+    float: right;
+    background: rgba(247, 247, 247, 0.8);
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, .2);
+    margin-right: 5px;
+    width: 300px;
+    height: 300px;
+}
+.pickedColors {
+    margin: 12 15 13 10;
+}
+/*Einzelne vordefinierte Farben*/
+
+#color1 {
+    background-color: #ff0000;
+}
+#color2 {
+    background-color: #FFA500;
+}
+#color3 {
+    background-color: #FFFF00;
+}
+#color4 {
+    background-color: #ADFF2F;
+}
+#color5 {
+    background-color: #00FF00;
+}
+#color6 {
+    background-color: #00FFFF;
+}
+#color7 {
+    background-color: #0000FF;
+}
+#color8 {
+    background-color: #800080;
+}
+#color9 {
+    background-color: #FFC0CB;
+}
+#color10 {
+    background-color: #FFFFFF;
+}
+/* Canvas mit colorwheel*/
+
+#pickerWrapper {
+    width: auto;
+    height: auto;
+    position: relative;
+}
+#picker {
+    position: absolute;
+    cursor: crosshair;
+    margin-left: 5px;
+    z-index: 2;
+}
+#pickerBorder {
+    position: absolute;
+    border: 4px dashed rgba(0, 0, 0, 0);
+    transition: border-color 0.5s linear;
+    -moz-transition: border-color 1s linear;
+    -o-transition: border-color 1s linear;
+    -webkit-transition: border-color 0.5slinear;
+    text-align: center;
+    margin-top: -4px;
+    margin-left: 1px;
+    width: 300px;
+    height: 300px;
+    /*
+    display: none;
+*/
+    z-index: 1;
+}
+#pickerBorder.border {
+    border-color: rgba(72, 72, 72, .6);
+}
+#pickerBorder.hover {
+    border-color: rgb(255, 255, 255);
+}
+#btnImgUpload {
+    float: right;
+    margin-right: -50px;
+    margin-top: 60px;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, .2);
+    text-align: center;
+    font-size: 3.0em;
+    color: black;
+    display: none;
+    background-image: url(../img/icons/BildUpload.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: rgba(255, 255, 255, .4);
+    cursor: default;
+}
+#btnImgUpload:hover {
+    opacity: 0.6;
+}
+#btnImgUpload:active {
+    background-color: rgba(255, 255, 255, .2);
+}
+#btnImgMax {
+    float: right;
+    margin-right: -50px;
+    margin-top: 120px;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, .2);
+    text-align: center;
+    font-size: 3.0em;
+    color: black;
+    display: none;
+    background-color: rgba(255, 255, 255, .4);
+    background-image: url(../img/icons/Vergr%C3%B6%C3%9Fern.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: default;
+}
+#btnImgMax:hover {
+    opacity: 0.6;
+}
+#btnImgMax:active {
+    background-color: rgba(255, 255, 255, .2);
+}
+input[type="file"] {
+    margin-top: 325px;
+    color: black;
+    display: none;
+}
+#switch {
+    float: right;
+    margin-right: 20px;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, .2);
+    background-color: rgba(255, 255, 255, 0.4);
+    /*
+    border: solid 2px rgba(72, 72, 72, .6);
+*/
+}
+#switch:hover {
+    opacity: 0.6;
+}
+#switch:active {
+    background-color: rgba(255, 255, 255, .2);
+}
+#pickerdiv {
+    width: 500px;
+    height: 500px;
+}

@@ -1,0 +1,17 @@
+#profileContent {
+    position: absolute;
+    align-content: center;
+    overflow: auto;
+    width: 1180px;
+    height: 500px;
+    background: rgba(0, 0, 0, .8);
+    z-index: 6;
+    padding: 10px;
+    display: none;
+}
+.profileContentImg {
+    margin-left: 30px;
+    margin-right: 35px;
+    margin-bottom: 20px;
+    background: url(../img/slider/Relax.png);
+}
