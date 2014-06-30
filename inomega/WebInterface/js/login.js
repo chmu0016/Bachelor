@@ -1,5 +1,5 @@
 $(document).ready(function () {
-var ip = "192.168.178.55";
+var ip = "192.168.1.148";
 // ---- CLIENT IP -----
 // Laptop Zu hause  192.168.178.75
 // PC Zu hause      changes everytime

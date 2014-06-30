@@ -3,7 +3,7 @@ $(document).ready(function () {
 });
 var un = localStorage.getItem("username");
 var pw = localStorage.getItem("password");
-var ip = "192.168.178.75";
+var ip = "192.168.1.148";
 // ---- SERVER IP -----
 // Laptop Zu hause  192.168.178.75
 // PC Zu hause      192.168.178.90
@@ -153,7 +153,7 @@ function profileAuth(clickedRoomAuth) {
 }
 
 function addProfiles() {
-    $("#colorPickerContent").after('<div id="profileContent"></div>');
+    $("#colorPickerContent").after('<div id="profileContent"> <button id="profileAddBtn"> Profil hinzufügen </button> </div>');
     for (var i = 0; i <= profileAmount; i++) {
         if (i == profileAmount) {
 
