@@ -49,12 +49,13 @@
     height: 154px;
     width: 300px;
 }
-#shadow {
+/*#shadow {
     position: absolute;
     width: 1200px;
     height: 154px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.65) 100%);
-}
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.5) 75%);
+    z-index: 2;
+} */
 #img0 {
     background: url(../img/slider/Badezimmer.png);
 }
@@ -81,7 +82,7 @@
     padding-left: 5px;
     color: rgba(255, 255, 255, .6);
     font-size: 1.3em;
-    z-index: 2;
+    z-index: 4;
 }
 .roomImage.toggle {
     box-shadow: inset 0 0px 1px 3px rgba(58, 170, 203, 0.65);
@@ -94,8 +95,8 @@
     position: absolute;
     bottom: 2px;
     right: 30px;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     opacity: 1;
     background-image: url(../img/icons/ToggleOn2.svg);
     background-repeat: no-repeat;
@@ -104,15 +105,18 @@
 }
 .toggleOnOff.toggled {
     background-image: url(../img/icons/ToggleOff3.svg);
+        background-repeat: no-repeat;
+    background-size: contain;
 }
 .profileBtnClass {
     position: absolute;
     background-image: url(../img/icons/Profil2.svg);
-    opacity: 1;
     background-repeat: no-repeat;
     background-size: contain;
-    right: 75px;
+    opacity: 1;
+    right: 65px;
     bottom: 2px;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
+    z-index: 3;
 }

@@ -1,10 +1,10 @@
 $(document).ready(function () {
     console.log('websocketready');
 });
-var ip = "192.168.1.148";
+var ip = "192.168.178.75";
 // ---- SERVER IP -----
 // Laptop Zu hause  192.168.178.75
-// PC Zu hause      192.168.178.90
+// PC Zu hause      changes everytime
 // PC Arbeit        192.168.1.148
 var ws = new WebSocket('ws://'+ip+':8080/inomega/websocket');
 

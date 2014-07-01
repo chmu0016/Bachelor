@@ -3,7 +3,7 @@ $(document).ready(function () {
 });
 var un = localStorage.getItem("username");
 var pw = localStorage.getItem("password");
-var ip = "192.168.1.148";
+var ip = "192.168.178.75";
 // ---- SERVER IP -----
 // Laptop Zu hause  192.168.178.75
 // PC Zu hause      192.168.178.90
