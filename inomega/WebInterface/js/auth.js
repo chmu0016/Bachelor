@@ -3,7 +3,7 @@ $(document).ready(function () {
 });
 var un = localStorage.getItem("username");
 var pw = localStorage.getItem("password");
-var ip = "192.168.178.75";
+var ip = "192.168.1.148";
 // ---- SERVER IP -----
 // Laptop Zu hause  192.168.178.75
 // PC Zu hause      192.168.178.90
@@ -107,7 +107,6 @@ function unsubscribe() {
 }
 
 function profileAuth(clickedRoomAuth) {
-    console.log("PROFILEAUTH clickedroom: " + clickedRoomAuth);
     $.ajax({
         type: "GET",
         url: "http://" + un + ":" + pw + "@" + ip + ":8080/inomega/api/rooms/" + clickedRoomAuth + "/profiles?callback=JSONPCallback",
@@ -163,7 +162,7 @@ function addProfiles() {
         } else {
 
             $("#profileContent").append('<div id="profile' + profileId[i] + '" class="profileContentImg roomImage">');
-            $("#profile" + profileId[i]).append('<label for="profile' + profileId[i] + '" class="profileLabel">' + profileNames[i] + '</label>');
+            $("#profile" + profileId[i]).append('<label for="profile' + profileId[i] + '" class="profileLabel">' + profileNames[i] + '</label> <button id="btnDeleteProfile' + profileId[i] + '" class="btnDelete"> - </button>');
             console.log("i: " + i + " PID: " + profileId[i] + " profilname: " + profileNames[i]);
         }
 
