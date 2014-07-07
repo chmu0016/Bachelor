@@ -239,7 +239,6 @@ function colorPickerIni() {
             if (e.keyCode == 27) {
                 $("#pickerWrapper").animate({
                     "margin-top": 0 + "%",
-
                     "top": 0 + "px",
                     "left": 0 + "px",
                 }, "fast", function () {

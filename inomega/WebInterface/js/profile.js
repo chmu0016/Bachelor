@@ -31,11 +31,38 @@ function profileIni() {
         // Profil hinzufügen
         $("#profileAddBtn").unbind('click').click(function () {
 
+            function getBase64Image(img) {
+                // Create an empty canvas element
+                var canvas = document.createElement("canvas");
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                // Copy the image contents to the canvas
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0);
+
+                // Get the data-URL formatted image
+                // Firefox supports PNG and JPEG. You could check img.src to
+                // guess the original format, but be aware the using "image/jpg"
+                // will re-encode the image.
+                var dataURL = canvas.toDataURL("image/png");
+
+                return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+            }
+            var imageProf = new Image();
+            imageProf.src = 'img/background.png';
+            var base64str = getBase64Image(imageProf);
+            console.error(base64str);
             var profileJsonObj = {
-                "name": "LasttestCHRIS",
-                "img_type": "jpg",
-                "img": "/img/profiles/profile_default.png",
-                "config": "mockup"
+                "name": "base64Test2",
+                "img_type": "png",
+                "img": base64str,
+                "config": [{
+                    "lamp": 1234,
+                    "color": "#FFFFFF",
+                    "brightness": 34,
+                    "state": "on",
+                }]
             };
             var jsonStrObj = JSON.stringify(profileJsonObj);
 
@@ -52,7 +79,7 @@ function profileIni() {
                 jsonpCallback: "JSONPCallback",
                 data: jsonStrObj,
                 success: function (returnedData) {
-                    /*alert(returnedData);*/
+                    console.info(returnedData);
                     console.log('Success');
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -94,7 +121,7 @@ function profileDelete() {
         var profIDSubstr = profID.substring(7, profIDLength);
 
 
-        var url=  "http://" + un + ":" + pw + "@" + ip + ":8080/inomega/api/rooms/" + clickedRoom + "/profiles/" + profIDSubstr + "?callback=JSONPCallback";
+        var url = "http://" + un + ":" + pw + "@" + ip + ":8080/inomega/api/rooms/" + clickedRoom + "/profiles/" + profIDSubstr + "?callback=JSONPCallback";
         $.ajax({
             type: 'DELETE',
             dataType: 'html',
@@ -105,9 +132,9 @@ function profileDelete() {
             url: url,
             jsonpCallback: "JSONPCallback",
             success: function (returnedData) {
-/*
-                alert(returnedData);
-*/
+
+                console.info(returnedData);
+
                 console.log('Success');
             },
             error: function (xhr, ajaxOptions, thrownError) {

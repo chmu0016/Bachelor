@@ -27,8 +27,10 @@ var lampBrightness = new Array();
 var lampId = new Array();
 var lampState = new Array();
 
-var profileNames = new Array();
 var profileId = new Array()
+var profileImage = new Array()
+var profileNames = new Array();
+var profileType = new Array();
 var profileAmount = 0;
 
 var oldClickedRoom = 1;
@@ -121,10 +123,13 @@ function profileAuth(clickedRoomAuth) {
             /*console.log(result);*/
             profileNames = [];
             profileId = [];
+            profileType = [];
+            profileImage =[]
             profileAmount = 0;
             $.each(result, function (key, val) {
                 profileNames[profileAmount] = val.name;
                 profileId[profileAmount] = val.id;
+                profileType[profileAmount] = val.type;
                 profileAmount++;
                 /*console.log("index: " + key + '   ' + " id: " + val.id);*/
             });
@@ -162,12 +167,17 @@ function addProfiles() {
         } else {
 
             $("#profileContent").append('<div id="profile' + profileId[i] + '" class="profileContentImg roomImage">');
-            $("#profile" + profileId[i]).append('<label for="profile' + profileId[i] + '" class="profileLabel">' + profileNames[i] + '</label> <button id="btnDeleteProfile' + profileId[i] + '" class="btnDelete"> - </button>');
+            $("#profile" + profileId[i]).append('<label for="profile' + profileId[i] + '" class="profileLabel">' + profileNames[i] + '</label>');
+            if (profileType[i] == "default") {
+                console.info("Default Profile");
+            }
+            else {
+                                $("#profile" + profileId[i] + " .profileLabel").after('<button id="btnDeleteProfile' + profileId[i] + '" class="btnDelete"> - </button>');
+            }
             console.log("i: " + i + " PID: " + profileId[i] + " profilname: " + profileNames[i]);
         }
 
     }
-
 }
 
 function removeProfiles() {
