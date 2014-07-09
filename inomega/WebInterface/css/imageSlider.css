@@ -77,10 +77,11 @@
 }
 .roomLabel {
     position: absolute;
-    bottom: 0px;
-    float: left;
-    padding-left: 5px;
+    top: 0px;
+    width: 322px;
+    text-align: center;
     color: rgba(255, 255, 255, .6);
+    background-color: rgba(0,0,0,0.5);
     font-size: 1.3em;
     z-index: 4;
 }

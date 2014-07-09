@@ -193,5 +193,15 @@ function imageSlider() {
             "value": 1,
         }));
     });
+/*    labelPositioning();*/
+}
 
+function labelPositioning() {
+    var labelWidth = new Array();
+
+    for (var i = 0; i < roomamount; i++) {
+        labelWidth[i] = $("#img" + i + " .roomLabel").css("width");
+        console.warn(labelWidth[i]);
+        $("#img" + i + " .roomLabel").css("margin-right", -labelWidth[i]);
+    }
 }

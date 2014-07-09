@@ -124,7 +124,7 @@ function profileAuth(clickedRoomAuth) {
             profileNames = [];
             profileId = [];
             profileType = [];
-            profileImage =[]
+            profileImage = []
             profileAmount = 0;
             $.each(result, function (key, val) {
                 profileNames[profileAmount] = val.name;
@@ -170,9 +170,8 @@ function addProfiles() {
             $("#profile" + profileId[i]).append('<label for="profile' + profileId[i] + '" class="profileLabel">' + profileNames[i] + '</label>');
             if (profileType[i] == "default") {
                 console.info("Default Profile");
-            }
-            else {
-                                $("#profile" + profileId[i] + " .profileLabel").after('<button id="btnDeleteProfile' + profileId[i] + '" class="btnDelete"> - </button>');
+            } else {
+                $("#profile" + profileId[i] + " .profileLabel").after('<button id="btnDeleteProfile' + profileId[i] + '" class="btnDelete"> - </button>');
             }
             console.log("i: " + i + " PID: " + profileId[i] + " profilname: " + profileNames[i]);
         }
@@ -228,6 +227,7 @@ function addSlider() {
                     "value": sliderVal,
                 }));
 
+
             } else if (slider == clickedSliderId) {
                 $("#" + clickedSliderId + ".ui-widget-content .ui-state-default").css("margin-left", "-" + widthVal + "px");
                 sendMessage(JSON.stringify({
@@ -236,6 +236,12 @@ function addSlider() {
                     "param": "brightness",
                     "value": sliderVal,
                 }));
+                sendMessage(JSON.stringify({
+                   "action": "set",
+                    "lamp": sliderIdSubstr,
+                    "param": "state",
+                    "value": "on",
+                }));
             } else {
                 $("#" + slider + ".ui-widget-content .ui-state-default").css("margin-left", "-" + widthVal + "px");
                 sendMessage(JSON.stringify({
@@ -243,6 +249,12 @@ function addSlider() {
                     "lamp": sliderIdSubstr,
                     "param": "brightness",
                     "value": sliderVal,
+                }));
+                sendMessage(JSON.stringify({
+                 "action": "set",
+                    "lamp": sliderIdSubstr,
+                    "param": "state",
+                    "value": "on",
                 }));
             }
         }
@@ -305,7 +317,7 @@ function roomAuth() {
 }
 
 function addRoom() {
-    if (roomamount >= 4) {
+    if (roomamount >= 0) {
         $("#topBox").before('<div id="allRoomsButton">  </div> <div id="roomsAccordion"> </div>');
         for (var i = 0; i < roomamount; i++) {
             $("#sliderWidth").append('<div id="imgWrapper' + i + '" class="roomImageWrapper"> </div>');

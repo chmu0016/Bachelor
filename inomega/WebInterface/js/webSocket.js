@@ -29,9 +29,10 @@ function startwebsocket() {
         console.log(obj.value);
         console.log(obj.lamp);*/
         if (obj.code == 'ok') {
-            console.log(obj);
+            console.info("Server -> Client:" + data.data);
         } else {
-            console.log(obj);
+            console.info("Server -> Client:" + data.data);
+
             var dataParam = obj.param;
             var dataVal = obj.value;
 
@@ -62,4 +63,5 @@ function startwebsocket() {
 
 function sendMessage(temp) {
     ws.send(temp);
+    console.info("Client -> Server:" + temp);
 }

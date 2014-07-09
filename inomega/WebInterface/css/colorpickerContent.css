@@ -29,13 +29,27 @@
 
 .allColors {
     float: left;
-    margin: 10 10 5 10;
+    margin-right: 10px;
+    margin-left: 11px;
+    margin-top: 0px;
+    margin-bottom: 5px;
     height: 50px;
     width: 50px;
     box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, .2);
 }
 #allColorsContent {
-    height: 70px;
+    position: relative;
+    height: 50px;
+    width: 690px;
+    margin: 10 0 20 5;
+    padding: 0;
+}
+#allColorsContent div:first-child {
+    margin-left: 0px;
+}
+#allColorsContent div:last-child {
+    margin-right: 0px;
+    margin-left: 12px;
 }
 #preview {
     height: 50;
@@ -55,7 +69,7 @@
     height: 300px;
 }
 .pickedColors {
-    margin: 12 15 13 10;
+    margin: 12.5 12.5 12.5 12.5;
 }
 /*Einzelne vordefinierte Farben*/
 
