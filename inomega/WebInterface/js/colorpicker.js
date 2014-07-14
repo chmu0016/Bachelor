@@ -360,8 +360,6 @@ function colorPickerIni() {
             }
         }
     });
-
-
 }
 
 function changeColor(picked, index) {

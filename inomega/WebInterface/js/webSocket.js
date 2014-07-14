@@ -1,5 +1,6 @@
 $(document).ready(function () {
     console.log('websocketready');
+    startwebsocket();
 });
 var ip = "192.168.1.148";
 // ---- SERVER IP -----
@@ -30,6 +31,8 @@ function startwebsocket() {
         console.log(obj.lamp);*/
         if (obj.code == 'ok') {
             console.info("Server -> Client:" + data.data);
+        } else if (obj.code == 'error') {
+            console.error("Server -> Client: ERROR WEBSOCKET");
         } else {
             console.info("Server -> Client:" + data.data);
 

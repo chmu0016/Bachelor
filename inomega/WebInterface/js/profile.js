@@ -109,7 +109,16 @@ function profileIni() {
             "state ": "on "
             }],
        };*/
-        $("#profileContent").slideToggle();
+/*
+        $("#profileContent").slideToggle("fast");
+*/
+        $("#profileContent").fadeIn("slow");
+        $("#profileContent").animate({
+            display: "block",
+            right: "0px",
+        }, function(){
+            
+        });
     });
 
 }

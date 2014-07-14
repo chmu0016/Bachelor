@@ -140,7 +140,7 @@ function profileAuth(clickedRoomAuth) {
                 addProfiles();
             }
             profileIni();
-            startwebsocket();
+
         },
         error: function (a, b, c) {
             console.log(a + " " + b + " " + c);
@@ -157,7 +157,7 @@ function profileAuth(clickedRoomAuth) {
 }
 
 function addProfiles() {
-    $("#colorPickerContent").after('<div id="profileContent"> <button id="profileAddBtn"> Profil hinzufügen </button> </div>');
+    $("#colorPickerContent").after('<div id="profileContent"><div id="profileTopLabelContent"> <label for="profileTopLabelContent" class="profileTopLabel">Profile</label></div> <button id="profileAddBtn"></button> </div>');
     for (var i = 0; i <= profileAmount; i++) {
         if (i == profileAmount) {
 
@@ -227,7 +227,6 @@ function addSlider() {
                     "value": sliderVal,
                 }));
 
-
             } else if (slider == clickedSliderId) {
                 $("#" + clickedSliderId + ".ui-widget-content .ui-state-default").css("margin-left", "-" + widthVal + "px");
                 sendMessage(JSON.stringify({
@@ -237,7 +236,7 @@ function addSlider() {
                     "value": sliderVal,
                 }));
                 sendMessage(JSON.stringify({
-                   "action": "set",
+                    "action": "set",
                     "lamp": sliderIdSubstr,
                     "param": "state",
                     "value": "on",
@@ -251,7 +250,7 @@ function addSlider() {
                     "value": sliderVal,
                 }));
                 sendMessage(JSON.stringify({
-                 "action": "set",
+                    "action": "set",
                     "lamp": sliderIdSubstr,
                     "param": "state",
                     "value": "on",

@@ -1,0 +1,42 @@
+#profilName {
+    margin-left: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+#profilNameText {
+    width: 300px;
+    height: 30px;
+}
+#profilBildUploadBtn {
+    float: right;
+    margin-left: 20px;
+    width: 300px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid #c2c2c2;
+}
+#uploadContent {
+    float: right;
+    border: 4px dashed rgb(136, 136, 136);
+}
+#formBtnUpload {
+    margin-top: 380px;
+}
+#cancelBtn {
+    float: left;
+    bottom: 0px;
+    margin-left: 20px;
+    width: 300px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid #c2c2c2;
+}
+#uploadBtn {
+    float: right;
+    bottom: 0px;
+    margin-left: 20px;
+    width: 300px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid #c2c2c2;
+}

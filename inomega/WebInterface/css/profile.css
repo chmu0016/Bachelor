@@ -1,17 +1,30 @@
 #profileContent {
     position: absolute;
+    right: 0px;
+    margin-top: 50px;
+    margin-right: 10px;
     align-content: center;
     overflow: auto;
-    width: 1180px;
-    height: 500px;
-    background: rgba(227, 227, 227, 0.9);
+    width: 720px;
+    height: 490px;
+    background: rgb(255, 255, 255);
     z-index: 6;
-    padding: 10px;
     display: none;
 }
+#profileTopLabelContent {
+    width: 100%;
+    height: 30px;
+    background-color: rgb(103, 3, 55);
+    text-align: center;
+}
+.profileTopLabel {
+    color: rgb(255, 255, 255);
+    font-size: 1.7em;
+    line-height: 120%;
+}
 .profileContentImg {
-    margin-left: 30px;
-    margin-right: 35px;
+    margin-left: 15px;
+    margin-right: 10px;
     margin-top: 30px;
     background: url(../img/slider/Relax.png);
 }
@@ -30,10 +43,15 @@
 #profileAddBtn {
     position: absolute;
     color: #363636;
-    background-color: white;
+    height: 30px;
+    width: 50px;
+    background-color: rgba(0, 0, 0, 0.42);
+    background-image: url(../img/icons/Profilhinzuf%C3%BCgen.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
     top: 0px;
-    left: 0px;
-    padding: 3px;
+    right: 0px;
     font-size: 1em;
     border-right: 0px solid black;
     border-top: 0px solid black;
@@ -42,7 +60,7 @@
     z-index: 1;
 }
 #profileAddBtn:hover {
-    background-color: grey;
+    background-color: rgba(0, 0, 0, 0.15);
 }
 .btnDelete {
     width: 50px;
