@@ -2,7 +2,7 @@ $(document).ready(function () {
     console.log('websocketready');
     startwebsocket();
 });
-var ip = "192.168.1.148";
+var ip = "192.168.178.49";
 // ---- SERVER IP -----
 // Laptop Zu hause  192.168.178.75
 // PC Zu hause      changes everytime
@@ -32,7 +32,7 @@ function startwebsocket() {
         if (obj.code == 'ok') {
             console.info("Server -> Client:" + data.data);
         } else if (obj.code == 'error') {
-            console.error("Server -> Client: ERROR WEBSOCKET");
+            console.error("Server -> Client:" + data.data);
         } else {
             console.info("Server -> Client:" + data.data);
 
@@ -45,6 +45,7 @@ function startwebsocket() {
                 var thumbWidth = dataVal * 0.23;
                 $("#" + dataSliderId).slider("value", dataVal);
                 $("#" + dataSliderId + ".ui-widget-content .ui-state-default").css("margin-left", "-" + thumbWidth + "px");
+
             } else if (Boolean(obj.lamp) && dataParam == "color") {
                 console.log("lamp color");
                 var dataSliderId = "slider" + obj.lamp;
@@ -59,6 +60,24 @@ function startwebsocket() {
                 var dataRoomId = obj.room;
                 console.log("ALLCOLORS");
                 $(".slider.ui-widget-content .ui-state-default").css("background", dataVal);
+            } else if (Boolean(obj.lamp) && (dataParam == "state")) {
+                console.log("Lamp state");
+                var dataSliderId = "slider" + obj.lamp;
+                if (dataVal == "off") {
+                    $("#" + dataSliderId).css("background", "black");
+                } else {
+                    $("#" + dataSliderId).css("background", "rgb(180, 180, 180)");
+                }
+            } else if (Boolean(obj.room) && (dataParam == "state")) {
+                console.log("Room state");
+                var dataRoomId = obj.room;
+                if (dataVal == "off") {
+                    $(".slider").not("#sliderAllLamps").css("background", "black");
+                    $("#toggleOnOff" + dataRoomId-1).addClass("toggled");
+                } else {
+                    $("#toggleOnOff" + dataRoomId-1).removeClass("toggled");
+                    $(".slider").not("#sliderAllLamps").css("background", "rgb(180, 180, 180)");
+                }
             }
         }
     }

@@ -40,10 +40,18 @@ function profilUpload() {
                             /*  var parent = $("#pickedColorsContent").offsetTop();
                             var child = $("canvas").offsetTop();
                             console.info("PARENT: " + parent + " " + "CHILD: " + child);*/
-                            var width = img.width / 300;
-                            canvas.width = (img.width / width);
-                            canvas.height = (img.height / width);
-                            ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, (img.width / width), (img.height / width));
+                            if (img.width > img.height) {
+                                var width = img.width / 300;
+                                canvas.width = (img.width / width);
+                                canvas.height = (img.height / width);
+                                ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, (img.width / width), (img.height / width));
+                            } else {
+                                var height = img.height / 150;
+                                canvas.width = (img.width / height);
+                                canvas.height = (img.height / height);
+                                ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, (img.width / height), (img.height / height));
+
+                            }
                         }
                     };
                 }(file));
@@ -73,12 +81,26 @@ function profilUpload() {
 
         return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
     }
+    // Abbrechen Button
+    $("#cancelBtn").unbind('click').click(function () {
+        $("#profileUploadContent").fadeOut("fast");
+        $("#picker").css("top", "");
+        $("#picker").css("left", "");
+        $("#picker").css("z-index", "");
 
+    });
+    // Speichern Button
     $("#uploadBtn").unbind('click').click(function () {
-        /*        profilname = $("#profilNameText").val();
+        $("#profileUploadContent").fadeOut("fast");
+        
+        $("#picker").css("top", "");
+        $("#picker").css("left", "");
+        $("#picker").css("z-index", "");
+
+        profilname = $("#profilNameText").val();
         console.info("profilname: " + base64str);
 
-        console.error(base64str);
+        console.info(base64str);
         var profileJsonObj = {
             "name": profilname,
             "img_type": "png",
@@ -115,13 +137,7 @@ function profilUpload() {
 
         function JSONPCallback() {
 
-        }*/
-        sendMessage(JSON.stringify({
-            "action": "set",
-            "lamp": 18,
-            "param": "profile",
-            "value": 5,
-        }));
+        }
     });
 
 }

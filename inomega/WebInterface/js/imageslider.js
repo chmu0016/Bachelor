@@ -98,7 +98,6 @@ function imageSlider() {
 */
 
     $(".roomImage").click(function (e) {
-        console.log(e.target);
         if ($(this).hasClass('roomImageAccordion')) {
             var clickedImg = $(e.target).index();
         } else {
@@ -156,46 +155,36 @@ function imageSlider() {
         }
     });
 
-    /*    $(".toggleOnOff").click(function () {
-        $(".toggleOnOff").toggleClass("toggled");
-        if (state == "off") {
+    $(".toggleOnOff").click(function () {
+
+        var roomId = $(this).prev("div").attr("id");
+        var roomIdLength = roomId.length;
+        var roomIdSubstr = roomId.substring(3, roomIdLength);
+        roomIdSubstr++;
+
+        $(this).toggleClass("toggled");
+        if ($(this).hasClass("toggled")) {
             sendMessage(JSON.stringify({
                 "action": "set",
-                "room": clickedRoom,
-                "param": "state",
-                "value": "on",
-            }));
-            state = "on";
-        } else {
-            sendMessage(JSON.stringify({
-                "action": "set",
-                "room": clickedRoom,
+                "room": roomIdSubstr,
                 "param": "state",
                 "value": "off",
             }));
-            state = "off";
+
+        } else {
+            sendMessage(JSON.stringify({
+                "action": "set",
+                "room": roomIdSubstr,
+                "param": "state",
+                "value": "on",
+            }));
+
         }
 
-    });*/
-    $(".toggleOnOff").click(function () {
-        console.info("get");
-        /*        $(".toggleOnOff").toggleClass("toggled");
-        sendMessage(JSON.stringify({
-            "action": "get",
-            "lamp": clickedRoom,
-            "param": "color",
-        }));*/
-        $(".toggleOnOff").toggleClass("toggled");
-        sendMessage(JSON.stringify({
-            "action": "set",
-            "room": clickedRoom,
-            "param": "state",
-            "value": 1,
-        }));
     });
-/*    labelPositioning();*/
 }
 
+// evtl. für buttons mittig zu positionieren für jedes Bild
 function labelPositioning() {
     var labelWidth = new Array();
 

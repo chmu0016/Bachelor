@@ -3,7 +3,7 @@ $(document).ready(function () {
 });
 var un = localStorage.getItem("username");
 var pw = localStorage.getItem("password");
-var ip = "192.168.1.148";
+var ip = "192.168.178.49";
 // ---- SERVER IP -----
 // Laptop Zu hause  192.168.178.75
 // PC Zu hause      192.168.178.90
@@ -32,6 +32,8 @@ var profileImage = new Array()
 var profileNames = new Array();
 var profileType = new Array();
 var profileAmount = 0;
+
+var ciName, ciColorPrim, ciColorSec;
 
 var oldClickedRoom = 1;
 var clickedRoom = 0;
@@ -79,6 +81,10 @@ function sliderAuth(clickedRoomAuth) {
             oldClickedRoom = clickedRoom;
             subscribe(clickedRoom);
             profileAuth(clickedRoom);
+            if (lampamount > 10) {
+                sliderOverflow();
+            }
+            sliderThumbClick();
         },
         error: function (a, b, c) {
             console.log(a + " " + b + " " + c);
@@ -134,6 +140,7 @@ function profileAuth(clickedRoomAuth) {
                 /*console.log("index: " + key + '   ' + " id: " + val.id);*/
             });
             removeProfiles();
+            corpIdent();
             if (result == "") {
                 console.log("RESULT null");
             } else {
@@ -204,7 +211,8 @@ function addSlider() {
         }
     }
     /*console.log("--------------------------------------------------------------------------------------");*/
-    var slider, sliderVal, widthVal;
+    var slider, sliderVal, widthVal, sliderState;
+    sliderState = "off";
     $(".slider").slider({
         min: 0,
         max: 100,
@@ -215,11 +223,30 @@ function addSlider() {
             widthVal = sliderVal * 0.23;
             var sliderIdLength = slider.length;
             var sliderIdSubstr = slider.substring(6, sliderIdLength);
-            /*            console.warn(slider + "  " + sliderVal + " " + clickedSliderId);*/
             if (slider == "sliderAllLamps") {
                 $(".slider").slider("value", ui.value);
                 $("#sliderAllLamps.ui-widget-content .ui-state-default").css("margin-left", "-" + widthVal + "px");
                 $(".slider.ui-widget-content .ui-state-default").css("margin-left", "-" + widthVal + "px");
+
+                if (sliderVal > 1 && sliderState == "off") {
+                    sliderState = "on";
+                    sendMessage(JSON.stringify({
+                        "action": "set",
+                        "room": clickedRoom,
+                        "param": "state",
+                        "value": sliderState,
+                    }));
+
+                } else if (sliderVal > 1 && sliderState == "on") {} else {
+                    sliderState = "off";
+                    sendMessage(JSON.stringify({
+                        "action": "set",
+                        "room": clickedRoom,
+                        "param": "state",
+                        "value": sliderState,
+                    }));
+                }
+
                 sendMessage(JSON.stringify({
                     "action": "set",
                     "room": clickedRoom,
@@ -228,6 +255,25 @@ function addSlider() {
                 }));
 
             } else if (slider == clickedSliderId) {
+                if (sliderVal > 1 && sliderState == "off") {
+                    sliderState = "on";
+                    sendMessage(JSON.stringify({
+                        "action": "set",
+                        "lamp": sliderIdSubstr,
+                        "param": "state",
+                        "value": sliderState,
+                    }));
+
+                } else if (sliderVal > 1 && sliderState == "on") {} else {
+                    sliderState = "off";
+                    sendMessage(JSON.stringify({
+                        "action": "set",
+                        "lamp": sliderIdSubstr,
+                        "param": "state",
+                        "value": sliderState,
+                    }));
+                }
+
                 $("#" + clickedSliderId + ".ui-widget-content .ui-state-default").css("margin-left", "-" + widthVal + "px");
                 sendMessage(JSON.stringify({
                     "action": "set",
@@ -235,25 +281,33 @@ function addSlider() {
                     "param": "brightness",
                     "value": sliderVal,
                 }));
-                sendMessage(JSON.stringify({
-                    "action": "set",
-                    "lamp": sliderIdSubstr,
-                    "param": "state",
-                    "value": "on",
-                }));
+
             } else {
+                if (sliderVal > 1 && sliderState == "off") {
+                    sliderState = "on";
+                    sendMessage(JSON.stringify({
+                        "action": "set",
+                        "lamp": sliderIdSubstr,
+                        "param": "state",
+                        "value": sliderState,
+                    }));
+
+                } else if (sliderVal > 1 && sliderState == "on") {} else {
+                    sliderState = "off";
+                    sendMessage(JSON.stringify({
+                        "action": "set",
+                        "lamp": sliderIdSubstr,
+                        "param": "state",
+                        "value": sliderState,
+                    }));
+                }
+
                 $("#" + slider + ".ui-widget-content .ui-state-default").css("margin-left", "-" + widthVal + "px");
                 sendMessage(JSON.stringify({
                     "action": "set",
                     "lamp": sliderIdSubstr,
                     "param": "brightness",
                     "value": sliderVal,
-                }));
-                sendMessage(JSON.stringify({
-                    "action": "set",
-                    "lamp": sliderIdSubstr,
-                    "param": "state",
-                    "value": "on",
                 }));
             }
         }
@@ -300,6 +354,7 @@ function roomAuth() {
             addRoom();
             imageSlider();
             allRoomsContent();
+
         },
         error: function (a, b, c) {
             console.log(a + " " + b + " " + c + "ERROR");
@@ -331,6 +386,41 @@ function addRoom() {
     } else {
 
     }
+}
+
+function corpIdent() {
+    $.ajax({
+        type: "GET",
+        url: "http://" + un + ":" + pw + "@" + ip + ":8080/inomega/api/ci?callback=JSONPCallback",
+        dataType: 'jsonp',
+        jsonp: false,
+        jsonpCallback: 'JSONPCallback',
+        async: true,
+        crossDomain: true,
+        username: 'user1',
+        password: 'user1',
+        success: function (result) {
+            ciName = result.app_name;
+            ciColorPrim = result.color_prim;
+            ciColorSec = result.color_sec;
+
+            console.warn("CI: " + ciName + " " + ciColorPrim + " " + ciColorSec);
+
+        },
+        error: function (a, b, c) {
+            console.warn(a + " " + b + " " + c + "ERROR");
+        }
+    })
+        .fail(function (e) {
+            console.warn(e.msg + "ERROR");
+        });
+
+    function JSONPCallback() {
+        /*
+         alert("callback");
+*/
+    }
+
 }
 
 function departmentAuth() {

@@ -58,18 +58,28 @@
                 </div>
             </div>
         </div>
+
+        <div id="profileUploadContent">
+            <div id="profileHinzTopLabelContent">
+                <label for="profileHinzTopLabelContent" class="profileHinzTopLabel">Neues Profil hinzufügen</label>
+            </div>
+            <div id="profileUploadContentWrapper">
+                <form id="profilName">
+                    <input type="text" id="profilNameText" placeholder="Profilname" placeholder="Nutzername" />
+                    <button type="button" id="profilBildUploadBtn">Profilbild auswählen</button>
+                    <input type="file" id="profileToUpload" multiple="multiple" />
+                </form>
+
+                <canvas id="uploadContent"></canvas>
+                <form id="FormBtnUpload">
+                    <button type="button" id="cancelBtn">Abbrechen</button>
+                    <button type="button" id="uploadBtn">Speichern</button>
+                </form>
+            </div>
+        </div>
+
         <div id="colorPickerContent">
             <div id="currentLightName">
-                <label for="currentLightName" class="currentLightNameLabel">Neues Profil hinzufügen</label>
-            </div>
-            <form id="profilName">
-                <input type="text" id="profilNameText" placeholder="Profilname" placeholder="Nutzername" />
-                <button type="button" id="profilBildUploadBtn">Profilbild auswählen</button>
-                <input type="file" id="profileToUpload" multiple="multiple" />
-            </form>
-            <canvas id="uploadContent"></canvas>
-
-            <!--            <div id="currentLightName">
                 <label for="currentLightName" class="currentLightNameLabel"></label>
             </div>
             <div id="allColorsContent">
@@ -105,7 +115,7 @@
                 <div id="pColor15" class="allColors pickedColors"></div>
                 <div id="pColor16" class="allColors pickedColors"></div>
             </div>
-            
+
             <img id="switch" src="img/icons/BildSwitch.svg"></img>
             <div id="btnImgUpload"></div>
             <input type="file" id="filesToUpload" multiple="multiple" />
@@ -114,16 +124,12 @@
             <div id="pickerWrapper">
                 <canvas id="picker"></canvas>
             </div>
--->
-            <div id="pickerWrapper">
-                <canvas id="picker"></canvas>
-            </div>
-            <form id="FormBtnUpload">
-                <button type="button" id="cancelBtn">Abbrechen</button>
-                <button type="button" id="uploadBtn">Speichern</button>
-            </form>
+
+
         </div>
+
     </div>
+
 </body>
 
 </html>

@@ -22,7 +22,7 @@
 }
 .currentLightNameLabel {
     color: rgb(255, 255, 255);
-    font-size: 1.7em;
+    font-size: 1.5em;
     line-height: 120%;
 }
 /*Alle vordefinierten farben*/
@@ -114,7 +114,7 @@
     position: absolute;
     cursor: crosshair;
     margin-left: 5px;
-    z-index: 2;
+    z-index: 1;
 }
 #pickerBorder {
     position: absolute;
@@ -206,8 +206,4 @@ input[type="file"] {
 }
 #switch:active {
     background-color: rgba(255, 255, 255, .2);
-}
-#pickerdiv {
-    width: 500px;
-    height: 500px;
 }

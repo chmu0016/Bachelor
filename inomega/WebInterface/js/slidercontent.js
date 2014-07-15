@@ -1,8 +1,6 @@
-$(document).ready(function () {
-    slider();
-});
+$(document).ready(function () {});
 
-function slider() {
+function sliderOverflow() {
     var parH = $('#sliderContentParent').outerHeight(true);
     var areaH = $('#sliderContent').outerHeight(true);
     var scrH = parH / (areaH / parH);
@@ -80,5 +78,42 @@ function slider() {
             document.attachEvent("on" + mousewheelevt, displaywheel)
         else if (document.addEventListener) //WC3 browsers
             document.addEventListener(mousewheelevt, displaywheel, false)
+    });
+
+}
+
+function sliderThumbClick() {
+    // Klick auf SliderThumb
+    $(".ui-widget-content .ui-state-default").click(function () {
+        var sliderofThumb = $(this).closest("div").attr("id");
+        var sliderofThumbLength = sliderofThumb.length;
+        var sliderofThumbSubstr = sliderofThumb.substring(6, sliderofThumbLength);
+
+        console.log(sliderofThumb);
+        if (sliderofThumb == "sliderAllLamps") {
+            if ($("#toggleOnOff" + (clickedRoom - 1)).hasClass("toggled")) {
+                sendMessage(JSON.stringify({
+                    "action": "set",
+                    "room": clickedRoom,
+                    "param": "state",
+                    "value": "on",
+                }));
+            } else {
+                sendMessage(JSON.stringify({
+                    "action": "set",
+                    "room": clickedRoom,
+                    "param": "state",
+                    "value": "off",
+                }));
+
+            }
+        } else {
+            sendMessage(JSON.stringify({
+                "action": "set",
+                "lamp": sliderofThumbSubstr,
+                "param": "state",
+                "value": "off",
+            }));
+        }
     });
 }

@@ -8,7 +8,7 @@
     width: 720px;
     height: 490px;
     background: rgb(255, 255, 255);
-    z-index: 6;
+    z-index: 1;
     display: none;
 }
 #profileTopLabelContent {
@@ -19,7 +19,7 @@
 }
 .profileTopLabel {
     color: rgb(255, 255, 255);
-    font-size: 1.7em;
+    font-size: 1.5em;
     line-height: 120%;
 }
 .profileContentImg {

@@ -10,6 +10,7 @@ function profileIni() {
     $("#" + oldProfile).addClass("toggle");
 
     $(".profileBtnClass").unbind('click').click(function () {
+
         // Profil aktivieren
         $(".profileContentImg").unbind('click').click(function (e) {
             roomProfileIndex = $(this).attr("id");
@@ -28,10 +29,19 @@ function profileIni() {
             $("#" + roomProfileIndex).addClass("toggle");
             $("#" + roomProfileIndex + " .profileLabel").css("color", "rgba(255, 255, 255, 1)");
         });
+
         // Profil hinzufügen
         $("#profileAddBtn").unbind('click').click(function () {
+         
+            $("#profileUploadContent").fadeIn("fast", function () {
+           
+                $("#picker").css("top", "-80px");
+                $("#picker").css("left", "5px");
+                $("#picker").css("z-index", 2);
 
-            function getBase64Image(img) {
+            });
+
+            /* function getBase64Image(img) {
                 // Create an empty canvas element
                 var canvas = document.createElement("canvas");
                 canvas.width = img.width;
@@ -89,7 +99,7 @@ function profileIni() {
 
             function JSONPCallback() {
 
-            }
+            }*/
         });
 
         // Profil aktualisieren
@@ -109,16 +119,8 @@ function profileIni() {
             "state ": "on "
             }],
        };*/
-/*
-        $("#profileContent").slideToggle("fast");
-*/
-        $("#profileContent").fadeIn("slow");
-        $("#profileContent").animate({
-            display: "block",
-            right: "0px",
-        }, function(){
-            
-        });
+
+        $("#profileContent").fadeToggle("fast");
     });
 
 }
