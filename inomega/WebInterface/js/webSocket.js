@@ -2,7 +2,7 @@ $(document).ready(function () {
     console.log('websocketready');
     startwebsocket();
 });
-var ip = "192.168.178.49";
+var ip = "192.168.1.130";
 // ---- SERVER IP -----
 // Laptop Zu hause  192.168.178.75
 // PC Zu hause      changes everytime
@@ -29,8 +29,51 @@ function startwebsocket() {
         /*    console.log(obj.param);
         console.log(obj.value);
         console.log(obj.lamp);*/
+        /*
+        console.warn(obj.code);
+*/
         if (obj.code == 'ok') {
             console.info("Server -> Client:" + data.data);
+
+            var dataParam = obj.param;
+            var dataVal = obj.value;
+
+            if (Boolean(obj.lamp) && (dataParam == "brightness")) {
+                var dataSliderId = "slider" + obj.lamp;
+                var thumbWidth = dataVal * 0.23;
+                $("#" + dataSliderId).slider("value", dataVal);
+                $("#" + dataSliderId + ".ui-widget-content .ui-state-default").css("margin-left", "-" + thumbWidth + "px");
+
+            } else if (Boolean(obj.lamp) && dataParam == "color") {
+                var dataSliderId = "slider" + obj.lamp;
+                $("#" + dataSliderId + ".ui-widget-content .ui-state-default").css("background", dataVal);
+            } else if (Boolean(obj.room) && (dataParam == "brightness")) {
+                var dataRoomId = obj.room;
+                var thumbWidth = dataVal * 0.23;
+                $(".slider").slider("value", dataVal);
+                $(".slider.ui-widget-content .ui-state-default").css("margin-left", "-" + thumbWidth + "px");
+            } else if (Boolean(obj.room) && (dataParam == "color")) {
+                var dataRoomId = obj.room;
+                $(".slider.ui-widget-content .ui-state-default").css("background", dataVal);
+            } else if (Boolean(obj.lamp) && (dataParam == "state")) {
+                console.log("STATE LAMP");
+                var dataSliderId = "slider" + obj.lamp;
+                if (dataVal == "off") {
+                    $("#" + dataSliderId).css("background", "black");
+                } else {
+                    $("#" + dataSliderId).css("background", "rgb(180, 180, 180)");
+                }
+            } else if (Boolean(obj.room) && (dataParam == "state")) {
+                console.log("STATE ROOM");
+                var dataRoomId = obj.room;
+                if (dataVal == "off") {
+                    $(".slider").not("#sliderAllLamps").css("background", "black");
+                    $("#toggleOnOff" + dataRoomId - 1).addClass("toggled");
+                } else {
+                    $("#toggleOnOff" + dataRoomId - 1).removeClass("toggled");
+                    $(".slider").not("#sliderAllLamps").css("background", "rgb(180, 180, 180)");
+                }
+            }
         } else if (obj.code == 'error') {
             console.error("Server -> Client:" + data.data);
         } else {
@@ -40,28 +83,24 @@ function startwebsocket() {
             var dataVal = obj.value;
 
             if (Boolean(obj.lamp) && (dataParam == "brightness")) {
-                console.log("lamp brightness");
                 var dataSliderId = "slider" + obj.lamp;
                 var thumbWidth = dataVal * 0.23;
                 $("#" + dataSliderId).slider("value", dataVal);
                 $("#" + dataSliderId + ".ui-widget-content .ui-state-default").css("margin-left", "-" + thumbWidth + "px");
 
             } else if (Boolean(obj.lamp) && dataParam == "color") {
-                console.log("lamp color");
                 var dataSliderId = "slider" + obj.lamp;
                 $("#" + dataSliderId + ".ui-widget-content .ui-state-default").css("background", dataVal);
             } else if (Boolean(obj.room) && (dataParam == "brightness")) {
-                console.log("all brightness");
                 var dataRoomId = obj.room;
                 var thumbWidth = dataVal * 0.23;
                 $(".slider").slider("value", dataVal);
                 $(".slider.ui-widget-content .ui-state-default").css("margin-left", "-" + thumbWidth + "px");
             } else if (Boolean(obj.room) && (dataParam == "color")) {
                 var dataRoomId = obj.room;
-                console.log("ALLCOLORS");
                 $(".slider.ui-widget-content .ui-state-default").css("background", dataVal);
             } else if (Boolean(obj.lamp) && (dataParam == "state")) {
-                console.log("Lamp state");
+                console.log("STATE LAMP");
                 var dataSliderId = "slider" + obj.lamp;
                 if (dataVal == "off") {
                     $("#" + dataSliderId).css("background", "black");
@@ -69,13 +108,13 @@ function startwebsocket() {
                     $("#" + dataSliderId).css("background", "rgb(180, 180, 180)");
                 }
             } else if (Boolean(obj.room) && (dataParam == "state")) {
-                console.log("Room state");
+                console.log("STATE ROOM");
                 var dataRoomId = obj.room;
                 if (dataVal == "off") {
                     $(".slider").not("#sliderAllLamps").css("background", "black");
-                    $("#toggleOnOff" + dataRoomId-1).addClass("toggled");
+                    $("#toggleOnOff" + dataRoomId - 1).addClass("toggled");
                 } else {
-                    $("#toggleOnOff" + dataRoomId-1).removeClass("toggled");
+                    $("#toggleOnOff" + dataRoomId - 1).removeClass("toggled");
                     $(".slider").not("#sliderAllLamps").css("background", "rgb(180, 180, 180)");
                 }
             }

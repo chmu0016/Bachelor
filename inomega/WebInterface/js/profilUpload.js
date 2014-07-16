@@ -33,9 +33,9 @@ function profilUpload() {
                         var canvas = document.getElementById('uploadContent');
                         var ctx = canvas.getContext('2d');
 
-                        base64str = getBase64Image(img);
 
                         img.src = evt.target.result;
+                        base64str = getBase64Image(img);
                         img.onload = function () {
                             /*  var parent = $("#pickedColorsContent").offsetTop();
                             var child = $("canvas").offsetTop();
@@ -65,78 +65,139 @@ function profilUpload() {
 
     function getBase64Image(img) {
         // Create an empty canvas element
-        var canvas = document.createElement("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
+        var canvasUpload = document.createElement("canvas");
+        canvasUpload.width = img.width;
+        canvasUpload.height = img.height;
 
         // Copy the image contents to the canvas
-        var ctx = canvas.getContext("2d");
+        var ctx = canvasUpload.getContext("2d");
         ctx.drawImage(img, 0, 0);
 
         // Get the data-URL formatted image
         // Firefox supports PNG and JPEG. You could check img.src to
         // guess the original format, but be aware the using "image/jpg"
         // will re-encode the image.
-        var dataURL = canvas.toDataURL("image/png");
+        var dataURL = canvasUpload.toDataURL("image/png");
 
         return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
     }
     // Abbrechen Button
     $("#cancelBtn").unbind('click').click(function () {
-        $("#profileUploadContent").fadeOut("fast");
-        $("#picker").css("top", "");
-        $("#picker").css("left", "");
-        $("#picker").css("z-index", "");
+        $("#profileContent").fadeIn("fast", function () {
+
+            $("#profileUploadContent").fadeOut("fast");
+
+            $("#picker").css("top", "");
+            $("#picker").css("left", "");
+            $("#picker").css("z-index", "");
+        });
+
 
     });
     // Speichern Button
     $("#uploadBtn").unbind('click').click(function () {
-        $("#profileUploadContent").fadeOut("fast");
-        
-        $("#picker").css("top", "");
-        $("#picker").css("left", "");
-        $("#picker").css("z-index", "");
+        $("#profileContent").fadeOut("fast", function () {
+
+            $("#profileUploadContent").fadeOut("fast");
+
+            $("#picker").css("top", "");
+            $("#picker").css("left", "");
+            $("#picker").css("z-index", "");
+        });
 
         profilname = $("#profilNameText").val();
-        console.info("profilname: " + base64str);
-
-        console.info(base64str);
-        var profileJsonObj = {
-            "name": profilname,
-            "img_type": "png",
-            "img": base64str,
-            "config": [{
-                "lamp": 1234,
-                "color": "#FFFFFF",
-                "brightness": 34,
-                "state": "on",
-                }]
-        };
-        var jsonStrObj = JSON.stringify(profileJsonObj);
-
-        var url = "http://" + un + ":" + pw + "@" + ip + ":8080/inomega/api/rooms/" + clickedRoom + "/profiles/add?callback=JSONPCallback";
 
         $.ajax({
-            type: 'PUT',
-            dataType: 'html',
+            type: "GET",
+            url: "http://" + un + ":" + pw + "@" + ip + ":8080/inomega/api/rooms/" + clickedRoom + "/lamps?callback=JSONPCallback",
+            dataType: 'jsonp',
+            jsonp: false,
+            jsonpCallback: 'JSONPCallback',
+            async: true,
             crossDomain: true,
-            xhrFields: {
-                withCredentials: true
+            username: 'user1',
+            password: 'user1',
+            success: function (result) {
+                /*console.log(result);*/
+                lampnames = [];
+                lampColor = [];
+                lampBrightness = [];
+                lampId = [];
+                lampState = [];
+
+                lampamount = 0;
+                $.each(result, function (key, val) {
+                    lampnames[lampamount] = val.name;
+                    lampColor[lampamount] = val.color;
+                    lampBrightness[lampamount] = val.brightness;
+                    lampId[lampamount] = val.id;
+                    lampState[lampamount] = val.state;
+
+                    lampamount++;
+                });
+
+                uploadConfig();
             },
-            url: url,
-            jsonpCallback: "JSONPCallback",
-            data: jsonStrObj,
-            success: function (returnedData) {
-                console.info(returnedData);
-                console.log('Success');
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                console.error('xhr : ' + xhr + " ajaxOptions : " + ajaxOptions + " thrownError : " + thrownError);
-            },
-        });
+            error: function (a, b, c) {
+                console.log(a + " " + b + " " + c);
+                document.body.innerHTML = a + " " + b + " " + c;
+            }
+        })
+            .fail(function (e) {
+                console.log(e.msg);
+            });
 
         function JSONPCallback() {
 
+        }
+
+        function uploadConfig() {
+
+
+            var uplConfig = [];
+            for (var i = 0; i < lampamount; i++) {
+
+                uplConfig.push({
+                    "lamp": lampId[i],
+                    "color": lampColor[i],
+                    "brightness": lampBrightness[i],
+                    "state": lampState[i],
+                });
+
+                console.info("up: " + JSON.stringify(uplConfig));
+
+            }
+            var profileJsonObj = {
+                "name": profilname,
+                "img_type": "png",
+                "img": base64str,
+                "config": uplConfig
+            };
+            var jsonStrObj = JSON.stringify(profileJsonObj);
+            var url = "http://" + un + ":" + pw + "@" + ip + ":8080/inomega/api/rooms/" + (clickedRoom) + "/profiles/add?callback=JSONPCallback";
+
+            $.ajax({
+                type: 'PUT',
+                dataType: 'html',
+                crossDomain: true,
+                xhrFields: {
+                    withCredentials: true
+                },
+                url: url,
+                jsonpCallback: "JSONPCallback",
+                data: jsonStrObj,
+                success: function (returnedData) {
+                    console.info(returnedData);
+                    console.log('Success');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.error('xhr : ' + xhr + " ajaxOptions : " + ajaxOptions + " thrownError : " + thrownError);
+                },
+            });
+
+            function JSONPCallback() {
+
+            }
         }
     });
 

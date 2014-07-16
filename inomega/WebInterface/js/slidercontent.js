@@ -89,7 +89,6 @@ function sliderThumbClick() {
         var sliderofThumbLength = sliderofThumb.length;
         var sliderofThumbSubstr = sliderofThumb.substring(6, sliderofThumbLength);
 
-        console.log(sliderofThumb);
         if (sliderofThumb == "sliderAllLamps") {
             if ($("#toggleOnOff" + (clickedRoom - 1)).hasClass("toggled")) {
                 sendMessage(JSON.stringify({
@@ -108,12 +107,31 @@ function sliderThumbClick() {
 
             }
         } else {
-            sendMessage(JSON.stringify({
+            if ($("#" + sliderofThumb).css("background-Color") == "rgb(0, 0, 0)") {
+                console.warn("black");
+                sendMessage(JSON.stringify({
+                    "action": "set",
+                    "lamp": sliderofThumbSubstr,
+                    "param": "state",
+                    "value": "on"
+                }));
+            } else {
+                console.warn("not black: " + $("#" + sliderofThumb).css("background-Color"));
+                sendMessage(JSON.stringify({
+                    "action": "set",
+                    "lamp": sliderofThumbSubstr,
+                    "param": "state",
+                    "value": "off"
+                }));
+
+            }
+
+            /*            sendMessage(JSON.stringify({
                 "action": "set",
                 "lamp": sliderofThumbSubstr,
                 "param": "state",
                 "value": "off",
-            }));
+            }));*/
         }
     });
 }

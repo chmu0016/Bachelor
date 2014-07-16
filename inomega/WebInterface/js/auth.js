@@ -3,7 +3,7 @@ $(document).ready(function () {
 });
 var un = localStorage.getItem("username");
 var pw = localStorage.getItem("password");
-var ip = "192.168.178.49";
+var ip = "192.168.1.130";
 // ---- SERVER IP -----
 // Laptop Zu hause  192.168.178.75
 // PC Zu hause      192.168.178.90
@@ -42,7 +42,6 @@ var clickedRoom = 0;
 
 function sliderAuth(clickedRoomAuth) {
     clickedRoom = clickedRoomAuth + 1; // +1 addieren, weil id der Raumobjekte bei 1 anfängt (indize clickedroom bei 0)
-
     $.ajax({
         type: "GET",
         url: "http://" + un + ":" + pw + "@" + ip + ":8080/inomega/api/rooms/" + clickedRoom + "/lamps?callback=JSONPCallback",
@@ -68,11 +67,12 @@ function sliderAuth(clickedRoomAuth) {
                 lampBrightness[lampamount] = val.brightness;
                 lampId[lampamount] = val.id;
                 lampState[lampamount] = val.state;
-                /*                console.log('lampnames : ' + lampnames[lampamount]);
+                                console.log('lampnames : ' + lampnames[lampamount]);
                 console.log('color : ' + lampColor[lampamount]);
-                console.log('brightness : ' + lampBrightness[lampamount]);*/
+                console.log('brightness : ' + lampBrightness[lampamount]);
                 lampamount++;
                 /*console.log("index: " + key + '   ' + " id: " + val.id);*/
+                console.lo
             });
             removeSlider();
             addSlider();
@@ -141,11 +141,8 @@ function profileAuth(clickedRoomAuth) {
             });
             removeProfiles();
             corpIdent();
-            if (result == "") {
-                console.log("RESULT null");
-            } else {
-                addProfiles();
-            }
+            addProfiles();
+
             profileIni();
 
         },

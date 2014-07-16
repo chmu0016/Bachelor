@@ -30,11 +30,11 @@ function profileIni() {
             $("#" + roomProfileIndex + " .profileLabel").css("color", "rgba(255, 255, 255, 1)");
         });
 
-        // Profil hinzufügen
+        // Profil hinzufügen klicken
         $("#profileAddBtn").unbind('click').click(function () {
-         
             $("#profileUploadContent").fadeIn("fast", function () {
-           
+                $("#profileContent").fadeOut("fast");
+
                 $("#picker").css("top", "-80px");
                 $("#picker").css("left", "5px");
                 $("#picker").css("z-index", 2);
@@ -119,8 +119,24 @@ function profileIni() {
             "state ": "on "
             }],
        };*/
-
         $("#profileContent").fadeToggle("fast");
+    });
+    $(document).keyup(function (e) {
+        if (e.keyCode == 27) {
+            if ($("#profileContent").is(":visible")) {
+                $("#profileContent").fadeOut("fast");
+            } else if ($("#profileUploadContent").is(":visible")) {
+                $("#profileContent").fadeIn("fast", function () {
+
+                    $("#profileUploadContent").fadeOut("fast");
+
+                    $("#picker").css("top", "");
+                    $("#picker").css("left", "");
+                    $("#picker").css("z-index", "");
+                });
+
+            }
+        }
     });
 
 }
