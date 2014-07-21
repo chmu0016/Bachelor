@@ -6,6 +6,7 @@
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
+
     <script src="js/globalVariable.js"></script>
     <script src="js/login.js"></script>
     <script src="js/webSocket.js"></script>
@@ -44,11 +45,20 @@
     <img src="img/BackgroundAbstract.jpg" class="bg">
 -->
         <div id="topBox">
-            <div id="leftBtn"></div>
-            <div id="rightBtn"></div>
-            <div id="imageSlider">
-                <div id="sliderWidth"></div>
+            <button type="button" id="depBtn">Bereiche</button>
+            <div id="bereichContent">
+                <div id="bereich1" class="bereiche"></div>
+                <div id="bereich2" class="bereiche"></div>
+                <div id="bereich3" class="bereiche"></div>
             </div>
+            <button type="button" id="buildBtn">Gebäude</button>
+            <div id="gebäudeContent">Second content panel</div>
+            <button type="button" id="roomBtn">Räume</button>
+
+            <div id="raumContent">Second content panel</div>
+            <!--            <div id="imageSlider">
+                <div id="sliderWidth"></div>
+            </div>-->
         </div>
         <div id="sliderContentWrapper">
             <div id="allLampsWrapper">

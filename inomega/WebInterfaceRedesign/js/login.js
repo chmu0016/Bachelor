@@ -19,6 +19,6 @@ function login() {
         localStorage.setItem("password", password);
         localStorage.setItem("ipAdresse", ipAdresse);
 
-        window.location.replace("http://" + ipAdresse + "/inomega/WebInterface/index.html");
+        window.location.replace("http://" + ipAdresse + "/Bachelor/inomega/WebInterfaceRedesign/index.html");
     });
 }

@@ -1,0 +1,143 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+    <!--
+    <script src="js/socket.io.js"></script>
+-->
+    <script src="http://192.168.1.128:81/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            console.log('websocketready');
+            startwebsocket();
+        });
+
+        function startwebsocket() {
+            console.log('startwebsocket');
+            $("#sendmessage10").click(function(event) {
+                $("#slider").val(10).slider("refresh");
+                sendMessage(10);
+            });
+            $("#sendmessage20").click(function(event) {
+                $("#slider").val(20).slider("refresh");
+                sendMessage(20);
+            });
+            $("#sendmessage30").click(function(event) {
+                $("#slider").val(30).slider("refresh");
+                sendMessage(30);
+            });
+            $("#sendmessage40").click(function(event) {
+                $("#slider").val(40).slider("refresh");
+                sendMessage(40);
+            });
+            $("#sendmessage50").click(function(event) {
+                $("#slider").val(50).slider("refresh");
+                sendMessage(50);
+            });
+            $("#sendmessage60").click(function(event) {
+                $("#slider").val(60).slider("refresh");
+                sendMessage(60);
+            });
+            $("#slider").on('change', function(event) {
+                var value = $("#slider").val();
+                if (bool) {
+                    console.log('sendvalue : ' + value);
+                    sendMessage(value);
+                }
+            });
+
+            $("#slider").on('slidestart', function(event) {
+                console.log('Slidestart');
+                bool = true;
+            });
+
+            $("#slider").on('slidestop', function(event) {
+                console.log('Slidestop');
+                bool = false;
+            });
+            var bool = false;
+
+            /*
+            var ws = new WebSocket('ws://192.168.1.130:8080/inomega/websocket');
+
+            var ws = io.connect('//192.168.1.130:8080/inomega/websocket');
+            ws.onopen = function() {
+                console.log("Websocket Ready!!");
+                //            sendMessage();
+            }
+            ws.onclose = function() {
+                console.log("Websocket Closed!!");
+                var output = document.getElementById('output');
+                output.innerHTML = "Websocket Closed!!";
+            }
+            ws.onerror = function() {
+                console.log("Websocket Error!!");
+                var output = document.getElementById('output');
+                output.innerHTML = "Websocket Error!!";
+            }
+            ws.onmessage = function(data) {
+                console.log('getvalue : ' + data.data);
+                var output = document.getElementById('output');
+                var slider1 = document.getElementById('slider');
+
+                $("#slider").val(data.data).slider("refresh");
+                output.innerHTML = data.data;
+                if ("Hi!" == data.data) {
+                    //ws.close();
+                }
+            }
+
+            function sendMessage(temp) {
+                ws.send(temp);
+            }
+            */
+
+            var socket = io.connect('http://192.168.1.128:81');
+
+            socket.on('welcome', function(data) {
+                $('#messages').append('<li>' + data.message + '</li>');
+
+                socket.emit('i am client', {
+                    data: 'foo!'
+                });
+            });
+            socket.on('time', function(data) {
+                console.log(data);
+                $('#messages').append('<li>' + data.time + '</li>');
+            });
+            socket.on('error', function() {
+                console.error(arguments)
+            });
+            socket.on('message', function() {
+                console.log(arguments)
+            });
+
+            function sendMessage(temp) {
+
+                socket.send(temp);
+            }
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <input type="range" id="slider" value="0" min="0" max="100" animate="true">
+    <input type="range" id="slider1" value="0" min="0" max="100" animate="true">
+    <input type="button" id="sendmessage10" value="sendmessage10">
+    <input type="button" id="sendmessage20" value="sendmessage20">
+    <input type="button" id="sendmessage30" value="sendmessage30">
+    <input type="button" id="sendmessage40" value="sendmessage40">
+    <input type="button" id="sendmessage50" value="sendmessage50">
+    <input type="button" id="sendmessage60" value="sendmessage60">
+
+    <div id="output"></div>
+</body>
+
+
+</html>

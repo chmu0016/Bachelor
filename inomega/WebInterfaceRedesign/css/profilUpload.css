@@ -1,0 +1,82 @@
+#profileUploadContent {
+    position: absolute;
+    right: 0px;
+    margin-top: 50px;
+    margin-right: 10px;
+    align-content: center;
+    overflow: auto;
+    width: 720px;
+    height: 490px;
+    background: rgb(255, 255, 255);
+    z-index: 2;
+    display: none;
+}
+#profileUploadContentWrapper {
+    width: 670px;
+    height: 420px;
+    margin-left: 15px;
+}
+#profileHinzTopLabelContent {
+    width: 100%;
+    height: 30px;
+    background-color: rgb(103, 3, 55);
+    text-align: center;
+}
+.profileHinzTopLabel {
+    color: rgb(255, 255, 255);
+    font-size: 1.5em;
+    line-height: 120%;
+}
+#profilName {
+    margin-left: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+#profilNameText {
+    width: 300px;
+    height: 30px;
+}
+#profilBildUploadBtn {
+    float: right;
+    margin-left: 20px;
+    width: 300px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid #c2c2c2;
+}
+#pickerProfile {
+    position: absolute;
+    cursor: crosshair;
+    margin-left: 5px;
+    z-index: 2;
+}
+#uploadContent {
+    float: right;
+    border: 4px dashed rgb(136, 136, 136);
+}
+#formBtnUpload {
+    margin-top: 380px;
+}
+#cancelBtn {
+    float: left;
+    bottom: 0px;
+    margin-left: 20px;
+    width: 300px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid #c2c2c2;
+}
+#uploadBtn {
+    float: right;
+    bottom: 0px;
+    margin-left: 20px;
+    width: 300px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid #c2c2c2;
+}
+#pickerProfileWrapper {
+        width: auto;
+    height: auto;
+    position: relative;
+}

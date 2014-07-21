@@ -1,5 +1,5 @@
 html {
-    background-color: rgb(103, 3, 55);
+    background-color: #f0f3f6;
 }
 #backgroundContent {
     position: absolute;
@@ -9,16 +9,17 @@ html {
     top: 0;
     bottom: 0;
     height: 100%;
+    z-index: 1;
 }
 #loginContentWrapper {
     position: relative;
-    width: 630px;
+    width: 420px;
     left: 50%;
 }
 #loginContent {
     position: relative;
     margin-top: 200px;
-    margin-left: -315px;
+    margin-left: -210px;
     width: 420px;
     height: auto;
     text-align: center;
@@ -48,12 +49,14 @@ input {
     background-color: #e3e3e3;
 }
 #topText {
+    position: relative;
     width: 100%;
+    min-width: 950px;
     height: 100px;
     background-color: rgb(103, 3, 55);
-    top: 50px;
     font-size: 4.0em;
     text-align: center;
     text-shadow: 0 -1px 1px #666666, 0 1px 1px #000000;
     color: white;
+    z-index: 2;
 }
