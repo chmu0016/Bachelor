@@ -1,112 +1,92 @@
 $(document).ready(function () {});
 
 function imageSlider() {
-
-    $("#depBtn").click(function () {
-
-        $(this).next().animate({
-            width: 'toggle'
-        }, 1000);
-    });
-    $("#buildBtn").click(function () {
-
-        $(this).next().animate({
-            width: 'toggle'
-        }, 1000);
-    });
-    $("#roomBtn").click(function () {
-
-        $(this).next().animate({
-            width: 'toggle'
-        }, 1000);
-    });
-
-
-
-
-    // Breite eines einzelnes Bildes
-    var singleImgWidth = $("#img0").outerWidth();
-
-    // Gesamtbreite aller Bilder im Slider
-    var totalW = 0;
-    $("#sliderWidth").children().each(function () {
-        totalW = totalW + $(this).width();
-    });
-
-    // Div-Container auf die gesamtbreite der Bilder setzen
-    document.getElementById("sliderWidth").style.width = totalW + "px";
-    // Breite des Sichtbaren Sliders
-    var imgWidth = $("#imageSlider").width();
-    var scrollPixel = 0;
-    $("#rightBtn").click(function () {
-        if (scrollPixel * 2 < totalW) {
-            scrollPixel += singleImgWidth;
-            $("#imageSlider").animate({
-                scrollLeft: scrollPixel
-            }, 200);
-        } else {}
-    });
-
-    $("#leftBtn").click(function () {
-        if (scrollPixel > 0) {
-            scrollPixel -= singleImgWidth;
-            $("#imageSlider").animate({
-                scrollLeft: scrollPixel
-            }, 200);
+    var clicked = false;
+    var totalImgWidth = 0;
+    $("#depBtn").bind("click", function () {
+        totalImgWidth = 0;
+        clicked = !clicked;
+        $("#bereichImageContent").children().each(function () {
+            totalImgWidth = totalImgWidth + $(this).width();
+        });
+        totalImgWidth = totalImgWidth + $("#bereichImageContent").children().length;
+        $("#bereichImageContent").width(totalImgWidth);
+        if (clicked == true) {
+            document.getElementById('buildBtn').disabled = true;
+            document.getElementById('roomBtn').disabled = true;
+            $("#buildBtn").animate({
+                "margin-left": "1020px"
+            }, 1000);
         } else {
-            scrollPixel = 0;
+            document.getElementById('buildBtn').disabled = false;
+            document.getElementById('roomBtn').disabled = false;
+            $("#buildBtn").animate({
+                "margin-left": "0px"
+            }, 1000);
         }
+        $(this).next().animate({
+            width: 'toggle'
+        }, 1000);
     });
+
+    // Gebäude anzeigen
+    $("#buildBtn").click(function () {
+        totalImgWidth = 0;
+        clicked = !clicked;
+        $("#gebäudeImageContent").children().each(function () {
+            totalImgWidth = totalImgWidth + $(this).width();
+        });
+        totalImgWidth = totalImgWidth + $("#gebäudeImageContent").children().length;
+        $("#gebäudeImageContent").width(totalImgWidth);
+        if (clicked == true) {
+            document.getElementById('depBtn').disabled = true;
+            document.getElementById('roomBtn').disabled = true;
+
+            $("#roomBtn").animate({
+                "margin-left": "1020px"
+            }, 1000);
+        } else {
+            document.getElementById('depBtn').disabled = false;
+            document.getElementById('roomBtn').disabled = false;
+
+            $("#roomBtn").animate({
+                "margin-left": "0px"
+            }, 1000);
+        }
+        $(this).next().animate({
+            width: 'toggle'
+        }, 1000);
+    });
+
+    // Raumnübersicht anzeigen
+    $("#roomBtn").click(function () {
+        totalImgWidth = 0;
+        clicked = !clicked;
+        // Breite aller Kind-Elemente zusammenaddieren um die Breite des Imagesliders festzulegen
+        $("#raumImageContent").children().each(function () {
+            totalImgWidth = totalImgWidth + $(this).width();
+        });
+        totalImgWidth = totalImgWidth + $("#raumImageContent").children().length;
+        $("#raumImageContent").width(totalImgWidth);
+        // Wenn angeklickt, beide anderen Buttons deaktivieren
+        if (clicked == true) {
+            document.getElementById('depBtn').disabled = true;
+            document.getElementById('buildBtn').disabled = true;
+        } else {
+            document.getElementById('depBtn').disabled = false;
+            document.getElementById('buildBtn').disabled = false;
+        }
+
+        $(this).next().animate({
+            width: 'toggle'
+        }, 1000);
+    });
+
+
+  
 
     var checked = false;
 
-    function displaywheel(e) {
-        if (checked == true) {
-            var evt = window.event || e //equalize event object
-            var delta = evt.detail ? evt.detail * (-120) : evt.wheelDelta /*check for detail first so Opera uses that instead of wheelDelta             */
-        }
-        if (delta > 0) {
-            if (scrollPixel * 2 < totalW) {
-                scrollPixel += singleImgWidth;
-                $("#imageSlider").animate({
-                    scrollLeft: scrollPixel
-                }, 200);
-            } else {
-                /*scrollPixel = (imgWidth - singleImgWidth);
-                    console.log("else" + scrollPixel);*/
-            }
-        } else if (delta < 0) {
-            if (scrollPixel > 0) {
-                scrollPixel -= singleImgWidth;
-                $("#imageSlider").animate({
-                    scrollLeft: scrollPixel
-                }, 200);
-            } else {
-                scrollPixel = 0;
-            }
-        }
-        /*console.log(delta) //delta returns +120 when wheel is scrolled up, -120 when down*/
-    }
-
-    $("#imageSlider").mouseenter(function () {
-        checked = true;
-        var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
-
-        if (document.attachEvent) //if IE (and Opera depending on user setting)
-            document.attachEvent("on" + mousewheelevt, displaywheel)
-        else if (document.addEventListener) //WC3 browsers
-            document.addEventListener(mousewheelevt, displaywheel, false)
-    });
-
-    $("#imageSlider").mouseleave(function () {
-        checked = false;
-        var mousewheelevt = null; //FF doesn't recognize mousewheel as of FF3.x
-
-        if (document.attachEvent) //if IE (and Opera depending on user setting)
-            document.attachEvent(null, displaywheel)
-        else if (document.addEventListener) //WC3 browsers
-            document.addEventListener(null, displaywheel, false)
-    });
 
     // Auswählen eines Raumes
     var tmpClickedImg = 0;
@@ -127,37 +107,12 @@ function imageSlider() {
             var clickedImg = $(this).closest('.roomImageWrapper').index('.roomImageWrapper');
         }
         var pos = $("#img" + clickedImg).position().left;
-        var visibleContent = (imgWidth - singleImgWidth);
-        if (scrollPixel > visibleContent) {
-            scrollPixel = visibleContent - singleImgWidth;
-        } else if (scrollPixel < 0) {
-            scrollPixel = 0;
-        }
+
         /* console.log("POSITION:" + pos);
         console.log("breite sichtbar:" + visibleContent);
         console.log("scrollpixel:" + scrollPixel);
         console.log("--------------------------------------------------------------------------------------------------------------------");*/
-        if (pos > visibleContent) {
 
-            scrollPixel = scrollPixel + (pos - visibleContent);
-            /*            console.log("POSITION:" + pos);
-            console.log("breite sichtbar:" + visibleContent);
-            console.log("scrollpixel:" + scrollPixel);
-            console.log("--------------------------------------------------------------------------------------------------------------");*/
-            $("#imageSlider").animate({
-                scrollLeft: scrollPixel
-            }, 200);
-        }
-        if (pos < 0) {
-            scrollPixel = scrollPixel + pos;
-            /*            console.log("POSITION:" + pos);
-            console.log("breite sichtbar:" + visibleContent);
-            console.log("scrollpixel:" + scrollPixel);
-            console.log("----------------------------------------------------------------------------------------------------------");*/
-            $("#imageSlider").animate({
-                scrollLeft: scrollPixel
-            }, 200);
-        }
         if (clickedImg == tmpClickedImg) {
             // nichts machen                    
         } else {

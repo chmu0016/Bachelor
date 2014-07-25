@@ -371,7 +371,7 @@ function addRoom() {
     if (roomamount >= 0) {
         $("#topBox").before('<div id="allRoomsButton">  </div> <div id="roomsAccordion"> </div>');
         for (var i = 0; i < roomamount; i++) {
-            $("#sliderWidth").append('<div id="imgWrapper' + i + '" class="roomImageWrapper"> </div>');
+            $("#raumImageContent").append('<div id="imgWrapper' + i + '" class="roomImageWrapper"> </div>');
             $("#imgWrapper" + i).append('<div id="img' + i + '" class="roomImage"> </div>');
             $("#img" + i).append('<label for="img' + i + '" class="roomLabel">' + roomnames[i] + '</label>');
             $("#imgWrapper" + i).append('<div id="toggleOnOff' + i + '" class="toggleOnOff"> </div>');

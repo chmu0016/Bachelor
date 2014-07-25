@@ -1,54 +1,125 @@
 #topBox {
     position: relative;
     float: left;
-    height: 154px;
+    height: 150px;
     width: 1200px;
     left: 50%;
     margin-left: -600px;
 }
-#leftBtn {
+#depBtn {
+    position: relative;
+    float: left;
+    width: 60px;
+    height: 150px;
+    margin-right: 0px;
+    background-color: white;
+    border-right: 0px solid black;
+    border-top: 0px solid black;
+    border-left: 0px solid black;
+    border-bottom: 0px solid black;
+}
+#bereichContent {
     position: absolute;
-    left: 0;
-    width: 45px;
+    display: none;
+    float: left;
+    background-color: red;
+    margin-left: 60px;
+    height: 150px;
+    width: 1020px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+#bereichImageContent {
+    overflow: hidden;
     height: 154px;
-    color: rgba(255, 255, 255, .8);
-    background-image: url(../img/icons/WeiterLinks.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    cursor: default;
-    z-index: 3;
+    width: 1250px;
 }
-#leftBtn:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+.bereiche {
+    position: relative;
+    float: left;
+    width: 250px;
+    height: 150px;
+    border-right: 1px solid #a2a2a2;
+    background-color: #313131;
 }
-#rightBtn {
+#buildBtn {
+    position: relative;
+    float: left;
+    width: 60px;
+    height: 150px;
+    background-color: white;
+    border-right: 0px solid black;
+    border-top: 0px solid black;
+    border-left: 0px solid black;
+    border-bottom: 0px solid black;
+}
+#gebäudeContent {
     position: absolute;
-    right: 0;
+    display: none;
+    float: left;
+    background-color: red;
+    margin-left: 120px;
+    height: 150px;
+    width: 1020px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+#gebäudeImageContent {
+    overflow: hidden;
     height: 154px;
-    width: 45px;
-    color: rgba(255, 255, 255, .8);
-    background-image: url(../img/icons/WeiterRechts.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    cursor: default;
-    z-index: 3;
+    width: 1250px;
 }
-#rightBtn:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+.gebäude {
+    position: relative;
+    float: left;
+    width: 250px;
+    height: 150px;
+    border-right: 1px solid #a2a2a2;
+    background-color: #313131;
 }
+#roomBtn {
+    position: relative;
+    float: left;
+    width: 60px;
+    height: 150px;
+    background-color: white;
+    border-right: 0px solid black;
+    border-top: 0px solid black;
+    border-left: 0px solid black;
+    border-bottom: 0px solid black;
+}
+#raumContent {
+    position: absolute;
+    display: none;
+    float: left;
+    background-color: red;
+    margin-left: 180px;
+    height: 150px;
+    width: 1020px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+#raumImageContent {
+    overflow: hidden;
+    height: 154px;
+    width: 1250px;
+}
+.räume {
+    position: relative;
+    float: left;
+    width: 250px;
+    height: 150px;
+    border-right: 1px solid #a2a2a2;
+    background-color: #313131;
+}
+/*--------------------------------------------------------------------------------------------------------------*/
+
 #imageSlider {
     position: absolute;
     overflow: hidden;
     height: 154px;
     width: 1200px;
     z-index: 1;
-}
-#sliderWidth {
-    overflow: hidden;
-    height: 154px;
-    width: 300px;
 }
 /*#shadow {
     position: absolute;
@@ -57,6 +128,7 @@
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.5) 75%);
     z-index: 2;
 } */
+
 #img0 {
     background: url(../img/slider/Badezimmer.png);
 }
@@ -69,29 +141,30 @@
 #img3 {
     background-image: url(../img/slider/Relax.png);
 }
-
 .roomImage {
     position: relative;
-    height: 154px;
-    width: 322px;
+    width: 250px;
+    height: 150px;
+    float: left;
+}
+.roomImageWrapper {
+    position: relative;
+    width: 250px;
+    height: 150px;
     float: left;
 }
 .roomLabel {
     position: absolute;
     top: 0px;
-    width: 322px;
+    width: 250px;
     text-align: center;
     color: rgba(255, 255, 255, .6);
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     font-size: 1.3em;
     z-index: 4;
 }
 .roomImage.toggle {
     box-shadow: inset 0 0px 1px 3px rgba(58, 170, 203, 0.65);
-}
-.roomImageWrapper {
-    position: relative;
-    float: left;
 }
 .toggleOnOff {
     position: absolute;
@@ -107,7 +180,7 @@
 }
 .toggleOnOff.toggled {
     background-image: url(../img/icons/ToggleOff3.svg);
-        background-repeat: no-repeat;
+    background-repeat: no-repeat;
     background-size: contain;
 }
 .profileBtnClass {
