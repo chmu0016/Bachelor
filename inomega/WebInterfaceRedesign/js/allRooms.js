@@ -3,11 +3,11 @@ $(document).ready(function () {
 });
 
 function allRoomsContent() {
-    var check = $(roomsAccordion).is(":visible");
+    var check = $(allRoomsImageContent).is(":visible");
     var imgCheck = false;
     $("#allRoomsButton").click(function () {
-        $("#roomsAccordion").slideToggle(function () {
-            check = $(roomsAccordion).is(":visible");
+        $("#allRoomsImageContent").fadeToggle(function () {
+            check = $(allRoomsImageContent).is(":visible");
         });
     });
     $(".imageAccordion").click(function () {
@@ -15,7 +15,7 @@ function allRoomsContent() {
     });
     $("body").bind("click", function () {
         if (check == true && imgCheck == false) {
-            $("#roomsAccordion").slideUp();
+            $("#allRoomsImageContent").fadeOut();
             check = false
         } else {
             imgCheck = false;

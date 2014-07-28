@@ -15,7 +15,7 @@
 }
 #currentLightName {
     width: 100%;
-    height: 30px;
+    height: 35px;
     background-color: rgb(103, 3, 55);
     margin-left: -10px;
     padding-left: 20px;
@@ -24,7 +24,7 @@
 .currentLightNameLabel {
     color: rgb(255, 255, 255);
     font-size: 1.5em;
-    line-height: 120%;
+    line-height: 150%;
 }
 /*Alle vordefinierten farben*/
 

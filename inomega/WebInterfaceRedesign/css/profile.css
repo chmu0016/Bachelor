@@ -1,7 +1,7 @@
 #profileContent {
     position: absolute;
     right: 0px;
-    margin-top: 50px;
+    margin-top: 200px;
     margin-right: 10px;
     align-content: center;
     overflow: auto;
@@ -13,14 +13,14 @@
 }
 #profileTopLabelContent {
     width: 100%;
-    height: 30px;
+    height: 35px;
     background-color: rgb(103, 3, 55);
     text-align: center;
 }
 .profileTopLabel {
     color: rgb(255, 255, 255);
     font-size: 1.5em;
-    line-height: 120%;
+    line-height: 150%;
 }
 .profileContentImg {
     margin-left: 15px;
@@ -43,8 +43,8 @@
 #profileAddBtn {
     position: absolute;
     color: #363636;
-    height: 30px;
-    width: 50px;
+    height: 35px;
+    width: 40px;
     background-color: rgba(0, 0, 0, 0.42);
     background-image: url(../img/icons/Profilhinzuf%C3%BCgen.svg);
     background-repeat: no-repeat;

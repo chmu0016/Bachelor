@@ -381,7 +381,8 @@ function addRoom() {
             $("#imgWrapper" + i).append('<div id="profileBtn' + i + '" class="profileBtnClass"> </div>');
 
             $("#allRoomsImageContent").append('<div id="imgAcc' + i + '" class="roomImageAccordion roomImage">');
-            $("#imgAcc" + i).append('<label for="imgAcc' + i + '" class="labelimgAcc">' + roomnames[i] + '</label>');	  
+            $("#imgAcc" + i).append('<label for="imgAcc' + i + '" class="labelimgAcc">' + roomnames[i] + '</label>');
+	  
         }
     } else {
 
