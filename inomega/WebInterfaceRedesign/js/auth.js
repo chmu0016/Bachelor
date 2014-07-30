@@ -161,7 +161,7 @@ function profileAuth(clickedRoomAuth) {
 }
 
 function addProfiles() {
-    $("#colorPickerContent").after('<div id="profileContent"><div id="profileTopLabelContent"> <label for="profileTopLabelContent" class="profileTopLabel">Profile</label></div> <button id="profileAddBtn"></button> </div>');
+    $("#colorPickerContent").after('<div id="profileTopLabelContent"><button id="profileAddBtn"></button> <label for="profileTopLabelContent" class="profileTopLabel">Profile</label> </div> <div id="profileContent"> </div>');
     for (var i = 0; i <= profileAmount; i++) {
         if (i == profileAmount) {
 
@@ -351,6 +351,7 @@ function roomAuth() {
             addRoom();
             imageSlider();
             allRoomsContent();
+            allRoomsScrollbar();
 
         },
         error: function (a, b, c) {
@@ -370,7 +371,7 @@ function roomAuth() {
 function addRoom() {
     if (roomamount >= 0) {
         $("#currentLightName").after('<div id="allRoomsButton">  </div>');
-        $("#colorPickerContent").after('<div id="allRoomsImageContent"><div id="allRoomsTopLabelContent"> <label for="allRoomsTopLabelContent" class="allRoomsTopLabel">Alle Räume</label></div> <button id="colorPickerSwitchBtn"></button>  </div>');
+        $("#colorPickerContent").after('<div id="allRoomsTopLabelContent"> <button id="colorPickerSwitchBtn"></button> <label for="allRoomsTopLabelContent" class="allRoomsTopLabel">Alle Räume</label></div>   <div id="allRoomsImageContent"></div>');
 
 
         for (var i = 0; i < roomamount; i++) {
@@ -381,7 +382,7 @@ function addRoom() {
             $("#imgWrapper" + i).append('<div id="profileBtn' + i + '" class="profileBtnClass"> </div>');
 
             $("#allRoomsImageContent").append('<div id="imgAcc' + i + '" class="roomImageAccordion roomImage">');
-            $("#imgAcc" + i).append('<label for="imgAcc' + i + '" class="labelimgAcc">' + roomnames[i] + '</label>');	  
+            $("#imgAcc" + i).append('<label for="imgAcc' + i + '" class="labelimgAcc">' + roomnames[i] + '</label>');
         }
     } else {
 

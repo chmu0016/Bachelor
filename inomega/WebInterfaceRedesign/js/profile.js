@@ -3,6 +3,14 @@ $(document).ready(function () {
 });
 
 function profileIni() {
+    $("#profileContent").mCustomScrollbar({
+        theme: "dark",
+        scrollButtons: {
+            enable: true
+        },
+        autoHideScrollbar: true,
+        axis: "y",
+    });
     profileDelete();
     var profileCheck = false;
     var oldProfile, roomProfileIndex, roomProfileIndexLength, roomProfileIndexSubstr;
@@ -32,12 +40,19 @@ function profileIni() {
 
         // Profil hinzufügen klicken
         $("#profileAddBtn").unbind('click').click(function () {
+
+            $("#profileHinzTopLabelContent").fadeIn("fast");
             $("#profileUploadContent").fadeIn("fast", function () {
                 $("#profileContent").fadeOut("fast");
+                $("#profileTopLabelContent").fadeOut("fast");
 
                 $("#picker").css("top", "-80px");
                 $("#picker").css("left", "5px");
                 $("#picker").css("z-index", 2);
+
+                $("#pickerBorder").css("top", "105px");
+                $("#pickerBorder").css("left", "15px");
+                $("#pickerBorder").css("z-index", 2);
 
             });
 
@@ -62,19 +77,26 @@ function profileIni() {
             }],
        };*/
         $("#profileContent").fadeToggle("fast");
+        $("#profileTopLabelContent").fadeToggle("fast");
     });
     $(document).keyup(function (e) {
         if (e.keyCode == 27) {
             if ($("#profileContent").is(":visible")) {
                 $("#profileContent").fadeOut("fast");
+                $("#profileTopLabelContent").fadeOut("fast");
             } else if ($("#profileUploadContent").is(":visible")) {
+                $("#profileTopLabelContent").fadeIn("fast");
                 $("#profileContent").fadeIn("fast", function () {
 
+                    $("#profileHinzTopLabelContent").fadeOut("fast");
                     $("#profileUploadContent").fadeOut("fast");
 
                     $("#picker").css("top", "");
                     $("#picker").css("left", "");
                     $("#picker").css("z-index", "");
+                    $("#pickerBorder").css("top", "");
+                    $("#pickerBorder").css("left", "");
+                    $("#pickerBorder").css("z-index", "");
                 });
 
             }

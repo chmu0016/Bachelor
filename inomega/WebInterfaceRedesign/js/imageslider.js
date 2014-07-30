@@ -1,4 +1,29 @@
-$(document).ready(function () {});
+$(document).ready(function () {
+    $("#bereichContent").mCustomScrollbar({
+          theme: "light",
+        scrollButtons:{
+          enable:true
+        },
+        autoHideScrollbar: true,
+        axis: "x",
+    });
+    $("#gebäudeContent").mCustomScrollbar({
+          theme: "light",
+        scrollButtons:{
+          enable:true
+        },
+        autoHideScrollbar: true,
+        axis: "x",
+    });
+    $("#raumContent").mCustomScrollbar({
+        theme: "light",
+        scrollButtons:{
+          enable:true
+        },
+        autoHideScrollbar: true,
+        axis: "x",
+    });
+});
 
 function imageSlider() {
     var clicked = false;
@@ -83,7 +108,7 @@ function imageSlider() {
     });
 
 
-  
+
 
     var checked = false;
 
@@ -106,12 +131,6 @@ function imageSlider() {
         } else {
             var clickedImg = $(this).closest('.roomImageWrapper').index('.roomImageWrapper');
         }
-        var pos = $("#img" + clickedImg).position().left;
-
-        /* console.log("POSITION:" + pos);
-        console.log("breite sichtbar:" + visibleContent);
-        console.log("scrollpixel:" + scrollPixel);
-        console.log("--------------------------------------------------------------------------------------------------------------------");*/
 
         if (clickedImg == tmpClickedImg) {
             // nichts machen                    

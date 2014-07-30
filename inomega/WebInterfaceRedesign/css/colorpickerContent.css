@@ -9,7 +9,7 @@
     margin-right: 10px;
     margin-left: 50px;
     width: 700px;
-    height: 480px;
+    height: 490px;
     padding: 0 10 10 10;
     color: white;
 }
@@ -132,7 +132,7 @@
     /*
     display: none;
 */
-    z-index: 1;
+    z-index: 2;
 }
 #pickerBorder.border {
     border-color: rgba(72, 72, 72, .6);

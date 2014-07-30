@@ -83,26 +83,40 @@ function profilUpload() {
     }
     // Abbrechen Button
     $("#cancelBtn").unbind('click').click(function () {
+        document.getElementsByName('profileBtnClass').disabled = true;
+        $("#profileTopLabelContent").fadeIn("fast");
         $("#profileContent").fadeIn("fast", function () {
 
+            $("#profileHinzTopLabelContent").fadeOut("fast");
             $("#profileUploadContent").fadeOut("fast");
 
             $("#picker").css("top", "");
             $("#picker").css("left", "");
             $("#picker").css("z-index", "");
+
+            $("#pickerBorder").css("top", "");
+            $("#pickerBorder").css("left", "");
+            $("#pickerBorder").css("z-index", "");
         });
 
 
     });
     // Speichern Button
     $("#uploadBtn").unbind('click').click(function () {
+        document.getElementsByName('profileBtnClass').disabled = false;
+        $("#profileContent").fadeOut("fast");
         $("#profileContent").fadeOut("fast", function () {
 
+            $("#profileHinzTopLabelContent").fadeOut("fast");
             $("#profileUploadContent").fadeOut("fast");
 
             $("#picker").css("top", "");
             $("#picker").css("left", "");
             $("#picker").css("z-index", "");
+
+            $("#pickerBorder").css("top", "");
+            $("#pickerBorder").css("left", "");
+            $("#pickerBorder").css("z-index", "");
         });
 
         profilname = $("#profilNameText").val();

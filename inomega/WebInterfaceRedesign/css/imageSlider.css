@@ -92,7 +92,6 @@
     position: absolute;
     display: none;
     float: left;
-    background-color: red;
     margin-left: 180px;
     height: 150px;
     width: 1020px;
@@ -155,11 +154,10 @@
 }
 .roomLabel {
     position: absolute;
-    top: 0px;
-    width: 250px;
+    bottom: 0px;
+    width: 300px;
     text-align: center;
     color: rgba(255, 255, 255, .6);
-    background-color: rgba(0, 0, 0, 0.5);
     font-size: 1.3em;
     z-index: 4;
 }
@@ -168,8 +166,8 @@
 }
 .toggleOnOff {
     position: absolute;
-    bottom: 2px;
-    right: 30px;
+    top: 2px;
+    right: 145px;
     width: 30px;
     height: 30px;
     opacity: 1;
@@ -189,8 +187,8 @@
     background-repeat: no-repeat;
     background-size: contain;
     opacity: 1;
-    right: 65px;
-    bottom: 2px;
+    right: 115px;
+    top: 2px;
     width: 30px;
     height: 30px;
     z-index: 3;
