@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    roomAuth();
+    departmentAuth();
 });
 var un = localStorage.getItem("username");
 var pw = localStorage.getItem("password");
@@ -14,9 +14,11 @@ var roomnames = new Array();
 var roomamount = 0;
 
 var depnames = new Array();
+var depId = new Array();
 var depamount = 0;
 
 var buildnames = new Array();
+var buildId = new Array();
 var buildamount = 0;
 
 var lampnames = new Array();
@@ -437,11 +439,11 @@ function departmentAuth() {
         password: 'user1',
         success: function (result) {
             $.each(result, function (key, val) {
+                depId[depamount] = val.id;
                 depnames[depamount] = val.name;
-                console.log("DEPAUTH: " + depnames[depamount]);
                 depamount++;
-
             });
+            addDepartments();
             buildingAuth();
         },
         error: function (a, b, c) {
@@ -458,6 +460,13 @@ function departmentAuth() {
     }
 }
 
+function addDepartments() {
+    for (var i = 0; i < depamount; i++) {
+        $("#bereichImageContent").append('<div id="bereich' + depId[i] + '" class="bereiche"><label for="bereich' + depId[i] + '" class="bereicheLabel">' + depnames[i] + '</label> </div>');
+    }
+
+}
+
 function buildingAuth() {
     $.ajax({
         type: "GET",
@@ -472,10 +481,11 @@ function buildingAuth() {
         success: function (result) {
             $.each(result, function (key, val) {
                 buildnames[buildamount] = val.name;
-                console.log("BUILD AUTH: " + buildnames[buildamount]);
+                buildId[buildamount] = val.id;
                 buildamount++;
 
             });
+            addBuildings();
             roomAuth();
         },
         error: function (a, b, c) {
@@ -490,4 +500,13 @@ function buildingAuth() {
     function JSONPCallback() {
         /* alert("callback");*/
     }
+}
+
+function addBuildings() {
+    for (var i = 0; i < depamount; i++) {
+        $("#gebäudeImageContent").append('<div id="gebäude' + buildId[i] + '" class="gebäude"><label for="gebäude' + buildId[i] + '" class="gebäudeLabel">' + buildnames[i] + '</label> </div>');
+    }
+
+
+
 }

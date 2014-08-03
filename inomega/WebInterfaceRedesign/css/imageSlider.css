@@ -34,6 +34,12 @@
     height: 154px;
     width: 1250px;
 }
+.bereicheWrapper {
+    position: relative;
+    float: left;
+    width: 250px;
+    height: 150px;
+}
 .bereiche {
     position: relative;
     float: left;
@@ -41,6 +47,15 @@
     height: 150px;
     border-right: 1px solid #a2a2a2;
     background-color: #313131;
+    text-align: center;
+}
+.bereicheLabel {
+    position: relative;
+    width: 250px;
+    top: 63px;
+    color: rgba(255, 255, 255, .6);
+    font-size: 1.3em;
+    z-index: 4;
 }
 #buildBtn {
     position: relative;
@@ -76,6 +91,15 @@
     height: 150px;
     border-right: 1px solid #a2a2a2;
     background-color: #313131;
+    text-align: center;
+}
+.gebäudeLabel {
+    position: relative;
+    width: 250px;
+    top: 63px;
+    color: rgba(255, 255, 255, .6);
+    font-size: 1.3em;
+    z-index: 4;
 }
 #roomBtn {
     position: relative;
