@@ -181,6 +181,7 @@ function colorPickerIni() {
 
     // Button zum switchen des colorpickers
     $("#switch").unbind().bind("click", function () {
+         $("#pickerBorder").css("display", "block");
         var img = new Image();
         var contentH = $("#colorPickerContent").outerHeight();
         $("#pickerBorder").toggleClass("border");

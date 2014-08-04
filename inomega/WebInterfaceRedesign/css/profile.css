@@ -8,11 +8,11 @@
     width: 720px;
     height: 455px;
     background: rgb(255, 255, 255);
-    z-index: 1;
+    z-index: 3;
     display: none;
 }
 #profileTopLabelContent {
-    background-color: rgb(103, 3, 55);
+    background-color: rgb(105, 0, 0);;
     text-align: center;
     position: absolute;
     width: 720px;

@@ -17,7 +17,7 @@
     margin-left: 15px;
 }
 #profileHinzTopLabelContent {
-background-color: rgb(103, 3, 55);
+    background-color: rgb(105, 0, 0);
     text-align: center;
     position: absolute;
     width: 720px;
@@ -84,7 +84,7 @@ background-color: rgb(103, 3, 55);
     border: 1px solid #c2c2c2;
 }
 #pickerProfileWrapper {
-        width: auto;
+    width: auto;
     height: auto;
     position: relative;
 }

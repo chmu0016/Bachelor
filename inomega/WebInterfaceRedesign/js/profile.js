@@ -18,6 +18,7 @@ function profileIni() {
     $("#" + oldProfile).addClass("toggle");
 
     $(".profileBtnClass").unbind('click').click(function () {
+        $("#pickerBorder").css("display", "none");
 
         // Profil aktivieren
         $(".profileContentImg").unbind('click').click(function (e) {

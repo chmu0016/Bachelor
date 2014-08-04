@@ -22,7 +22,7 @@
     position: absolute;
     display: none;
     float: left;
-    background-color: red;
+
     margin-left: 60px;
     height: 150px;
     width: 1020px;
@@ -72,7 +72,6 @@
     position: absolute;
     display: none;
     float: left;
-    background-color: red;
     margin-left: 120px;
     height: 150px;
     width: 1020px;

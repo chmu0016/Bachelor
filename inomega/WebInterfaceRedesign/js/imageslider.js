@@ -59,7 +59,6 @@ function imageSlider() {
         } else {
             // nothing to do
         }
-
     });
 
     function depBtnAction() {
@@ -70,7 +69,7 @@ function imageSlider() {
         totalImgWidth = totalImgWidth + $("#bereichImageContent").children().length;
         $("#bereichImageContent").width(totalImgWidth);
         $("#buildBtn").animate({
-            "margin-left": "1020px"
+            "margin-left": totalImgWidth + "px"
         }, 1000);
         $(depBtn).next().animate({
             width: 'toggle'
@@ -95,7 +94,7 @@ function imageSlider() {
             roomClicked = !roomClicked;
             $(roomBtn).next().animate({
                 width: 'toggle'
-            }, 500, function () {
+            }, 1000, function () {
                 buildBtnAction();
             });
 
@@ -112,7 +111,7 @@ function imageSlider() {
         $("#gebäudeImageContent").width(totalImgWidth);
         if (buildClicked == true) {
             $("#roomBtn").animate({
-                "margin-left": "1020px"
+                "margin-left": totalImgWidth + "px"
             }, 1000);
         } else {
             $("#roomBtn").animate({
@@ -128,7 +127,6 @@ function imageSlider() {
         $(buildBtn).next().animate({
             width: 'toggle'
         }, 1000);
-
         $("#roomBtn").animate({
             "margin-left": "0px"
         }, 1000, function () {
