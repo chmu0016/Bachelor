@@ -3,6 +3,14 @@ $(document).ready(function () {
 });
 
 function profileIni() {
+    $("#profileContent").mCustomScrollbar({
+        theme: "dark",
+        scrollButtons: {
+            enable: true
+        },
+        autoHideScrollbar: true,
+        axis: "y",
+    });
     profileDelete();
     var profileCheck = false;
     var oldProfile, roomProfileIndex, roomProfileIndexLength, roomProfileIndexSubstr;
@@ -10,6 +18,7 @@ function profileIni() {
     $("#" + oldProfile).addClass("toggle");
 
     $(".profileBtnClass").unbind('click').click(function () {
+        $("#pickerBorder").css("display", "none");
 
         // Profil aktivieren
         $(".profileContentImg").unbind('click').click(function (e) {
@@ -32,74 +41,23 @@ function profileIni() {
 
         // Profil hinzufügen klicken
         $("#profileAddBtn").unbind('click').click(function () {
+
+            $("#profileHinzTopLabelContent").fadeIn("fast");
             $("#profileUploadContent").fadeIn("fast", function () {
                 $("#profileContent").fadeOut("fast");
+                $("#profileTopLabelContent").fadeOut("fast");
 
                 $("#picker").css("top", "-80px");
                 $("#picker").css("left", "5px");
                 $("#picker").css("z-index", 2);
 
+                $("#pickerBorder").css("top", "105px");
+                $("#pickerBorder").css("left", "15px");
+                $("#pickerBorder").css("z-index", 2);
+
             });
 
-            /* function getBase64Image(img) {
-                // Create an empty canvas element
-                var canvas = document.createElement("canvas");
-                canvas.width = img.width;
-                canvas.height = img.height;
 
-                // Copy the image contents to the canvas
-                var ctx = canvas.getContext("2d");
-                ctx.drawImage(img, 0, 0);
-
-                // Get the data-URL formatted image
-                // Firefox supports PNG and JPEG. You could check img.src to
-                // guess the original format, but be aware the using "image/jpg"
-                // will re-encode the image.
-                var dataURL = canvas.toDataURL("image/png");
-
-                return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-            }
-            var imageProf = new Image();
-            imageProf.src = 'img/background.png';
-            var base64str = getBase64Image(imageProf);
-            console.error(base64str);
-            var profileJsonObj = {
-                "name": "base64Test2",
-                "img_type": "png",
-                "img": base64str,
-                "config": [{
-                    "lamp": 1234,
-                    "color": "#FFFFFF",
-                    "brightness": 34,
-                    "state": "on",
-                }]
-            };
-            var jsonStrObj = JSON.stringify(profileJsonObj);
-
-            var url = "http://" + un + ":" + pw + "@" + ip + ":8080/inomega/api/rooms/" + clickedRoom + "/profiles/add?callback=JSONPCallback";
-
-            $.ajax({
-                type: 'PUT',
-                dataType: 'html',
-                crossDomain: true,
-                xhrFields: {
-                    withCredentials: true
-                },
-                url: url,
-                jsonpCallback: "JSONPCallback",
-                data: jsonStrObj,
-                success: function (returnedData) {
-                    console.info(returnedData);
-                    console.log('Success');
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    console.error('xhr : ' + xhr + " ajaxOptions : " + ajaxOptions + " thrownError : " + thrownError);
-                },
-            });
-
-            function JSONPCallback() {
-
-            }*/
         });
 
         // Profil aktualisieren
@@ -120,19 +78,26 @@ function profileIni() {
             }],
        };*/
         $("#profileContent").fadeToggle("fast");
+        $("#profileTopLabelContent").fadeToggle("fast");
     });
     $(document).keyup(function (e) {
         if (e.keyCode == 27) {
             if ($("#profileContent").is(":visible")) {
                 $("#profileContent").fadeOut("fast");
+                $("#profileTopLabelContent").fadeOut("fast");
             } else if ($("#profileUploadContent").is(":visible")) {
+                $("#profileTopLabelContent").fadeIn("fast");
                 $("#profileContent").fadeIn("fast", function () {
 
+                    $("#profileHinzTopLabelContent").fadeOut("fast");
                     $("#profileUploadContent").fadeOut("fast");
 
                     $("#picker").css("top", "");
                     $("#picker").css("left", "");
                     $("#picker").css("z-index", "");
+                    $("#pickerBorder").css("top", "");
+                    $("#pickerBorder").css("left", "");
+                    $("#pickerBorder").css("z-index", "");
                 });
 
             }

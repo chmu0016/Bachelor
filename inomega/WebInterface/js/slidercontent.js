@@ -79,16 +79,25 @@ function sliderOverflow() {
         else if (document.addEventListener) //WC3 browsers
             document.addEventListener(mousewheelevt, displaywheel, false)
     });
-
 }
 
 function sliderThumbClick() {
     // Klick auf SliderThumb
-    $(".ui-widget-content .ui-state-default").click(function () {
+    var slideValDown = 0;
+    var slideValUp = 1;
+    var sliding = false;
+
+    $(".ui-widget-content .ui-state-default").bind("mousedown", function () {
         var sliderofThumb = $(this).closest("div").attr("id");
         var sliderofThumbLength = sliderofThumb.length;
         var sliderofThumbSubstr = sliderofThumb.substring(6, sliderofThumbLength);
-
+        slideValDown = $("#" + sliderofThumb).slider("value");
+    });
+    $(".ui-widget-content .ui-state-default").bind("mouseup", function () {
+        var sliderofThumb = $(this).closest("div").attr("id");
+        var sliderofThumbLength = sliderofThumb.length;
+        var sliderofThumbSubstr = sliderofThumb.substring(6, sliderofThumbLength);
+        slideValUp = $("#" + sliderofThumb).slider("value");
         if (sliderofThumb == "sliderAllLamps") {
             if ($("#toggleOnOff" + (clickedRoom - 1)).hasClass("toggled")) {
                 sendMessage(JSON.stringify({
@@ -104,34 +113,28 @@ function sliderThumbClick() {
                     "param": "state",
                     "value": "off",
                 }));
-
             }
         } else {
-            if ($("#" + sliderofThumb).css("background-Color") == "rgb(0, 0, 0)") {
-                console.warn("black");
-                sendMessage(JSON.stringify({
-                    "action": "set",
-                    "lamp": sliderofThumbSubstr,
-                    "param": "state",
-                    "value": "on"
-                }));
+            if (slideValDown != slideValUp) {
+
             } else {
-                console.warn("not black: " + $("#" + sliderofThumb).css("background-Color"));
-                sendMessage(JSON.stringify({
-                    "action": "set",
-                    "lamp": sliderofThumbSubstr,
-                    "param": "state",
-                    "value": "off"
-                }));
-
-            }
-
-            /*            sendMessage(JSON.stringify({
-                "action": "set",
-                "lamp": sliderofThumbSubstr,
-                "param": "state",
-                "value": "off",
-            }));*/
-        }
-    });
-}
+                if ($("#" + sliderofThumb).css("background-Color") == "rgb(0, 0, 0)") {
+                    console.warn("black");
+                    sendMessage(JSON.stringify({
+                        "action": "set",
+                        "lamp": sliderofThumbSubstr,
+                        "param": "state",
+                        "value": "on"
+                    }));
+                } else {
+                    sendMessage(JSON.stringify({
+                        "action": "set",
+                        "lamp": sliderofThumbSubstr,
+                        "param": "state",
+                        "value": "off"
+                    }));
+                } // unterstes else
+            } // mittleres else
+        }// oberes else
+    }); // bind().mousedown
+}// sliderthumbclick()

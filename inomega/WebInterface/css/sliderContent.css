@@ -1,12 +1,12 @@
 /* Alle Slider Div*/
 
 #sliderContentWrapper {
-    position: relative;
     float: left;
     height: auto;
     width: 400px;
     height: 500px;
-    margin-top: 50px;
+    margin-top: 200px;
+    margin-left: -600px;
 }
 #allLampsWrapper {
     position: relative;
@@ -15,17 +15,17 @@
 #sliderAllLamps {
     top: 0px;
     left: 10px;
-    background-color: rgb(103, 3, 55);
+    background-color: rgb(105, 0, 0);
 }
 .sliderAllLampsClicked {
     opacity: 0.5;
-    background-color: rgb(136, 0, 72);
+    background-color: rgb(105, 0, 0);
 }
 #btnSliderAllLamps {
     margin-left: 390px;
     color: white;
     border-top: 0px;
-    background-color: rgb(103, 3, 55);
+    background-color: rgb(105, 0, 0);
 }
 #sliderContentParent {
     float: left;

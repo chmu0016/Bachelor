@@ -1,89 +1,165 @@
-$(document).ready(function () {});
+$(document).ready(function () {
+    $("#bereichContent").mCustomScrollbar({
+        theme: "light",
+        scrollButtons: {
+            enable: true
+        },
+        autoHideScrollbar: true,
+        axis: "x",
+    });
+    $("#gebäudeContent").mCustomScrollbar({
+        theme: "light",
+        scrollButtons: {
+            enable: true
+        },
+        autoHideScrollbar: true,
+        axis: "x",
+    });
+    $("#raumContent").mCustomScrollbar({
+        theme: "light",
+        scrollButtons: {
+            enable: true
+        },
+        autoHideScrollbar: true,
+        axis: "x",
+    });
+});
 
 function imageSlider() {
-    // Breite eines einzelnes Bildes
-    var singleImgWidth = $("#img0").outerWidth();
+    var buildClicked = false;
+    var roomClicked = false;
+    var totalImgWidth = 0;
 
-    // Gesamtbreite aller Bilder im Slider
-    var totalW = 0;
-    $("#sliderWidth").children().each(function () {
-        totalW = totalW + $(this).width();
-    });
+    //////////////////////////// Bereiche ////////////////////////////
+    // Bereichebutton
+    $("#depBtn").bind("click", function () {
+        if (buildClicked == true) {
+            buildClicked = !buildClicked;
+            $(buildBtn).next().animate({
+                width: 'toggle'
+            }, 500);
+            $("#buildBtn").animate({
+                "margin-left": "0px"
+            }, 500);
+            $("#roomBtn").animate({
+                "margin-left": "0px"
+            }, 500, function () {
+                depBtnAction();
+            });
 
-    // Div-Container auf die gesamtbreite der Bilder setzen
-    document.getElementById("sliderWidth").style.width = totalW + "px";
-    // Breite des Sichtbaren Sliders
-    var imgWidth = $("#imageSlider").width();
-    var scrollPixel = 0;
-    $("#rightBtn").click(function () {
-        if (scrollPixel * 2 < totalW) {
-            scrollPixel += singleImgWidth;
-            $("#imageSlider").animate({
-                scrollLeft: scrollPixel
-            }, 200);
-        } else {}
-    });
-
-    $("#leftBtn").click(function () {
-        if (scrollPixel > 0) {
-            scrollPixel -= singleImgWidth;
-            $("#imageSlider").animate({
-                scrollLeft: scrollPixel
-            }, 200);
+        } else if (roomClicked == true) {
+            roomClicked = !roomClicked;
+            $(roomBtn).next().animate({
+                width: 'toggle'
+            }, 500);
+            $("#roomBtn").animate({
+                "margin-left": "0px"
+            }, 500, function () {
+                depBtnAction();
+            });
         } else {
-            scrollPixel = 0;
+            // nothing to do
         }
     });
+
+    function depBtnAction() {
+        totalImgWidth = 0;
+        $("#bereichImageContent").children().each(function () {
+            totalImgWidth = totalImgWidth + $(this).width();
+        });
+        totalImgWidth = totalImgWidth + $("#bereichImageContent").children().length;
+        $("#bereichImageContent").width(totalImgWidth);
+        $("#buildBtn").animate({
+            "margin-left": totalImgWidth + "px"
+        }, 1000);
+        $(depBtn).next().animate({
+            width: 'toggle'
+        }, 1000);
+    }
+    // Bereichebild Klick
+    $(".bereiche").click(function () {
+        $(depBtn).next().animate({
+            width: 'toggle'
+        }, 1000);
+
+        $("#buildBtn").animate({
+            "margin-left": "0px"
+        }, 1000, function () {
+            buildBtnAction();
+        });
+
+    });
+
+    //////////////////////////// Gebäude ////////////////////////////
+    // Gebäudebutton
+    $("#buildBtn").click(function () {
+        if (roomClicked == true) {
+            roomClicked = !roomClicked;
+            $(roomBtn).next().animate({
+                width: 'toggle'
+            }, 1000, function () {
+                buildBtnAction();
+            });
+
+        }
+    });
+
+    function buildBtnAction() {
+        totalImgWidth = 0;
+        buildClicked = !buildClicked;
+        $("#gebäudeImageContent").children().each(function () {
+            totalImgWidth = totalImgWidth + $(this).width();
+        });
+        totalImgWidth = totalImgWidth + $("#gebäudeImageContent").children().length;
+        $("#gebäudeImageContent").width(totalImgWidth);
+        if (buildClicked == true) {
+            $("#roomBtn").animate({
+                "margin-left": totalImgWidth + "px"
+            }, 1000);
+        } else {
+            $("#roomBtn").animate({
+                "margin-left": "0px"
+            }, 1000);
+        }
+        $(buildBtn).next().animate({
+            width: 'toggle'
+        }, 1000);
+    }
+    // Gebäudebild Klick
+    $(".gebäude").click(function () {
+        buildClicked = !buildClicked;
+        $(buildBtn).next().animate({
+            width: 'toggle'
+        }, 1000);
+        $("#roomBtn").animate({
+            "margin-left": "0px"
+        }, 1000, function () {
+            roomBtnAction();
+        });
+
+    });
+
+    //////////////////////////// Räume anzeigen ////////////////////////////
+    // Raumbutton
+    $("#roomBtn").click(function () {});
+
+    function roomBtnAction() {
+        totalImgWidth = 0;
+        roomClicked = !roomClicked;
+        // Breite aller Kind-Elemente zusammenaddieren um die Breite des Imagesliders festzulegen
+        $("#raumImageContent").children().each(function () {
+            totalImgWidth = totalImgWidth + $(this).width();
+        });
+        totalImgWidth = totalImgWidth + $("#raumImageContent").children().length;
+        $("#raumImageContent").width(totalImgWidth);
+
+        $(roomBtn).next().animate({
+            width: 'toggle'
+        }, 1000);
+    }
 
     var checked = false;
 
-    function displaywheel(e) {
-        if (checked == true) {
-            var evt = window.event || e //equalize event object
-            var delta = evt.detail ? evt.detail * (-120) : evt.wheelDelta /*check for detail first so Opera uses that instead of wheelDelta             */
-        }
-        if (delta > 0) {
-            if (scrollPixel * 2 < totalW) {
-                scrollPixel += singleImgWidth;
-                $("#imageSlider").animate({
-                    scrollLeft: scrollPixel
-                }, 200);
-            } else {
-                /*scrollPixel = (imgWidth - singleImgWidth);
-                    console.log("else" + scrollPixel);*/
-            }
-        } else if (delta < 0) {
-            if (scrollPixel > 0) {
-                scrollPixel -= singleImgWidth;
-                $("#imageSlider").animate({
-                    scrollLeft: scrollPixel
-                }, 200);
-            } else {
-                scrollPixel = 0;
-            }
-        }
-        /*console.log(delta) //delta returns +120 when wheel is scrolled up, -120 when down*/
-    }
-
-    $("#imageSlider").mouseenter(function () {
-        checked = true;
-        var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
-
-        if (document.attachEvent) //if IE (and Opera depending on user setting)
-            document.attachEvent("on" + mousewheelevt, displaywheel)
-        else if (document.addEventListener) //WC3 browsers
-            document.addEventListener(mousewheelevt, displaywheel, false)
-    });
-
-    $("#imageSlider").mouseleave(function () {
-        checked = false;
-        var mousewheelevt = null; //FF doesn't recognize mousewheel as of FF3.x
-
-        if (document.attachEvent) //if IE (and Opera depending on user setting)
-            document.attachEvent(null, displaywheel)
-        else if (document.addEventListener) //WC3 browsers
-            document.addEventListener(null, displaywheel, false)
-    });
 
     // Auswählen eines Raumes
     var tmpClickedImg = 0;
@@ -103,38 +179,7 @@ function imageSlider() {
         } else {
             var clickedImg = $(this).closest('.roomImageWrapper').index('.roomImageWrapper');
         }
-        var pos = $("#img" + clickedImg).position().left;
-        var visibleContent = (imgWidth - singleImgWidth);
-        if (scrollPixel > visibleContent) {
-            scrollPixel = visibleContent - singleImgWidth;
-        } else if (scrollPixel < 0) {
-            scrollPixel = 0;
-        }
-        /* console.log("POSITION:" + pos);
-        console.log("breite sichtbar:" + visibleContent);
-        console.log("scrollpixel:" + scrollPixel);
-        console.log("--------------------------------------------------------------------------------------------------------------------");*/
-        if (pos > visibleContent) {
 
-            scrollPixel = scrollPixel + (pos - visibleContent);
-            /*            console.log("POSITION:" + pos);
-            console.log("breite sichtbar:" + visibleContent);
-            console.log("scrollpixel:" + scrollPixel);
-            console.log("--------------------------------------------------------------------------------------------------------------");*/
-            $("#imageSlider").animate({
-                scrollLeft: scrollPixel
-            }, 200);
-        }
-        if (pos < 0) {
-            scrollPixel = scrollPixel + pos;
-            /*            console.log("POSITION:" + pos);
-            console.log("breite sichtbar:" + visibleContent);
-            console.log("scrollpixel:" + scrollPixel);
-            console.log("----------------------------------------------------------------------------------------------------------");*/
-            $("#imageSlider").animate({
-                scrollLeft: scrollPixel
-            }, 200);
-        }
         if (clickedImg == tmpClickedImg) {
             // nichts machen                    
         } else {
@@ -182,6 +227,7 @@ function imageSlider() {
         }
 
     });
+    depBtnAction();
 }
 
 // evtl. für buttons mittig zu positionieren für jedes Bild

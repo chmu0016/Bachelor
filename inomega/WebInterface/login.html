@@ -7,29 +7,42 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+        <link rel="stylesheet" href="framework/jquery-ui.min.css">
+        <link rel="stylesheet" href="framework/jquery-ui.structure.min.css">
+        <link rel="stylesheet" href="framework/jquery-ui.theme.min.css">
+        <script src="framework/jquery-1.11.1.min.js"></script>
+        <script src="framework/jquery-ui.min.js"></script>
 
         <script src="js/login.js"></script>
+        <script src="js/sprachauswahl.js"></script>
         <link rel="stylesheet" href="css/index.css">
         <link rel="stylesheet" href="css/login.css">
     </head>
 
     <body>
+        <div id="topText">
+            Inomega Beleuchtungssteuerung
+        </div>
         <div id="backgroundContent">
-            <div id="topText">
-                Inomega Beleuchtungssteuerung
-            </div>
             <div id="loginContentWrapper">
                 <form id="loginContent">
 
                     <input type="text" id="username" value="user1" placeholder="Nutzername" />
                     <br>
                     <input type="password" id="passwort" value="user1" placeholder="Passwort" />
-                    <br>                   
-                    <input type="text" id="ipAdresseText" value="192.168.1.148" placeholder="IP-Adresse" />
                     <br>
+                    <input type="text" id="ipAdresseText" value="192.168.1.130" placeholder="IP-Adresse" />
+                    <br>
+                    <div id="sprachContent">
+                        <label for="sprachContent" id="sprachContentLabel">Sprache auswählen:</label>
+                        <br>
+
+                            <img src="img/languages/de.png" id="de" class="flaggen">
+
+                            <img src="img/languages/en.png" id="en" class="flaggen">
+
+                    </div>
                     <button type="button" id="submit">Login</button>
                 </form>
             </div>

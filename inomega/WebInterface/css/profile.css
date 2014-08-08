@@ -1,26 +1,32 @@
 #profileContent {
     position: absolute;
     right: 0px;
-    margin-top: 50px;
+    margin-top: 235px;
     margin-right: 10px;
     align-content: center;
     overflow: auto;
     width: 720px;
-    height: 490px;
+    height: 455px;
     background: rgb(255, 255, 255);
-    z-index: 1;
+    z-index: 3;
     display: none;
 }
 #profileTopLabelContent {
-    width: 100%;
-    height: 30px;
-    background-color: rgb(103, 3, 55);
+    background-color: rgb(105, 0, 0);;
     text-align: center;
+    position: absolute;
+    width: 720px;
+    height: 35;
+    z-index: 1;
+    margin-top: 200px;
+    right: 0px;
+    margin-right: 10px;
+    display: none;
 }
 .profileTopLabel {
     color: rgb(255, 255, 255);
     font-size: 1.5em;
-    line-height: 120%;
+    line-height: 150%;
 }
 .profileContentImg {
     margin-left: 15px;
@@ -43,8 +49,8 @@
 #profileAddBtn {
     position: absolute;
     color: #363636;
-    height: 30px;
-    width: 50px;
+    height: 35px;
+    width: 40px;
     background-color: rgba(0, 0, 0, 0.42);
     background-image: url(../img/icons/Profilhinzuf%C3%BCgen.svg);
     background-repeat: no-repeat;

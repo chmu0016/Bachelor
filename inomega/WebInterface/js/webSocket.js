@@ -4,12 +4,13 @@ $(document).ready(function () {
 
 
 });
-var ip = ipAdresse;
+var ip = localStorage.getItem("ip");
 // ---- SERVER IP -----
 // Laptop Zu hause  192.168.178.75
 // PC Zu hause      changes everytime
 // PC Arbeit        192.168.1.148
 var ws = new WebSocket('ws://' + ip + ':8080/inomega/websocket');
+
 
 
 function startwebsocket() {

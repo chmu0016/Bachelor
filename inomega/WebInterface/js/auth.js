@@ -1,9 +1,12 @@
 $(document).ready(function () {
-    roomAuth();
+    //langAuth();
+    console.warn(lang);
+    langSelectAuth(lang);
 });
+var lang = localStorage.getItem("lang");
 var un = localStorage.getItem("username");
 var pw = localStorage.getItem("password");
-var ip = ipAdresse;
+var ip = localStorage.getItem("ip");
 // ---- SERVER IP -----
 // Laptop Zu hause  192.168.178.75
 // PC Zu hause      192.168.178.90
@@ -14,9 +17,11 @@ var roomnames = new Array();
 var roomamount = 0;
 
 var depnames = new Array();
+var depId = new Array();
 var depamount = 0;
 
 var buildnames = new Array();
+var buildId = new Array();
 var buildamount = 0;
 
 var lampnames = new Array();
@@ -34,6 +39,8 @@ var profileType = new Array();
 var profileAmount = 0;
 
 var ciName, ciColorPrim, ciColorSec;
+var allLanguagesAmount = 0;
+var languageName, languageSelect;
 
 var oldClickedRoom = 1;
 var clickedRoom = 0;
@@ -67,7 +74,7 @@ function sliderAuth(clickedRoomAuth) {
                 lampBrightness[lampamount] = val.brightness;
                 lampId[lampamount] = val.id;
                 lampState[lampamount] = val.state;
-                                console.log('lampnames : ' + lampnames[lampamount]);
+                console.log('lampnames : ' + lampnames[lampamount]);
                 console.log('color : ' + lampColor[lampamount]);
                 console.log('brightness : ' + lampBrightness[lampamount]);
                 lampamount++;
@@ -161,7 +168,7 @@ function profileAuth(clickedRoomAuth) {
 }
 
 function addProfiles() {
-    $("#colorPickerContent").after('<div id="profileContent"><div id="profileTopLabelContent"> <label for="profileTopLabelContent" class="profileTopLabel">Profile</label></div> <button id="profileAddBtn"></button> </div>');
+    $("#colorPickerContent").after('<div id="profileTopLabelContent"><button id="profileAddBtn"></button> <label for="profileTopLabelContent" class="profileTopLabel">Profile</label> </div> <div id="profileContent"> </div>');
     for (var i = 0; i <= profileAmount; i++) {
         if (i == profileAmount) {
 
@@ -351,6 +358,7 @@ function roomAuth() {
             addRoom();
             imageSlider();
             allRoomsContent();
+            allRoomsScrollbar();
 
         },
         error: function (a, b, c) {
@@ -369,15 +377,18 @@ function roomAuth() {
 
 function addRoom() {
     if (roomamount >= 0) {
-        $("#topBox").before('<div id="allRoomsButton">  </div> <div id="roomsAccordion"> </div>');
+        $("#currentLightName").after('<div id="allRoomsButton">  </div>');
+        $("#colorPickerContent").after('<div id="allRoomsTopLabelContent"> <button id="colorPickerSwitchBtn"></button> <label for="allRoomsTopLabelContent" class="allRoomsTopLabel">Alle Räume</label></div>   <div id="allRoomsImageContent"></div>');
+
+
         for (var i = 0; i < roomamount; i++) {
-            $("#sliderWidth").append('<div id="imgWrapper' + i + '" class="roomImageWrapper"> </div>');
+            $("#raumImageContent").append('<div id="imgWrapper' + i + '" class="roomImageWrapper"> </div>');
             $("#imgWrapper" + i).append('<div id="img' + i + '" class="roomImage"> </div>');
             $("#img" + i).append('<label for="img' + i + '" class="roomLabel">' + roomnames[i] + '</label>');
             $("#imgWrapper" + i).append('<div id="toggleOnOff' + i + '" class="toggleOnOff"> </div>');
             $("#imgWrapper" + i).append('<div id="profileBtn' + i + '" class="profileBtnClass"> </div>');
 
-            $("#roomsAccordion").append('<div id="imgAcc' + i + '" class="roomImageAccordion roomImage">');
+            $("#allRoomsImageContent").append('<div id="imgAcc' + i + '" class="roomImageAccordion roomImage">');
             $("#imgAcc" + i).append('<label for="imgAcc' + i + '" class="labelimgAcc">' + roomnames[i] + '</label>');
         }
     } else {
@@ -433,11 +444,11 @@ function departmentAuth() {
         password: 'user1',
         success: function (result) {
             $.each(result, function (key, val) {
+                depId[depamount] = val.id;
                 depnames[depamount] = val.name;
-                console.log("DEPAUTH: " + depnames[depamount]);
                 depamount++;
-
             });
+            addDepartments();
             buildingAuth();
         },
         error: function (a, b, c) {
@@ -454,6 +465,13 @@ function departmentAuth() {
     }
 }
 
+function addDepartments() {
+    for (var i = 0; i < depamount; i++) {
+        $("#bereichImageContent").append('<div id="bereich' + depId[i] + '" class="bereiche"><label for="bereich' + depId[i] + '" class="bereicheLabel">' + depnames[i] + '</label> </div>');
+    }
+
+}
+
 function buildingAuth() {
     $.ajax({
         type: "GET",
@@ -468,11 +486,82 @@ function buildingAuth() {
         success: function (result) {
             $.each(result, function (key, val) {
                 buildnames[buildamount] = val.name;
-                console.log("BUILD AUTH: " + buildnames[buildamount]);
+                buildId[buildamount] = val.id;
                 buildamount++;
 
             });
+            addBuildings();
             roomAuth();
+        },
+        error: function (a, b, c) {
+            console.log(a + " " + b + " " + c + "ERROR");
+            document.body.innerHTML = a + " " + b + " " + c + "ERROR";
+        }
+    })
+        .fail(function (e) {
+            console.log(e.msg + "ERROR");
+        });
+
+    function JSONPCallback() {
+        /* alert("callback");*/
+    }
+}
+
+function addBuildings() {
+    for (var i = 0; i < depamount; i++) {
+        $("#gebäudeImageContent").append('<div id="gebäude' + buildId[i] + '" class="gebäude"><label for="gebäude' + buildId[i] + '" class="gebäudeLabel">' + buildnames[i] + '</label> </div>');
+    }
+}
+
+function langAuth() {
+    $.ajax({
+        type: "GET",
+        url: "http://" + un + ":" + pw + "@" + ip + ":8080/inomega/api/languages?callback=JSONPCallback",
+        dataType: 'jsonp',
+        jsonp: false,
+        jsonpCallback: 'JSONPCallback',
+        async: true,
+        crossDomain: true,
+        username: 'user1',
+        password: 'user1',
+        success: function (result) {
+            $.each(result, function (key, val) {
+                languageName[lampamount] = val.languages;
+                console.warn(languageName[allLanguagesAmount]);
+                allLanguagesAmount++
+            });
+            departmentAuth();
+        },
+        error: function (a, b, c) {
+            console.log(a + " " + b + " " + c + "ERROR");
+            document.body.innerHTML = a + " " + b + " " + c + "ERROR";
+        }
+    })
+        .fail(function (e) {
+            console.log(e.msg + "ERROR");
+        });
+
+    function JSONPCallback() {
+        /* alert("callback");*/
+    }
+}
+
+function langSelectAuth(langname) {
+    var lang = langname;
+    console.info(lang);
+    $.ajax({
+        type: "GET",
+        url: "http://" + un + ":" + pw + "@" + ip + ":8080/inomega/api/languages/select/" + lang + "?callback=JSONPCallback",
+        dataType: 'jsonp',
+        jsonp: false,
+        jsonpCallback: 'JSONPCallback',
+        async: true,
+        crossDomain: true,
+        username: 'user1',
+        password: 'user1',
+        success: function (result) {
+            console.warn("Language Selected: " + result.language);
+            departmentAuth();
         },
         error: function (a, b, c) {
             console.log(a + " " + b + " " + c + "ERROR");

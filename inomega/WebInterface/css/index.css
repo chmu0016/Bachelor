@@ -11,10 +11,9 @@
 /* Image Slider */
 
 html {
-       background-color: rgb(103, 3, 55);
-
+    background-color: rgb(105, 0, 0);
 }
-body{
+body {
     height: 100%;
 }
 /*body {
@@ -25,6 +24,7 @@ body{
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, .8);
 }
 */
+
 #backgroundContent {
     position: relative;
     width: 1200px;
@@ -35,36 +35,4 @@ body{
 }
 label {
     pointer-events: none;
-}
-#depBtn {
-    position: relative;
-    width: 400px;
-    height: 20px;
-    margin-right: -4px;
-    background-color: white;
-    border-right: 0px solid black;
-    border-top: 0px solid black;
-    border-left: 0px solid black;
-    border-bottom: 0px solid black;
-}
-#buildBtn {
-    margin-right: -4px;
-    position: relative;
-    width: 400px;
-    height: 20px;
-    background-color: white;
-    border-right: 0px solid black;
-    border-top: 0px solid black;
-    border-left: 0px solid black;
-    border-bottom: 0px solid black;
-}
-#roomBtn {
-    position: relative;
-    width: 399px;
-    height: 20px;
-    background-color: white;
-    border-right: 0px solid black;
-    border-top: 0px solid black;
-    border-left: 0px solid black;
-    border-bottom: 0px solid black;
 }

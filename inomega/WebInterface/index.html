@@ -2,9 +2,14 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="framework/jquery-ui.min.css">
+    <link rel="stylesheet" href="framework/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="framework/jquery-ui.theme.min.css">
+    <script src="framework/jquery-1.11.1.min.js"></script>
+    <script src="framework/jquery-ui.min.js"></script>
+    <!-- v3.0.0 -->
+    <link rel="stylesheet" href="framework/jquery.mCustomScrollbar.css" />
+    <script src="framework/jquery.mCustomScrollbar.concat.min.js"></script>
 
     <script src="js/globalVariable.js"></script>
     <script src="js/login.js"></script>
@@ -18,6 +23,8 @@
     <script src="js/profilUpload.js"></script>
 
     <link rel="stylesheet" href="css/index.css">
+            <script src="js/sprachauswahl.js"></script>
+
     <link rel="stylesheet" href="css/sliderContent.css">
     <link rel="stylesheet" href="css/profilUpload.css">
     <link rel="stylesheet" href="css/allRooms.css">
@@ -38,18 +45,27 @@
     </script>
     <div id="backgroundContent">
         <!--        <button type="button" id="depBtn">Departments</button>
-        <button type="button" id="buildBtn">Buidlings</button>
-        <button type="button" id="roomBtn">Rooms</button>-->
-        <!--
+
     <img src="img/BackgroundAbstract.jpg" class="bg">
 -->
         <div id="topBox">
-            <div id="leftBtn"></div>
-            <div id="rightBtn"></div>
-            <div id="imageSlider">
-                <div id="sliderWidth"></div>
+            <button type="button" id="depBtn">Bereiche</button>
+            <div id="bereichContent">
+                <div id="bereichImageContent"></div>
+            </div>
+            <button type="button" id="buildBtn">Gebäude</button>
+            <div id="gebäudeContent">
+                <div id="gebäudeImageContent"></div>
+            </div>
+            <button type="button" id="roomBtn">Räume</button>
+
+            <div id="raumContent">
+                <div id="raumImageContent">
+
+                </div>
             </div>
         </div>
+
         <div id="sliderContentWrapper">
             <div id="allLampsWrapper">
             </div>
@@ -60,10 +76,10 @@
             </div>
         </div>
 
+        <div id="profileHinzTopLabelContent">
+            <label for="profileHinzTopLabelContent" class="profileHinzTopLabel">Neues Profil hinzufügen</label>
+        </div>
         <div id="profileUploadContent">
-            <div id="profileHinzTopLabelContent">
-                <label for="profileHinzTopLabelContent" class="profileHinzTopLabel">Neues Profil hinzufügen</label>
-            </div>
             <div id="profileUploadContentWrapper">
                 <form id="profilName">
                     <input type="text" id="profilNameText" placeholder="Profilname" placeholder="Nutzername" />

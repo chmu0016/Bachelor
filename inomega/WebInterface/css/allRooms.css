@@ -1,30 +1,77 @@
 #allRoomsButton {
-    position: relative;
-    height: 15px;
-    border-top: 1px solid #7c7a7a;
+    position: absolute;
+    color: #363636;
+    height: 35px;
+    width: 35px;
+    background-color: rgba(0, 0, 0, 0.42);
     background-image: url(../img/icons/WeiterUnten.svg);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    background-color: white;
+    top: 0px;
+    right: 0px;
+    font-size: 1em;
+    border-right: 0px solid black;
+    border-top: 0px solid black;
+    border-left: 0px solid black;
+    border-bottom: 0px solid black;
+    z-index: 1;
 }
-#roomsAccordion {
+#allRoomsImageContent {
     position: absolute;
-    display: none;
+    right: 0px;
+    margin-top: 235px;
+    margin-right: 10px;
+    align-content: center;
     overflow: auto;
-    width: 1180px;
-    height: auto;
-    max-height: 800px;
-    padding: 10px;
-    z-index: 4;
-    background: rgba(227, 227, 227, 0.8);
+    width: 720px;
+    height: 455px;
+    background: rgb(255, 255, 255);
+    z-index: 3;
+    display: none;
+}
+#allRoomsTopLabelContent {
+    background-color: rgb(103, 3, 55);
+    text-align: center;
+    position: absolute;
+    width: 720px;
+    height: 35;
+    z-index: 1;
+    margin-top: 200px;
+    right: 0px;
+    margin-right: 10px;
+    display: none;
+}
+.allRoomsTopLabel {
+    color: rgb(255, 255, 255);
+    font-size: 1.5em;
+    line-height: 150%;
+}
+#colorPickerSwitchBtn {
+    position: absolute;
+    color: #363636;
+    height: 35px;
+    width: 35px;
+    background-color: rgba(0, 0, 0, 0.42);
+    background-image: url(../img/colorwheel3.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    top: 0px;
+    right: 0px;
+    font-size: 1em;
+    border-right: 0px solid black;
+    border-top: 0px solid black;
+    border-left: 0px solid black;
+    border-bottom: 0px solid black;
+    z-index: 1;
 }
 .roomImageAccordion {
     box-shadow: 0px 0px 5px 1px rgba(255, 255, 255, .3);
-    margin-left: 30px;
-    margin-right: 35px;
-    margin-bottom: 20px;
+    margin-left: 40px;
+    margin-top: 20px;
     background: url(../img/slider/Badezimmer.png);
+    z-index: 1;
 }
 .roomImageAccordion.toggle {
     box-shadow: inset 0 0px 1px 3px rgb(255, 163, 38);
