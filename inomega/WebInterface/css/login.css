@@ -11,10 +11,35 @@ html {
     height: 100%;
     z-index: 1;
 }
+#ciWrapper {
+    position: relative;
+    width: 100%;
+    min-width: 950px;
+    height: 100px;
+    background-color: rgb(105, 0, 0);
+    font-size: 2.5em;
+    text-align: center;
+    color: #3e3e3e;
+    text-shadow: 0 -1px #fff, 1px 0 #fff, 0 1px #fff, -1px 0 #fff;
+    z-index: 2;
+}
 #loginContentWrapper {
     position: relative;
     width: 420px;
     left: 50%;
+}
+#loginTopContent {
+    width: 420px;
+    height: 35px;
+    background-color: #3d0091;
+    color: white;
+    font-size: 1.7em;
+    line-height: 120%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: -15px;
+    margin-bottom: 10px;
+    margin-left: -15px;
 }
 #loginContent {
     position: relative;
@@ -23,7 +48,7 @@ html {
     width: 420px;
     height: auto;
     text-align: center;
-    background-color: rgb(105, 0, 0);
+    background-color: #3e3e3e;
     color: black;
     box-shadow: 0px 1px 2px 0px black;
     padding: 15px 15px 0px 15px;
@@ -38,26 +63,17 @@ input {
     margin-left: -15px;
     width: 450px;
     height: 30px;
-    background-color: white;
+    background-color: #1f1f1f;
+    color: white;
+    font-size: 1.5em;
+        line-height: 100%;
     border-right: 0px solid black;
     border-top: 0px solid black;
     border-left: 0px solid black;
     border-bottom: 0px solid black;
 }
 #submit:hover {
-    background-color: #e3e3e3;
-}
-#topText {
-    position: relative;
-    width: 100%;
-    min-width: 950px;
-    height: 100px;
-    background-color: rgb(105, 0, 0);
-    font-size: 4.0em;
-    text-align: center;
-    text-shadow: 0 -1px 1px #666666, 0 1px 1px #000000;
-    color: white;
-    z-index: 2;
+    background-color: #2a2a2a;
 }
 #sprachContent {
     margin-left: 55px;
@@ -83,7 +99,7 @@ input {
 #en {
     height: 30px;
     width: 70px;
- /*    border-right: 0px solid black;
+    /*    border-right: 0px solid black;
     border-top: 0px solid black;
     border-left: 0px solid black;
     border-bottom: 0px solid black;
@@ -93,7 +109,6 @@ input {
     background-size: contain;
     background-position: center;*/
 }
-
 .flaggen {
     width: 50px;
     height: 25px;

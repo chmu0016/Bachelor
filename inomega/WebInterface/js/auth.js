@@ -168,7 +168,7 @@ function profileAuth(clickedRoomAuth) {
 }
 
 function addProfiles() {
-    $("#colorPickerContent").after('<div id="profileTopLabelContent"><button id="profileAddBtn"></button> <label for="profileTopLabelContent" class="profileTopLabel">Profile</label> </div> <div id="profileContent"> </div>');
+    $("#colorPickerContent").after('<div id="profileTopLabelContent" class="topLabel"><button id="profileAddBtn"></button> <label for="profileTopLabelContent" class="profileTopLabel">Profile</label> </div> <div id="profileContent"> </div>');
     for (var i = 0; i <= profileAmount; i++) {
         if (i == profileAmount) {
 
@@ -378,7 +378,7 @@ function roomAuth() {
 function addRoom() {
     if (roomamount >= 0) {
         $("#currentLightName").after('<div id="allRoomsButton">  </div>');
-        $("#colorPickerContent").after('<div id="allRoomsTopLabelContent"> <button id="colorPickerSwitchBtn"></button> <label for="allRoomsTopLabelContent" class="allRoomsTopLabel">Alle Räume</label></div>   <div id="allRoomsImageContent"></div>');
+        $("#colorPickerContent").after('<div id="allRoomsTopLabelContent" class="topLabel"> <button id="colorPickerSwitchBtn"></button> <label for="allRoomsTopLabelContent" class="allRoomsTopLabel">Alle Räume</label></div>   <div id="allRoomsImageContent"></div>');
 
 
         for (var i = 0; i < roomamount; i++) {
@@ -411,7 +411,12 @@ function corpIdent() {
             ciName = result.app_name;
             ciColorPrim = result.color_prim;
             ciColorSec = result.color_sec;
+            $("#ciWrapper").css("background-color", ciColorPrim);
+            $("#sliderAllLamps").css("background-color", ciColorSec);
+            $("#btnSliderAllLamps").css("background-color", ciColorSec);
+            $(".topLabel").css("background-color", ciColorSec);
 
+            $("#ciName").html(ciName);
             console.warn("CI: " + ciName + " " + ciColorPrim + " " + ciColorSec);
 
         },
@@ -530,6 +535,7 @@ function langAuth() {
                 console.warn(languageName[allLanguagesAmount]);
                 allLanguagesAmount++
             });
+            getVar();
             departmentAuth();
         },
         error: function (a, b, c) {

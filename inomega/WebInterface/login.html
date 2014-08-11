@@ -16,18 +16,24 @@
 
         <script src="js/login.js"></script>
         <script src="js/sprachauswahl.js"></script>
+        <script src="js/globalVariable.js"></script>
+        <script src="js/CI.js"></script>
         <link rel="stylesheet" href="css/index.css">
         <link rel="stylesheet" href="css/login.css">
     </head>
 
     <body>
-        <div id="topText">
-            Inomega Beleuchtungssteuerung
+        <div id="ciWrapper">
+            <div id="ciName">Name</div>
+            <label for="ciWrapper">Beleuchtungssteuerung</label> 
         </div>
         <div id="backgroundContent">
-            <div id="loginContentWrapper">
-                <form id="loginContent">
 
+            <div id="loginContentWrapper">
+                
+                <form id="loginContent">
+                    <div id="loginTopContent">
+                    Login</div>
                     <input type="text" id="username" value="user1" placeholder="Nutzername" />
                     <br>
                     <input type="password" id="passwort" value="user1" placeholder="Passwort" />
@@ -38,9 +44,9 @@
                         <label for="sprachContent" id="sprachContentLabel">Sprache auswählen:</label>
                         <br>
 
-                            <img src="img/languages/de.png" id="de" class="flaggen">
+                        <img src="img/languages/de.png" id="de" class="flaggen">
 
-                            <img src="img/languages/en.png" id="en" class="flaggen">
+                        <img src="img/languages/en.png" id="en" class="flaggen">
 
                     </div>
                     <button type="button" id="submit">Login</button>

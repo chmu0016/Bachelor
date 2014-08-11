@@ -5,16 +5,14 @@ $(document).ready(function () {
     // PC Arbeit        192.168.1.148
 
     login();
-
-
 });
 var langname = "de";
 var username = "";
 var password = "";
-
+var ciName, ciColorPrim, ciColorSec;
 
 function login() {
-        $(".flaggen").bind("click", function () {
+    $(".flaggen").bind("click", function () {
         console.warn($(this).attr("id"));
         langname = $(this).attr("id");
 
@@ -23,6 +21,7 @@ function login() {
         username = $("#username").val();
         password = $("#passwort").val();
         ipAdresse = $("#ipAdresseText").val();
+
         localStorage.setItem("username", username);
         localStorage.setItem("password", password);
         localStorage.setItem("ip", ipAdresse);
