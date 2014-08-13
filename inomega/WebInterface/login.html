@@ -6,8 +6,10 @@
     <title>Login</title>
 
     <head>
+<!--
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+-->
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
         <link rel="stylesheet" href="framework/jquery-ui.min.css">
         <link rel="stylesheet" href="framework/jquery-ui.structure.min.css">
         <link rel="stylesheet" href="framework/jquery-ui.theme.min.css">
@@ -25,7 +27,7 @@
     <body>
         <div id="ciWrapper">
             <div id="ciName">Name</div>
-            <label for="ciWrapper">Beleuchtungssteuerung</label> 
+            <label for="ciWrapper" id="ciLabel">Beleuchtungssteuerung</label> 
         </div>
         <div id="backgroundContent">
 
@@ -41,9 +43,8 @@
                     <input type="text" id="ipAdresseText" value="192.168.1.130" placeholder="IP-Adresse" />
                     <br>
                     <div id="sprachContent">
-                        <label for="sprachContent" id="sprachContentLabel">Sprache auswählen:</label>
-                        <br>
-
+                        <label for="sprachContent" id="sprachContentLabel">Sprache auswählen:</label> 
+                        <br/>
                         <img src="img/languages/de.png" id="de" class="flaggen">
 
                         <img src="img/languages/en.png" id="en" class="flaggen">

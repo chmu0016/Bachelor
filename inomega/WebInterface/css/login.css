@@ -1,121 +1,121 @@
+* {
+    font-family: 'Lato';
+}
+@font-face{
+font-family:Lato;
+ src:url(../fonts/Lato-Light.ttf);
+}
+@font-face{
+font-family:Playball;
+ src:url(../fonts/Playball-Regular.ttf);
+}
 html {
-    background-color: #f0f3f6;
+    background-color:#f0f3f6;
 }
 #backgroundContent {
-    position: absolute;
-    left: 50%;
-    width: 1200px;
-    margin-left: -600px;
-    top: 0;
-    bottom: 0;
-    height: 100%;
-    z-index: 1;
+    position:absolute;
+    left:50%;
+    width:1200px;
+    margin-left:-600px;
+    top:0;
+    bottom:0;
+    height:100%;
+    z-index:1;
+}
+#ciName {
+    font-family:'Playball';
+}
+#ciLabel {
+    font-family:'Playball';
 }
 #ciWrapper {
-    position: relative;
-    width: 100%;
-    min-width: 950px;
-    height: 100px;
-    background-color: rgb(105, 0, 0);
-    font-size: 2.5em;
-    text-align: center;
-    color: #3e3e3e;
-    text-shadow: 0 -1px #fff, 1px 0 #fff, 0 1px #fff, -1px 0 #fff;
-    z-index: 2;
+    position:relative;
+    width:100%;
+    min-width:950px;
+    height:100px;
+    background-color:rgb(105,
+    0,
+    0);
+    font-size:2.5em;
+    text-align:center;
+    color:#3e3e3e;
+    text-shadow:0 -1px #fff,
+    1px 0 #fff,
+    0 1px #fff,
+    -1px 0 #fff;
+    z-index:2;
 }
 #loginContentWrapper {
-    position: relative;
-    width: 420px;
-    left: 50%;
+    position:relative;
+    width:420px;
+    left:50%;
 }
 #loginTopContent {
-    width: 420px;
-    height: 35px;
-    background-color: #3d0091;
-    color: white;
-    font-size: 1.7em;
-    line-height: 120%;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-top: -15px;
-    margin-bottom: 10px;
-    margin-left: -15px;
+    width:420px;
+    height:35px;
+    background-color:#3d0091;
+    color:white;
+    font-size:1.7em;
+    line-height:120%;
+    padding-left:15px;
+    padding-right:15px;
+    margin-top:-15px;
+    margin-bottom:10px;
+    margin-left:-15px;
 }
 #loginContent {
-    position: relative;
-    margin-top: 200px;
-    margin-left: -210px;
-    width: 420px;
-    height: auto;
-    text-align: center;
-    background-color: #3e3e3e;
-    color: black;
-    box-shadow: 0px 1px 2px 0px black;
-    padding: 15px 15px 0px 15px;
+    position:relative;
+    margin-top:200px;
+    margin-left:-210px;
+    width:420px;
+    height:auto;
+    text-align:center;
+    background-color:#3e3e3e;
+    color:black;
+    box-shadow:0px 1px 2px 0px black;
+    padding:15px 15px 0px 15px;
 }
 input {
-    margin-bottom: 10px;
-    height: 25px;
-    width: 300px;
+    margin-bottom:10px;
+    height:25px;
+    width:300px;
 }
 #submit {
-    margin-top: 20px;
-    margin-left: -15px;
-    width: 450px;
-    height: 30px;
-    background-color: #1f1f1f;
-    color: white;
-    font-size: 1.5em;
-        line-height: 100%;
-    border-right: 0px solid black;
-    border-top: 0px solid black;
-    border-left: 0px solid black;
-    border-bottom: 0px solid black;
+    margin-top:20px;
+    margin-left:-15px;
+    width:450px;
+    height:30px;
+    background-color:#1f1f1f;
+    color:white;
+    font-size:1.5em;
+    line-height:100%;
+    border-right:0px solid black;
+    border-top:0px solid black;
+    border-left:0px solid black;
+    border-bottom:0px solid black;
 }
 #submit:hover {
-    background-color: #2a2a2a;
+    background-color:#2a2a2a;
 }
-#sprachContent {
-    margin-left: 55px;
-    height: 50px;
-    width: 300px;
-    background-color: rgba(128, 0, 0, 0.68);
-    color: white;
-    text-align: left;
-}
-#de {
-    height: 30px;
-    width: 70px;
-    /* border-right: 0px solid black;
-    border-top: 0px solid black;
-    border-left: 0px solid black;
-    border-bottom: 0px solid black;
-    background-color: rgba(0, 0, 0, 0);
-    background-image: url(../img/languages/de.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;*/
-}
-#en {
-    height: 30px;
-    width: 70px;
-    /*    border-right: 0px solid black;
-    border-top: 0px solid black;
-    border-left: 0px solid black;
-    border-bottom: 0px solid black;
-    background-color: rgba(0, 0, 0, 0);
-    background-image: url(../img/languages/en.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;*/
+#sprachContentLabel {} #sprachContent {
+    margin-left:55px;
+    height:auto;
+    width:300px;
+    border-radius:5px;
+    color:white;
+    text-align:left;
+    font-size:1.3em;
 }
 .flaggen {
-    width: 50px;
-    height: 25px;
+    margin-top:5px;
+    float:left;
+    width:70px;
+    height:30px;
+    margin-right:10px;
 }
 .flaggen:hover {
-    opacity: 0.8;
+    opacity:0.8;
 }
 .flaggen:focus {
-    border: solid blue 5px;
+    border:solid blue 5px;
 }
