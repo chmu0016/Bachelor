@@ -3,10 +3,10 @@
     color: #363636;
     height: 35px;
     width: 35px;
-    background-color: rgba(0, 0, 0, 0.42);
-    background-image: url(../img/icons/WeiterUnten.svg);
+    background-color: rgb(30, 31, 31);
+    background-image: url(../img/icons/Alle%20R%C3%A4ume.svg);
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 30px;
     background-position: center;
     top: 0px;
     right: 0px;
@@ -17,6 +17,9 @@
     border-bottom: 0px solid black;
     z-index: 1;
 }
+#allRoomsButton:hover{
+    background-color: rgba(92, 92, 92, 0.5);
+}
 #allRoomsImageContent {
     position: absolute;
     right: 0px;
@@ -26,7 +29,7 @@
     overflow: auto;
     width: 720px;
     height: 455px;
-    background: rgb(255, 255, 255);
+    background: #313131;
     z-index: 3;
     display: none;
 }
@@ -51,10 +54,10 @@
     color: #363636;
     height: 35px;
     width: 35px;
-    background-color: rgba(0, 0, 0, 0.42);
+    background-color: rgb(30, 31, 31);
     background-image: url(../img/colorwheel3.png);
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 25px;
     background-position: center;
     top: 0px;
     right: 0px;
@@ -64,6 +67,9 @@
     border-left: 0px solid black;
     border-bottom: 0px solid black;
     z-index: 1;
+}
+#colorPickerSwitchBtn:hover {
+    background-color: rgba(92, 92, 92, 0.5);
 }
 .roomImageAccordion {
     box-shadow: 0px 0px 5px 1px rgba(255, 255, 255, .3);

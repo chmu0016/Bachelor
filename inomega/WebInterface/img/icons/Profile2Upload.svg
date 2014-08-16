@@ -4,6 +4,7 @@
 <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="125.516px" height="119.373px" viewBox="0 0 125.516 119.373" enable-background="new 0 0 125.516 119.373"
 	 xml:space="preserve">
-<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#CCCCCC" points="62.758,0 82.151,39.295 125.516,45.596 94.137,76.184 
-	101.545,119.373 62.758,98.981 23.971,119.373 31.379,76.184 0,45.596 43.365,39.295 "/>
+<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M125.516,45.596l-43.364-6.301L62.758,0L43.365,39.295L0,45.596
+	l31.379,30.587l-7.408,43.189l38.787-20.392l38.787,20.392l-7.408-43.189L125.516,45.596z M76,61.646v29H48v-29H35.124
+	l27.975-32.159l27.294,32.159H76z"/>
 </svg>

@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
 });
-
-function allRoomsContent() {
+function allRoomsContent(){
+// Definition der Scrollbar wenn mehr Räume als dargestellt werden können, geladen werden
  $("#allRoomsImageContent").mCustomScrollbar({
         theme: "dark",
         scrollButtons: {
@@ -13,6 +13,8 @@ function allRoomsContent() {
     });
     var check = $(allRoomsImageContent).is(":visible");
     var imgCheck = false;
+    // Clicklistener Alle Räume Button
+    // Ein-/Ausblenden Alle Räume content 
     $("#allRoomsButton").click(function () {
 
         $("#allRoomsTopLabelContent").fadeToggle();
@@ -33,8 +35,4 @@ function allRoomsContent() {
             imgCheck = false;
         }
     });
-}
-
-function allRoomsScrollbar() {
-   
 }

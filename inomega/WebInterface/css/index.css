@@ -2,11 +2,6 @@
     margin: 0;
     padding: 0;
     font-family: 'Lato';
-    /*    user-select: none;
-    -o-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;*/
 }
 /* Image Slider */
 
@@ -22,36 +17,34 @@ font-family:Playball;
  src:url(../fonts/Playball-Regular.ttf);
 
 }
-html {
-    background-color:rgb(105,
-    0,
+html {} body {
+    background-color:rgba(232,
+    232,
+    232,
     0);
-}
-body {
+    max-height:800px;
+    margin:auto;
     height:100%;
+}
+.bg {
+    position:fixed;
+    left:0;
+    right:0;
+    display:block;
+    background-image:url(../img/background2.jpg);
+    width:1920px;
+    height:1080px;
+    -webkit-filter:blur(5px);
+    -moz-filter:blur(5px);
+    -o-filter:blur(5px);
+    -ms-filter:blur(5px);
+    filter:blur(5px);
 }
 #ciName {
     font-family:'Playball';
 }
 #ciLabel {
     font-family:'Playball';
-}
-/*body {
-    width: 1200px;
-    background-color: rgba(232, 232, 232, 0.91);
-    max-height: 800px;
-    margin: auto;
-    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, .8);
-}
-*/
-
-#backgroundContent {
-    position:relative;
-    width:1200px;
-    min-height:100%;
-    background-color:#f0f3f6;
-    max-height:1200px;
-    margin:auto;
 }
 #ciWrapper {
     position:relative;
@@ -61,14 +54,24 @@ body {
     background-color:rgb(105,
     0,
     0);
-    font-size:2.5em;
+    color:#313131;
+    font-size:3em;
+    font-weight:bold;
+    line-height:95%;
     text-align:center;
-    color:#3e3e3e;
-    text-shadow:0 -1px #fff,
-    1px 0 #fff,
-    0 1px #fff,
-    -1px 0 #fff;
     z-index:2;
+}
+#backgroundContent {
+    position:relative;
+    width:1200px;
+    min-height:100%;
+    background-color:rgba(0,
+    0,
+    0,
+    0);
+    max-height:1200px;
+    margin:auto;
+    z-index:1;
 }
 .topLabel {
     background-color:#6c6c6c;

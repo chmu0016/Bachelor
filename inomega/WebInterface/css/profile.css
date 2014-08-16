@@ -7,7 +7,7 @@
     overflow: auto;
     width: 720px;
     height: 455px;
-    background: rgb(255, 255, 255);
+    background: #313131;
     z-index: 3;
     display: none;
 }
@@ -50,7 +50,7 @@
     color: #363636;
     height: 35px;
     width: 40px;
-    background-color: rgba(0, 0, 0, 0.42);
+    background-color: rgb(30, 31, 31);
     background-image: url(../img/icons/Profilhinzuf%C3%BCgen.svg);
     background-repeat: no-repeat;
     background-size: contain;
@@ -65,7 +65,7 @@
     z-index: 1;
 }
 #profileAddBtn:hover {
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba(92, 92, 92, 0.5);
 }
 .btnDelete {
     width: 50px;
@@ -77,5 +77,5 @@
     border-bottom: 0px solid black;
 }
 .btnDelete:hover {
-    background-color: grey;
+    background-color: rgba(92, 92, 92, 0.5);
 }

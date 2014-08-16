@@ -2,10 +2,10 @@
     position: relative;
     float: left;
     height: 150px;
-    width: 1200px;
-    left: 50%;
-    margin-left: -600px;
+    width: 100%;
+    z-index: 2;
 }
+
 #depBtn {
     position: relative;
     float: left;
@@ -22,7 +22,6 @@
     position: absolute;
     display: none;
     float: left;
-
     margin-left: 60px;
     height: 150px;
     width: 1020px;
@@ -67,6 +66,7 @@
     border-top: 0px solid black;
     border-left: 0px solid black;
     border-bottom: 0px solid black;
+    box-shadow: -1px 0px #ddd;
 }
 #gebäudeContent {
     position: absolute;
@@ -74,7 +74,7 @@
     float: left;
     margin-left: 120px;
     height: 150px;
-    width: 1020px;
+    width: 1020;
     overflow-x: auto;
     overflow-y: hidden;
 }
@@ -110,6 +110,7 @@
     border-top: 0px solid black;
     border-left: 0px solid black;
     border-bottom: 0px solid black;
+    box-shadow: -1px 0px #ddd;
 }
 #raumContent {
     position: absolute;
@@ -134,7 +135,6 @@
     border-right: 1px solid #a2a2a2;
     background-color: #313131;
 }
-/*--------------------------------------------------------------------------------------------------------------*/
 
 #imageSlider {
     position: absolute;
@@ -143,31 +143,17 @@
     width: 1200px;
     z-index: 1;
 }
-/*#shadow {
-    position: absolute;
-    width: 1200px;
-    height: 154px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.5) 75%);
-    z-index: 2;
-} */
 
-#img0 {
-    background: url(../img/slider/Badezimmer.png);
-}
-#img1 {
-    background-image: url(../img/slider/belebend.png);
-}
-#img2 {
-    background-image: url(../img/slider/Esszimmer.png);
-}
-#img3 {
-    background-image: url(../img/slider/Relax.png);
-}
 .roomImage {
     position: relative;
     width: 300px;
     height: 150px;
     float: left;
+    box-shadow: -1px 0px #797979;
+    background-color: #313131;
+    background-repeat: no-repeat;
+    background-size: 300px  150px;
+    background-position: center;
 }
 .roomImageWrapper {
     position: relative;
@@ -206,7 +192,7 @@
 }
 .profileBtnClass {
     position: absolute;
-    background-image: url(../img/icons/Profil2.svg);
+    background-image: url(../img/icons/Profile2.svg);
     background-repeat: no-repeat;
     background-size: contain;
     opacity: 1;

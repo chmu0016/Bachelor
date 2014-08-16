@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    var win = $(window).width();
+    win = win - 180;
+    $("#raumContent").width(win);
     $("#bereichContent").mCustomScrollbar({
         theme: "light",
         scrollButtons: {
@@ -25,10 +28,11 @@ $(document).ready(function () {
     });
 });
 
+var buildClicked = false;
+var roomClicked = false;
+var totalImgWidth = 0;
+
 function imageSlider() {
-    var buildClicked = false;
-    var roomClicked = false;
-    var totalImgWidth = 0;
 
     //////////////////////////// Bereiche ////////////////////////////
     // Bereichebutton
@@ -78,6 +82,11 @@ function imageSlider() {
     }
     // Bereichebild Klick
     $(".bereiche").click(function () {
+        $("#gebäudeImageContent").empty();
+        var bereichId = $(this).attr("id");
+        var bereichIdLength = bereichId.length;
+        var bereichIdSubstr = bereichId.substring(7, bereichIdLength);
+        addBuildings(bereichIdSubstr);
         $(depBtn).next().animate({
             width: 'toggle'
         }, 1000);
@@ -125,42 +134,16 @@ function imageSlider() {
             width: 'toggle'
         }, 1000);
     }
-    // Gebäudebild Klick
-    $(".gebäude").click(function () {
-        buildClicked = !buildClicked;
-        $(buildBtn).next().animate({
-            width: 'toggle'
-        }, 1000);
-        $("#roomBtn").animate({
-            "margin-left": "0px"
-        }, 1000, function () {
-            roomBtnAction();
-        });
 
-    });
 
     //////////////////////////// Räume anzeigen ////////////////////////////
     // Raumbutton
     $("#roomBtn").click(function () {});
 
-    function roomBtnAction() {
-        totalImgWidth = 0;
-        roomClicked = !roomClicked;
-        // Breite aller Kind-Elemente zusammenaddieren um die Breite des Imagesliders festzulegen
-        $("#raumImageContent").children().each(function () {
-            totalImgWidth = totalImgWidth + $(this).width();
-        });
-        totalImgWidth = totalImgWidth + $("#raumImageContent").children().length;
-        $("#raumImageContent").width(totalImgWidth);
+    depBtnAction();
+}
 
-        $(roomBtn).next().animate({
-            width: 'toggle'
-        }, 1000);
-    }
-
-    var checked = false;
-
-
+function raumClicklistener(){
     // Auswählen eines Raumes
     var tmpClickedImg = 0;
     $("#img" + tmpClickedImg).addClass("toggle");
@@ -169,9 +152,6 @@ function imageSlider() {
     $("#img" + tmpClickedImg + " .roomLabel").css("color", "rgba(255, 255, 255, 1)");
     $("#imgAcc" + tmpClickedImg + " .labelimgAcc").css("color", "rgba(255, 255, 255, 1)");
     sliderAuth(tmpClickedImg);
-    /*
-    profileAuth(tmpClickedImg);
-*/
 
     $(".roomImage").click(function (e) {
         if ($(this).hasClass('roomImageAccordion')) {
@@ -194,9 +174,7 @@ function imageSlider() {
             $("#imgAcc" + clickedImg + " .labelimgAcc").css("color", "rgba(255, 255, 255, 1)");
             tmpClickedImg = clickedImg;
             sliderAuth(tmpClickedImg);
-            /*
-            profileAuth(tmpClickedImg);
-*/
+
         }
     });
 
@@ -227,8 +205,43 @@ function imageSlider() {
         }
 
     });
-    depBtnAction();
 }
+
+function clicklistener() {
+    // Gebäudebild Klick
+    $(".gebäude").click(function () {
+        buildClicked = !buildClicked;
+        $("#raumImageContent").empty();
+        var gebäudeId = $(this).attr("id");
+        var gebäudeIdLength = gebäudeId.length;
+        var gebäudeIdSubstr = gebäudeId.substring(7, gebäudeIdLength);
+         addRoom(gebäudeIdSubstr);
+        $(buildBtn).next().animate({
+            width: 'toggle'
+        }, 1000);
+        $("#roomBtn").animate({
+            "margin-left": "0px"
+        }, 1000, function () {
+            roomBtnAction();
+        });
+    });
+}
+
+function roomBtnAction() {
+    totalImgWidth = 0;
+    roomClicked = !roomClicked;
+    // Breite aller Kind-Elemente zusammenaddieren um die Breite des Imagesliders festzulegen
+    $("#raumImageContent").children().each(function () {
+        totalImgWidth = totalImgWidth + $(this).width();
+    });
+    totalImgWidth = totalImgWidth + $("#raumImageContent").children().length;
+    $("#raumImageContent").width(totalImgWidth);
+
+    $(roomBtn).next().animate({
+        width: 'toggle'
+    }, 1000);
+}
+
 
 // evtl. für buttons mittig zu positionieren für jedes Bild
 function labelPositioning() {

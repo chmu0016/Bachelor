@@ -2,12 +2,16 @@
     font-family: 'Lato';
 }
 @font-face{
+
 font-family:Lato;
  src:url(../fonts/Lato-Light.ttf);
+
 }
 @font-face{
+
 font-family:Playball;
  src:url(../fonts/Playball-Regular.ttf);
+
 }
 html {
     background-color:#f0f3f6;
@@ -17,33 +21,11 @@ html {
     left:50%;
     width:1200px;
     margin-left:-600px;
+        background-color: rgba(0,0,0,0);
     top:0;
     bottom:0;
     height:100%;
     z-index:1;
-}
-#ciName {
-    font-family:'Playball';
-}
-#ciLabel {
-    font-family:'Playball';
-}
-#ciWrapper {
-    position:relative;
-    width:100%;
-    min-width:950px;
-    height:100px;
-    background-color:rgb(105,
-    0,
-    0);
-    font-size:2.5em;
-    text-align:center;
-    color:#3e3e3e;
-    text-shadow:0 -1px #fff,
-    1px 0 #fff,
-    0 1px #fff,
-    -1px 0 #fff;
-    z-index:2;
 }
 #loginContentWrapper {
     position:relative;
@@ -95,9 +77,9 @@ input {
     border-bottom:0px solid black;
 }
 #submit:hover {
-    background-color:#2a2a2a;
+    background-color: rgba(92, 92, 92, 0.5);
 }
-#sprachContentLabel {} #sprachContent {
+#sprachContent {
     margin-left:55px;
     height:auto;
     width:300px;
@@ -114,7 +96,7 @@ input {
     margin-right:10px;
 }
 .flaggen:hover {
-    opacity:0.8;
+    background-color: rgba(92, 92, 92, 0.5);
 }
 .flaggen:focus {
     border:solid blue 5px;

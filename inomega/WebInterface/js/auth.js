@@ -1,19 +1,14 @@
 $(document).ready(function () {
-    //langAuth();
-    console.warn(lang);
     langSelectAuth(lang);
 });
+// Zuweisung Login Daten
 var lang = localStorage.getItem("lang");
 var un = localStorage.getItem("username");
 var pw = localStorage.getItem("password");
 var ip = localStorage.getItem("ip");
-// ---- SERVER IP -----
-// Laptop Zu hause  192.168.178.75
-// PC Zu hause      192.168.178.90
-// PC Arbeit        192.168.1.148
-/*localStorage.clear();*/
 
 var roomnames = new Array();
+var roomBuild = new Array();
 var roomamount = 0;
 
 var depnames = new Array();
@@ -22,6 +17,7 @@ var depamount = 0;
 
 var buildnames = new Array();
 var buildId = new Array();
+var buildDep = new Array();
 var buildamount = 0;
 
 var lampnames = new Array();
@@ -46,7 +42,7 @@ var oldClickedRoom = 1;
 var clickedRoom = 0;
 
 
-
+// Leuchten vom Server beziehen und Variablen zuweisen
 function sliderAuth(clickedRoomAuth) {
     clickedRoom = clickedRoomAuth + 1; // +1 addieren, weil id der Raumobjekte bei 1 anfängt (indize clickedroom bei 0)
     $.ajax({
@@ -66,8 +62,8 @@ function sliderAuth(clickedRoomAuth) {
             lampBrightness = [];
             lampId = [];
             lampState = [];
-
             lampamount = 0;
+            
             $.each(result, function (key, val) {
                 lampnames[lampamount] = val.name;
                 lampColor[lampamount] = val.color;
@@ -106,21 +102,21 @@ function sliderAuth(clickedRoomAuth) {
 
     }
 }
-
+// Im Raum anmelden
 function subscribe(clickedRoomAuth) {
     sendMessage(JSON.stringify({
         "action": "subscribe",
         "room": clickedRoomAuth,
     }));
 }
-
+// Vom Raum abmelden
 function unsubscribe() {
     sendMessage(JSON.stringify({
         "action": "unsubscribe",
         "room": oldClickedRoom,
     }));
 }
-
+// Profile vom Server laden und variablen zuweisen
 function profileAuth(clickedRoomAuth) {
     $.ajax({
         type: "GET",
@@ -137,19 +133,17 @@ function profileAuth(clickedRoomAuth) {
             profileNames = [];
             profileId = [];
             profileType = [];
-            profileImage = []
+            profileImage = [];
             profileAmount = 0;
             $.each(result, function (key, val) {
                 profileNames[profileAmount] = val.name;
                 profileId[profileAmount] = val.id;
                 profileType[profileAmount] = val.type;
+                profileImage[profileAmount] = val.img;
                 profileAmount++;
-                /*console.log("index: " + key + '   ' + " id: " + val.id);*/
             });
             removeProfiles();
-            corpIdent();
             addProfiles();
-
             profileIni();
 
         },
@@ -166,14 +160,11 @@ function profileAuth(clickedRoomAuth) {
 
     }
 }
-
+// Profilebereich und bilder in die HTML dynamisch hinzufügen
 function addProfiles() {
     $("#colorPickerContent").after('<div id="profileTopLabelContent" class="topLabel"><button id="profileAddBtn"></button> <label for="profileTopLabelContent" class="profileTopLabel">Profile</label> </div> <div id="profileContent"> </div>');
     for (var i = 0; i <= profileAmount; i++) {
         if (i == profileAmount) {
-
-            /*  $("#profileContent").append('<div id="profileAdd" class="profileContentImg roomImage">');
-            $("#profile" + i).append('<label for="profileAdd" class="profileLabel">Profil hinzufügen</label>');*/
 
         } else {
 
@@ -186,19 +177,19 @@ function addProfiles() {
             }
             console.log("i: " + i + " PID: " + profileId[i] + " profilname: " + profileNames[i]);
         }
-
+        $("#img" + i).css("background-image", profileImage[i]);
     }
 }
-
+// Profilbereich löschen z.B. wenn keine Profile in einem Raum, bei Raumwechsel, vorhanden sind
 function removeProfiles() {
     $("#profileContent").remove();
 }
-
+// Alte Leuchten löschen, bei Raumwechsel um neue Leuchten hinzuzufügen
 function removeSlider() {
     $("#sliderContent").empty();
     $("#allLampsWrapper").empty();
 }
-
+// Hinzufügen der Leuchten als Slider in der HTML
 function addSlider() {
     var allLampsBool = false;
     for (var i = 0; i < lampamount; i++) {
@@ -214,7 +205,7 @@ function addSlider() {
             $("#slider" + lampId[i]).append('<label for="slider' + lampId[i] + '" class="sliderLabel">' + lampnames[i] + '</label>');
         }
     }
-    /*console.log("--------------------------------------------------------------------------------------");*/
+    // Interaktion mit Slider, also ein-/Ausschalten, dimmen
     var slider, sliderVal, widthVal, sliderState;
     sliderState = "off";
     $(".slider").slider({
@@ -338,7 +329,7 @@ function addSlider() {
 }
 
 
-
+// Räume vom Server laden und Variablen zuweisen
 function roomAuth() {
     $.ajax({
         type: "GET",
@@ -353,12 +344,12 @@ function roomAuth() {
         success: function (result) {
             $.each(result, function (key, val) {
                 roomnames[roomamount] = val.name;
+                roomBuild[roomamount] = val.building;
                 roomamount++;
             });
             addRoom();
-            imageSlider();
             allRoomsContent();
-            allRoomsScrollbar();
+            imageSlider();
 
         },
         error: function (a, b, c) {
@@ -374,28 +365,31 @@ function roomAuth() {
         /* alert("callback");*/
     }
 }
-
-function addRoom() {
+// Räume als HTML-Elemente in den Imageslider laden
+function addRoom(roomValue) {
+    var roomClicked = roomValue;
     if (roomamount >= 0) {
         $("#currentLightName").after('<div id="allRoomsButton">  </div>');
         $("#colorPickerContent").after('<div id="allRoomsTopLabelContent" class="topLabel"> <button id="colorPickerSwitchBtn"></button> <label for="allRoomsTopLabelContent" class="allRoomsTopLabel">Alle Räume</label></div>   <div id="allRoomsImageContent"></div>');
-
-
         for (var i = 0; i < roomamount; i++) {
-            $("#raumImageContent").append('<div id="imgWrapper' + i + '" class="roomImageWrapper"> </div>');
-            $("#imgWrapper" + i).append('<div id="img' + i + '" class="roomImage"> </div>');
-            $("#img" + i).append('<label for="img' + i + '" class="roomLabel">' + roomnames[i] + '</label>');
-            $("#imgWrapper" + i).append('<div id="toggleOnOff' + i + '" class="toggleOnOff"> </div>');
-            $("#imgWrapper" + i).append('<div id="profileBtn' + i + '" class="profileBtnClass"> </div>');
+            if (roomClicked == roomBuild[i]) {
 
-            $("#allRoomsImageContent").append('<div id="imgAcc' + i + '" class="roomImageAccordion roomImage">');
-            $("#imgAcc" + i).append('<label for="imgAcc' + i + '" class="labelimgAcc">' + roomnames[i] + '</label>');
+                $("#raumImageContent").append('<div id="imgWrapper' + i + '" class="roomImageWrapper"> </div>');
+                $("#imgWrapper" + i).append('<div id="img' + i + '" class="roomImage"> </div>');
+                $("#img" + i).append('<label for="img' + i + '" class="roomLabel">' + roomnames[i] + '</label>');
+                $("#imgWrapper" + i).append('<div id="toggleOnOff' + i + '" class="toggleOnOff"> </div>');
+                $("#imgWrapper" + i).append('<div id="profileBtn' + i + '" class="profileBtnClass"> </div>');
+
+                $("#allRoomsImageContent").append('<div id="imgAcc' + i + '" class="roomImageAccordion roomImage">');
+                $("#imgAcc" + i).append('<label for="imgAcc' + i + '" class="labelimgAcc">' + roomnames[i] + '</label>');
+            }
         }
     } else {
 
     }
+    raumClicklistener();
 }
-
+// Corporate Identity vom Server beziehen und den Eigenschaften in CSS zuweisen
 function corpIdent() {
     $.ajax({
         type: "GET",
@@ -415,10 +409,7 @@ function corpIdent() {
             $("#sliderAllLamps").css("background-color", ciColorSec);
             $("#btnSliderAllLamps").css("background-color", ciColorSec);
             $(".topLabel").css("background-color", ciColorSec);
-
             $("#ciName").html(ciName);
-            console.warn("CI: " + ciName + " " + ciColorPrim + " " + ciColorSec);
-
         },
         error: function (a, b, c) {
             console.warn(a + " " + b + " " + c + "ERROR");
@@ -433,9 +424,8 @@ function corpIdent() {
          alert("callback");
 */
     }
-
 }
-
+// Bereiche vom Server beziehen und in Variablen speichern
 function departmentAuth() {
     $.ajax({
         type: "GET",
@@ -469,14 +459,13 @@ function departmentAuth() {
         /* alert("callback");*/
     }
 }
-
+// Bereiche im Imageslider als HTML-Elemente hinzufügen
 function addDepartments() {
     for (var i = 0; i < depamount; i++) {
         $("#bereichImageContent").append('<div id="bereich' + depId[i] + '" class="bereiche"><label for="bereich' + depId[i] + '" class="bereicheLabel">' + depnames[i] + '</label> </div>');
     }
-
 }
-
+// Gebäude vom Server beziehen und in Variablen speichern
 function buildingAuth() {
     $.ajax({
         type: "GET",
@@ -492,10 +481,12 @@ function buildingAuth() {
             $.each(result, function (key, val) {
                 buildnames[buildamount] = val.name;
                 buildId[buildamount] = val.id;
+                buildDep[buildamount] = val.departments;
                 buildamount++;
+                console.info(buildamount);
 
             });
-            addBuildings();
+            // addBuildings();
             roomAuth();
         },
         error: function (a, b, c) {
@@ -511,13 +502,17 @@ function buildingAuth() {
         /* alert("callback");*/
     }
 }
-
-function addBuildings() {
-    for (var i = 0; i < depamount; i++) {
-        $("#gebäudeImageContent").append('<div id="gebäude' + buildId[i] + '" class="gebäude"><label for="gebäude' + buildId[i] + '" class="gebäudeLabel">' + buildnames[i] + '</label> </div>');
+// Gebäude im Imageslider als HTML-Elemente hinzufügen
+function addBuildings(depValue) {
+    var depClicked = depValue;
+    for (var i = 0; i < buildamount; i++) {
+        if (depClicked == buildDep[i]) {
+            $("#gebäudeImageContent").append('<div id="gebäude' + buildId[i] + '" class="gebäude"><label for="gebäude' + buildId[i] + '" class="gebäudeLabel">' + buildnames[i] + '</label> </div>');
+        }
     }
+    clicklistener();
 }
-
+// Sprachen vom Server laden
 function langAuth() {
     $.ajax({
         type: "GET",
@@ -551,7 +546,7 @@ function langAuth() {
         /* alert("callback");*/
     }
 }
-
+// Ausgewählte Sprache aus dem Login Screen dem Server melden
 function langSelectAuth(langname) {
     var lang = langname;
     console.info(lang);
@@ -568,6 +563,7 @@ function langSelectAuth(langname) {
         success: function (result) {
             console.warn("Language Selected: " + result.language);
             departmentAuth();
+            corpIdent();
         },
         error: function (a, b, c) {
             console.log(a + " " + b + " " + c + "ERROR");
