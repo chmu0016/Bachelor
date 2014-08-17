@@ -1,12 +1,12 @@
 #profileContent {
     position: absolute;
     right: 0px;
-    margin-top: 235px;
+    margin-top: 205px;
     margin-right: 10px;
     align-content: center;
     overflow: auto;
     width: 720px;
-    height: 455px;
+    height: 385px;
     background: #313131;
     z-index: 3;
     display: none;
@@ -17,7 +17,7 @@
     width: 720px;
     height: 35;
     z-index: 1;
-    margin-top: 200px;
+    margin-top: 170px;
     right: 0px;
     margin-right: 10px;
     display: none;

@@ -11,7 +11,7 @@ function profilUpload() {
         $("#profileToUpload").trigger('click');
     });
 
-    // Klick auf Upload Button
+    // Klick auf Profilbildupload Button
     document.getElementById('profileToUpload').addEventListener('change', fileSelect, false);
 
     function fileSelect(evt) {
@@ -64,24 +64,22 @@ function profilUpload() {
     } // fileselect()
 
     function getBase64Image(img) {
-        // Create an empty canvas element
+        // Initialisierung Canvas und Context Objekte
         var canvasUpload = document.createElement("canvas");
         canvasUpload.width = img.width;
         canvasUpload.height = img.height;
 
-        // Copy the image contents to the canvas
         var ctx = canvasUpload.getContext("2d");
         ctx.drawImage(img, 0, 0);
 
-        // Get the data-URL formatted image
-        // Firefox supports PNG and JPEG. You could check img.src to
-        // guess the original format, but be aware the using "image/jpg"
-        // will re-encode the image.
+        /*  Get the data-URL formatted image , irefox supports PNG and JPEG.
+            You could check img.src to guess the original format, 
+            but be aware the using "image/jpg" will re-encode the image. */
         var dataURL = canvasUpload.toDataURL("image/png");
 
         return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
     }
-    // Abbrechen Button
+    // Klick auf Abbrechen Button
     $("#cancelBtn").unbind('click').click(function () {
         document.getElementsByName('profileBtnClass').disabled = true;
         $("#profileTopLabelContent").fadeIn("fast");
@@ -101,7 +99,8 @@ function profilUpload() {
 
 
     });
-    // Speichern Button
+    /*  Klick auf Speichern Button
+        Neues Profil auf den Server laden */
     $("#uploadBtn").unbind('click').click(function () {
         document.getElementsByName('profileBtnClass').disabled = false;
         $("#profileContent").fadeOut("fast");

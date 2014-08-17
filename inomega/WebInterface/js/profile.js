@@ -3,6 +3,7 @@ $(document).ready(function () {
 });
 
 function profileIni() {
+    // Custom scrollbar für Profilcontent definieren
     $("#profileContent").mCustomScrollbar({
         theme: "dark",
         scrollButtons: {
@@ -11,12 +12,13 @@ function profileIni() {
         autoHideScrollbar: true,
         axis: "y",
     });
+    // Aktivieren des Listeners zum löschen des Profils
     profileDelete();
     var profileCheck = false;
     var oldProfile, roomProfileIndex, roomProfileIndexLength, roomProfileIndexSubstr;
     oldProfile = $(".profileContentImg:first-child").attr("id");
     $("#" + oldProfile).addClass("toggle");
-
+    // Klick auf Profile anzeigen (Stern imageslider)
     $(".profileBtnClass").unbind('click').click(function () {
         $("#pickerBorder").css("display", "none");
 
@@ -47,7 +49,7 @@ function profileIni() {
                 $("#profileContent").fadeOut("fast");
                 $("#profileTopLabelContent").fadeOut("fast");
 
-                $("#picker").css("top", "-80px");
+                $("#picker").css("top", "-50px");
                 $("#picker").css("left", "5px");
                 $("#picker").css("z-index", 2);
 
@@ -59,27 +61,10 @@ function profileIni() {
 
 
         });
-
-        // Profil aktualisieren
-        /*var jsonobj = {
-            "name": "Lasttest",
-            "img_type": "jpg",
-            "img": "/img/profiles/profile_default.png",
-            "config": [{
-                "id ": 123,
-                "color ": "#cb00a1 ",
-                "brightness ": "25 ",
-                "state ": "on "
-            }, {
-            "id ": 456,
-            "color ": "#cb00a1 ",
-            "brightness ": "25 ",
-            "state ": "on "
-            }],
-       };*/
         $("#profileContent").fadeToggle("fast");
         $("#profileTopLabelContent").fadeToggle("fast");
     });
+    // Klick auf ESC Button zum ausblenden der Contents
     $(document).keyup(function (e) {
         if (e.keyCode == 27) {
             if ($("#profileContent").is(":visible")) {
@@ -105,7 +90,7 @@ function profileIni() {
     });
 
 }
-
+// Löschen eiens profils
 function profileDelete() {
     $(".btnDelete").unbind('click').click(function () {
         var profID = $(this).closest("div").attr("id");

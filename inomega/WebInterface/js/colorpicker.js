@@ -2,7 +2,8 @@ $(document).ready(function () {
     colorPickerIni();
 });
 var oldClickedBtnid, oldClickedSliderid, clickedBtnId, clickedSliderId;
-
+/*  Erste verfügbare Leuchte als angewählte Leuchte wählen.
+    Auswählen der Leuchte und aktualisierung der Bezeichnung im Colorpickercontent.*/
 function sliderHandling() {
     oldClickedBtnid = $("#btnSlider0").attr("id");
     oldClickedSliderid = $("#" + oldClickedBtnid).prev(".slider").attr("id");
@@ -46,41 +47,42 @@ function sliderHandling() {
         });
     });
 }
-
+// Verwaltung aktionen im Colorpickercontent
 function colorPickerIni() {
 
-    // create canvas and context objects
+    // Initialisierung Canvas und Context Objekte
     var canvas = document.getElementById('picker');
     var ctx = canvas.getContext('2d');
 
-    // drawing active image
+    // Zeichnung des Bildes
     var image = new Image();
     image.onload = function () {
-        canvas.width = (image.width);
-        canvas.height = (image.height);
-        ctx.drawImage(image, 0, 0, image.width, image.height); // draw the image on the canvas
-        $("#pickerBorder").css("width", (image.width) + "px");
-        $("#pickerBorder").css("height", (image.height) + "px");
+        canvas.width = 250;
+        /*canvas.width = (image.width);*/
+        canvas.height = 250;
+/*        canvas.height = (image.height);*/
+        ctx.drawImage(image, 0, 0, image.width, image.height); // Bild in den canvas zeichnen
+        $("#pickerBorder").css("width", (canvas.width) + "px");
+        $("#pickerBorder").css("height", (canvas.height) + "px");
     }
 
     var imageSrc = 'img/colorwheel3.png';
 
     image.src = imageSrc;
-    $('#picker').on("mousemove", function (e) { // mouse move handler
-        // get coordinates of current position
+    $('#picker').on("mousemove", function (e) { // Maus move handler
+        // Koordinaten der aktuellen Mausposition holen
         var canvasOffset = $(canvas).offset();
         var canvasX = Math.floor(e.pageX - canvasOffset.left);
         var canvasY = Math.floor(e.pageY - canvasOffset.top);
 
-        // get current pixel
+        // Farbpixel der aktuellen Mausposition speichern
         var imageData = ctx.getImageData(canvasX, canvasY, 1, 1);
         var pixel = imageData.data;
         var hexString1 = pixel[0].toString(16);
         var hexString2 = pixel[1].toString(16);
         var hexString3 = pixel[2].toString(16);
-        /*
-        console.log("hex1:" + hexString1 + " hex2:" + hexString2 + " hex3:" + hexString3);
-*/
+        
+        //Umwandlung der Pixel in Hexstring um farbe zu setzen
         if (hexString1.length < 2) {
             hexString1 = '0' + hexString1;
         }
@@ -92,25 +94,26 @@ function colorPickerIni() {
         }
         var hexstring = '#' + hexString1 + hexString2 + hexString3
 
-        // update preview color
+        // Farbvorschau aktualisieren
         var pixelColor = hexstring;
         $('#preview').css('background-color', pixelColor);
     });
 
-
+    // Bei klick auf den Farbpicker, die Farbe der ausgewählten Leuchte zuweisen
     $('#picker').on("click", function (e) {
-        // get coordinates of current position
+        // Koordinaten der aktuellen Mausposition holen
         var canvasOffset = $(canvas).offset();
         var canvasX = Math.floor(e.pageX - canvasOffset.left);
         var canvasY = Math.floor(e.pageY - canvasOffset.top);
 
-        // get current pixel
+        // Farbpixel der aktuellen Mausposition speichern
         var imageData = ctx.getImageData(canvasX, canvasY, 1, 1);
         var pixel = imageData.data;
         var hexString1 = pixel[0].toString(16);
         var hexString2 = pixel[1].toString(16);
         var hexString3 = pixel[2].toString(16);
-
+        
+        //Umwandlung der Pixel in Hexstring um farbe zu setzen
         if (hexString1.length < 2) {
             hexString1 = '0' + hexString1;
         }
@@ -122,15 +125,17 @@ function colorPickerIni() {
         }
         var hexstring = '#' + hexString1 + hexString2 + hexString3
         var pickedPixelColor = hexstring;
-
+        
+        // Aufruf der Funktion um die Farbe der akutellen Leuchte und der Farbhistorie zuzuweisen
         changeColor(pickedPixelColor, 16);
     });
-    // vordefinierte Colors
+    // Klick auf vordefinierte Farben 
     $("#allColorsContent .allColors").click(function (e) {
         setPixelColor = $(e.target).closest("div").css("background-color");
         var firstPickedColor = $("#pColor1").css("background-color");
         var hexstringSet = "",
             hexstringFirst = "";
+        // RGB farbe in Hex umwandeln
         colorPartsSet = setPixelColor.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
         delete(colorPartsSet[0]); // = rgb(R, G, B), wird nicht gebraucht
         for (var i = 1; i <= 3; ++i) {
@@ -138,8 +143,8 @@ function colorPickerIni() {
             if (colorPartsSet[i].length == 1) colorPartsSet[i] = '0' + colorPartsSet[i];
         }
         hexstringSet = '#' + colorPartsSet.join('');
+        // Wenn erste Farbhistoriefarbe gleich Transparent, nichts machen ansonsten Wert der Farbhistorie zuweisen
         if (firstPickedColor == "rgba(0, 0, 0, 0)") {} else {
-
             colorPartsFirst = firstPickedColor.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
             delete(colorPartsFirst[0]); // = rgb(R, G, B), wird nicht gebraucht
             for (var i = 1; i <= 3; ++i) {
@@ -148,12 +153,14 @@ function colorPickerIni() {
             }
             hexstringFirst = '#' + colorPartsFirst.join('');
         }
+        // Wenn Farbe ungleich der akutellen Leuchtfarbe ist, farbe setzen ansonsten nichts machen
         if (hexstringSet != hexstringFirst) {
+        // Farbe der ausgewählten Leuchte und der Farbhistorie zuweisen
             changeColor(hexstringSet, 16);
             $("#" + clickedSliderId + ".ui-widget-content .ui-state-default").css("background", hexstringSet);
         } else {}
     });
-    // Farbhistorie
+    // Klick auf der Farbhistorie und zuweisung der Farben
     $(".pickedColors").click(function (e) {
         setPixelColor = $(e.target).closest("div").css("background-color");
         if (setPixelColor == "rgba(0, 0, 0, 0)") {} else {
@@ -165,8 +172,6 @@ function colorPickerIni() {
                 if (colorParts[i].length == 1) colorParts[i] = '0' + colorParts[i];
             }
             var hexstring = '#' + colorParts.join('');
-            console.log("HEXSTRING: " + hexstring);
-
             var pickedPixelColor = hexstring;
             var strId = $(e.target).attr("id");
             strId = strId.charAt(6) + strId.charAt(7);
@@ -188,11 +193,6 @@ function colorPickerIni() {
         $("#switch").fadeOut(100, function () {
             if ($("#switch").attr("src") == "img/icons/BildSwitch.svg") {
                 $("#switch").attr("src", "img/colorwheel3_small.png").load();
-                /*                $("#colorPickerContent").animate({
-                    "height": contentH + 10 + "px"
-                }, "fast", function () {
-                    $("#btnImgUpload").fadeIn();
-                });*/
                 $("#btnImgUpload").fadeIn();
                 $("#btnImgMax").fadeIn();
             } else {
@@ -206,7 +206,7 @@ function colorPickerIni() {
         $("#btnImgUpload").unbind().bind("click", function () {
             $("#filesToUpload").trigger('click');
         });
-        // Maximieren des Bildes
+        // Klick zum maximieren des Bildes
         $("#btnImgMax").unbind().bind("click", function () {
             var canvas = document.getElementById('picker');
             var ctx = canvas.getContext('2d');
@@ -228,14 +228,12 @@ function colorPickerIni() {
                 "left": -500 + "px",
             }, "fast");
         });
-
+        // Bei druck auf ESC, Bild minimieren
         $(document).keyup(function (e) {
-            var width = img.width / 300;
+            var width = img.width / 250;
             canvas.width = img.width / width;
             canvas.height = img.height / width;
-/*
-            console.warn("Canvas h: "+ canvas.height + "  w: " + canvas.width);
-*/
+            
             ctx.drawImage(img, 0, 0, (img.width / width), (img.height / width));
             if (e.keyCode == 27) {
                 $("#pickerWrapper").animate({
@@ -243,11 +241,7 @@ function colorPickerIni() {
                     "top": 0 + "px",
                     "left": 0 + "px",
                 }, "fast", function () {
-
                 });
-
-
-
             }
         });
 
@@ -289,7 +283,7 @@ function colorPickerIni() {
                     var img = new Image();
                     img.src = event.target.result;
                     img.onload = function () {
-                        var width = img.width / 300;
+                        var width = img.width / 250;
                         canvas.width = (img.width / width);
                         canvas.height = (img.height / width);
                         ctx.drawImage(img, 0, 0, (img.width / width), (img.height / width));
@@ -308,10 +302,7 @@ function colorPickerIni() {
                 image.src = imageSrc;
             });
             $("#picker").fadeIn();
-
-
             holder.ondragover = function () {}
-
         }
 
 
@@ -343,7 +334,7 @@ function colorPickerIni() {
                                 /*  var parent = $("#pickedColorsContent").offsetTop();
                             var child = $("canvas").offsetTop();
                             console.info("PARENT: " + parent + " " + "CHILD: " + child);*/
-                                var width = img.width / 300;
+                                var width = img.width / 250;
                                 canvas.width = (img.width / width);
                                 canvas.height = (img.height / width);
                                 ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, (img.width / width), (img.height / width));
@@ -362,7 +353,7 @@ function colorPickerIni() {
         }
     });
 }
-
+// Farbe der ausgewählten Leuchte zuweisen und Farbe des Thumbs ändern
 function changeColor(picked, index) {
     var thumbColor = picked;
     var setPixelColor;

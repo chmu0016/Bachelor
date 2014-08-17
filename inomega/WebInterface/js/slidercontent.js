@@ -1,5 +1,5 @@
 $(document).ready(function () {});
-
+// bei mehreren Leuchten als der Content es erlaubt -> Scrollbar
 function sliderOverflow() {
     var parH = $('#sliderContentParent').outerHeight(true);
     var areaH = $('#sliderContent').outerHeight(true);
@@ -21,7 +21,7 @@ function sliderOverflow() {
         }
 
     });
-    // Slidercontetn mit Mausrad
+    // Slidercontetn mit Mausrad durchscrollen
     var checked = false;
 
     function displaywheel(e) {
@@ -62,6 +62,7 @@ function sliderOverflow() {
             }
         }
     }
+    // Wenn Maus den Content verlässt, obige events stoppen
     $(".slider").mouseleave(function () {
         checked = false;
         var mousewheelevt = null; //FF doesn't recognize mousewheel as of FF3.x
@@ -71,6 +72,8 @@ function sliderOverflow() {
         else if (document.addEventListener) //WC3 browsers
             document.addEventListener(null, displaywheel, false)
     });
+
+    // Wenn Maus den Content betritt, obige events aufrufen
     $(".slider").mouseenter(function () {
         checked = true;
         var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel"
@@ -80,24 +83,25 @@ function sliderOverflow() {
             document.addEventListener(mousewheelevt, displaywheel, false)
     });
 }
-
+// Klick auf SliderThumb
 function sliderThumbClick() {
-    // Klick auf SliderThumb
     var slideValDown = 0;
     var slideValUp = 1;
     var sliding = false;
-
+    // Speichern des aktuellen Dimmwertes bei Mousedown auf den Sliderthumb
     $(".ui-widget-content .ui-state-default").bind("mousedown", function () {
         var sliderofThumb = $(this).closest("div").attr("id");
         var sliderofThumbLength = sliderofThumb.length;
         var sliderofThumbSubstr = sliderofThumb.substring(6, sliderofThumbLength);
         slideValDown = $("#" + sliderofThumb).slider("value");
     });
+    // Speichern des aktuellen Dimmwertes bei Mouseup vom Sliderthumb
     $(".ui-widget-content .ui-state-default").bind("mouseup", function () {
         var sliderofThumb = $(this).closest("div").attr("id");
         var sliderofThumbLength = sliderofThumb.length;
         var sliderofThumbSubstr = sliderofThumb.substring(6, sliderofThumbLength);
         slideValUp = $("#" + sliderofThumb).slider("value");
+        // Wenn Thumb von Alle Lampen bewegt wird, ganzen Raum dimmen, ansonten einzelne Leuchte
         if (sliderofThumb == "sliderAllLamps") {
             if ($("#toggleOnOff" + (clickedRoom - 1)).hasClass("toggled")) {
                 sendMessage(JSON.stringify({
@@ -115,6 +119,7 @@ function sliderThumbClick() {
                 }));
             }
         } else {
+            // Wenn Wert von Mousedown und Mouseup ungleich sind nichts machen, ansonsten ein-/ausschalten
             if (slideValDown != slideValUp) {
 
             } else {
@@ -135,6 +140,6 @@ function sliderThumbClick() {
                     }));
                 } // unterstes else
             } // mittleres else
-        }// oberes else
+        } // oberes else
     }); // bind().mousedown
-}// sliderthumbclick()
+} // sliderthumbclick()

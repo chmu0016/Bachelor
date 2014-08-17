@@ -7,39 +7,39 @@ var un = localStorage.getItem("username");
 var pw = localStorage.getItem("password");
 var ip = localStorage.getItem("ip");
 
-var roomnames = new Array();
-var roomBuild = new Array();
-var roomamount = 0;
+var roomnames = new Array();    // Namen der Räume
+var roomBuild = new Array();    // Dem jeweiligen Raum zugewiesenen Gebäude
+var roomamount = 0;             // Gesamtanzahl der Räume
 
-var depnames = new Array();
-var depId = new Array();
-var depamount = 0;
+var depnames = new Array();     // Name der Bereiche
+var depId = new Array();        // ID der Bereiche
+var depamount = 0;              // Gesamtanzahl der Bereiche
 
-var buildnames = new Array();
-var buildId = new Array();
-var buildDep = new Array();
-var buildamount = 0;
+var buildnames = new Array();   // Name der Gebäude
+var buildId = new Array();      // ID der Gebäude
+var buildDep = new Array();     // Dem jeweiligen Gebäude zugewiesener Bereich
+var buildamount = 0;            // Gesamtanzahl der Gebäude
 
-var lampnames = new Array();
-var lampamount = 0;
+var lampnames = new Array();        // Namen der Leuchten
+var lampColor = new Array();        // Farbe der Leuchte
+var lampBrightness = new Array();   // Helligkeit der Leuchte
+var lampId = new Array();           // ID der Leuchte
+var lampState = new Array();        // Zustand der Leuchte (ein-/ausgeschaltet)
+var lampamount = 0;                 // Gesamtanzahl der Leuchten
 
-var lampColor = new Array();
-var lampBrightness = new Array();
-var lampId = new Array();
-var lampState = new Array();
+var profileId = new Array()         // ID des Profils
+var profileImage = new Array()      // Bild des Profils
+var profileNames = new Array();     // Name des Profils
+var profileType = new Array();      // Typ des Profils (Standard oder Benutzerdefiniert)
+var profileAmount = 0;              // Gesamtanzahl der Profile
 
-var profileId = new Array()
-var profileImage = new Array()
-var profileNames = new Array();
-var profileType = new Array();
-var profileAmount = 0;
+var ciName, ciColorPrim, ciColorSec;    // Name, Primär- und Sekundärfarbe der Corporate Identity
 
-var ciName, ciColorPrim, ciColorSec;
-var allLanguagesAmount = 0;
-var languageName, languageSelect;
+var languageName;           // Name der Sprache 
+var allLanguagesAmount = 0; // Gesamtanzahl der verfügbaren Sprachen
 
-var oldClickedRoom = 1;
-var clickedRoom = 0;
+var oldClickedRoom = 1;     // Zuletzt ausgewählter Raum
+var clickedRoom = 0;        // Ausgewählter Raum
 
 
 // Leuchten vom Server beziehen und Variablen zuweisen
@@ -56,38 +56,33 @@ function sliderAuth(clickedRoomAuth) {
         username: 'user1',
         password: 'user1',
         success: function (result) {
-            /*console.log(result);*/
             lampnames = [];
             lampColor = [];
             lampBrightness = [];
             lampId = [];
             lampState = [];
             lampamount = 0;
-            
+            // Jede Leuchte in dem Array den jeweiligen Wert zuweisen
             $.each(result, function (key, val) {
                 lampnames[lampamount] = val.name;
                 lampColor[lampamount] = val.color;
                 lampBrightness[lampamount] = val.brightness;
                 lampId[lampamount] = val.id;
                 lampState[lampamount] = val.state;
-                console.log('lampnames : ' + lampnames[lampamount]);
-                console.log('color : ' + lampColor[lampamount]);
-                console.log('brightness : ' + lampBrightness[lampamount]);
                 lampamount++;
-                /*console.log("index: " + key + '   ' + " id: " + val.id);*/
-                console.lo
             });
-            removeSlider();
-            addSlider();
-            sliderHandling();
-            unsubscribe(oldClickedRoom);
+            removeSlider();                 // Slider des vorherigen Raums löschen
+            addSlider();                    // Slider des aktuellen Raums hinzufügen
+            sliderHandling();               // Clicklistener der Leuchten aktivieren
+            unsubscribe(oldClickedRoom);    // Vom alten Raum abmelden um die Steuerung zu deaktivieren
             oldClickedRoom = clickedRoom;
-            subscribe(clickedRoom);
-            profileAuth(clickedRoom);
+            subscribe(clickedRoom);         // Im aktuellen Raum anmelden um Leuchten zu steuern
+            profileAuth(clickedRoom);       // Profile des aktuellen Raums laden
+            // Wenn es mehr als 10 Leuchten sind, wird der Scrollbare content aktiviert
             if (lampamount > 10) {
                 sliderOverflow();
             }
-            sliderThumbClick();
+            sliderThumbClick(); // Klick auf den Thumb des Sliders aktivieren
         },
         error: function (a, b, c) {
             console.log(a + " " + b + " " + c);
@@ -135,6 +130,7 @@ function profileAuth(clickedRoomAuth) {
             profileType = [];
             profileImage = [];
             profileAmount = 0;
+            // Jedem Profil den jeweiligen Wert zuweisen
             $.each(result, function (key, val) {
                 profileNames[profileAmount] = val.name;
                 profileId[profileAmount] = val.id;
@@ -142,9 +138,9 @@ function profileAuth(clickedRoomAuth) {
                 profileImage[profileAmount] = val.img;
                 profileAmount++;
             });
-            removeProfiles();
-            addProfiles();
-            profileIni();
+            removeProfiles();   // Profile des alten Raums löschen
+            addProfiles();      // Profile des aktuellen Raums hinzufügen
+            profileIni();       // Verwaltung der neuen Profile ermöglichen (Clicklistener etc.)
 
         },
         error: function (a, b, c) {

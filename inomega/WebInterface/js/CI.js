@@ -1,11 +1,11 @@
 $(document).ready(function () {
     ciLogin();
 });
-
+// Corporate Identity vom Server beziehen und den Eigenschaften in CSS zuweisen
 function ciLogin() {
     $.ajax({
         type: "GET",
-        url: "http://192.168.178.26:8080/inomega/api/ci?callback=JSONPCallback",
+        url: "http://192.168.42.52:8080/inomega/api/ci?callback=JSONPCallback",
         dataType: 'jsonp',
         jsonp: false,
         jsonpCallback: 'JSONPCallback',
@@ -18,9 +18,6 @@ function ciLogin() {
             $("#ciWrapper").css("background-color", ciColorPrim);
             $("#loginTopContent").css("background-color", ciColorSec);
             $("#ciName").html(ciName);
-
-            console.warn("CI: " + ciName + " " + ciColorPrim + " " + ciColorSec);
-
         },
         error: function (a, b, c) {
             console.warn(a + " " + b + " " + c + "ERROR");
