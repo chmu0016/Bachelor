@@ -21,7 +21,7 @@ function langAuth() {
                 languageName[allLanguagesAmount] = val.languages;
                 allLanguagesAmount++
             });
-            addLang();
+            addLang(); // Hinzufügen der Sprachen in HTML
         },
         error: function (a, b, c) {
             console.log(a + " " + b + " " + c + "ERROR");
@@ -33,10 +33,9 @@ function langAuth() {
         });
 
     function JSONPCallback() {
-        /* alert("callback");*/
     }
 }
-
+// Hinzufügen der Sprachen in HTML
 function addLang() {
     for (var i = 0; i < allLanguagesAmount; i++) {
         $("#sprachContent").last('<div id="' + languageName[i] + '" class="flaggen">' + languageName[i] + '</div>');

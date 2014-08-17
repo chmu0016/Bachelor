@@ -2,8 +2,8 @@ $(document).ready(function () {
     colorPickerIni();
 });
 var oldClickedBtnid, oldClickedSliderid, clickedBtnId, clickedSliderId;
-/*  Erste verfügbare Leuchte als angewählte Leuchte wählen.
-    Auswählen der Leuchte und aktualisierung der Bezeichnung im Colorpickercontent.*/
+//  Erste verfügbare Leuchte als angewählte Leuchte wählen.
+//  Auswählen der Leuchte und aktualisierung der Bezeichnung im Colorpickercontent.
 function sliderHandling() {
     oldClickedBtnid = $("#btnSlider0").attr("id");
     oldClickedSliderid = $("#" + oldClickedBtnid).prev(".slider").attr("id");
@@ -15,9 +15,11 @@ function sliderHandling() {
 
     var sliderName = $("#" + oldClickedSliderid + " .sliderLabel").text();
     $("#colorPickerContent .currentLightNameLabel").slideUp(function () {
+        // Toplabel im COlorpickercontent akutalisieren
         $("#colorPickerContent .currentLightNameLabel").text(sliderName);
         $("#colorPickerContent .currentLightNameLabel").slideDown();
     });
+    // Clicklistener für Buttons an den Slidern
     $(".btnsSlider").click(function (e) {
         clickedBtnId = $(e.target).attr("id");
         clickedSliderId = $("#" + clickedBtnId).prev(".slider").attr("id");
@@ -41,6 +43,7 @@ function sliderHandling() {
         $("#" + clickedBtnId).fadeIn(0);
 
         var sliderName = $("#" + clickedSliderId + " .sliderLabel").text();
+        // Toplabel im COlorpickercontent akutalisieren
         $("#colorPickerContent .currentLightNameLabel").slideUp(function () {
             $("#colorPickerContent .currentLightNameLabel").text(sliderName);
             $("#colorPickerContent .currentLightNameLabel").slideDown();
@@ -58,9 +61,7 @@ function colorPickerIni() {
     var image = new Image();
     image.onload = function () {
         canvas.width = 250;
-        /*canvas.width = (image.width);*/
         canvas.height = 250;
-/*        canvas.height = (image.height);*/
         ctx.drawImage(image, 0, 0, image.width, image.height); // Bild in den canvas zeichnen
         $("#pickerBorder").css("width", (canvas.width) + "px");
         $("#pickerBorder").css("height", (canvas.height) + "px");
@@ -69,7 +70,8 @@ function colorPickerIni() {
     var imageSrc = 'img/colorwheel3.png';
 
     image.src = imageSrc;
-    $('#picker').on("mousemove", function (e) { // Maus move handler
+    // Maus move handler
+    $('#picker').on("mousemove", function (e) {
         // Koordinaten der aktuellen Mausposition holen
         var canvasOffset = $(canvas).offset();
         var canvasX = Math.floor(e.pageX - canvasOffset.left);
@@ -81,7 +83,7 @@ function colorPickerIni() {
         var hexString1 = pixel[0].toString(16);
         var hexString2 = pixel[1].toString(16);
         var hexString3 = pixel[2].toString(16);
-        
+
         //Umwandlung der Pixel in Hexstring um farbe zu setzen
         if (hexString1.length < 2) {
             hexString1 = '0' + hexString1;
@@ -112,7 +114,7 @@ function colorPickerIni() {
         var hexString1 = pixel[0].toString(16);
         var hexString2 = pixel[1].toString(16);
         var hexString3 = pixel[2].toString(16);
-        
+
         //Umwandlung der Pixel in Hexstring um farbe zu setzen
         if (hexString1.length < 2) {
             hexString1 = '0' + hexString1;
@@ -125,7 +127,7 @@ function colorPickerIni() {
         }
         var hexstring = '#' + hexString1 + hexString2 + hexString3
         var pickedPixelColor = hexstring;
-        
+
         // Aufruf der Funktion um die Farbe der akutellen Leuchte und der Farbhistorie zuzuweisen
         changeColor(pickedPixelColor, 16);
     });
@@ -155,7 +157,7 @@ function colorPickerIni() {
         }
         // Wenn Farbe ungleich der akutellen Leuchtfarbe ist, farbe setzen ansonsten nichts machen
         if (hexstringSet != hexstringFirst) {
-        // Farbe der ausgewählten Leuchte und der Farbhistorie zuweisen
+            // Farbe der ausgewählten Leuchte und der Farbhistorie zuweisen
             changeColor(hexstringSet, 16);
             $("#" + clickedSliderId + ".ui-widget-content .ui-state-default").css("background", hexstringSet);
         } else {}
@@ -186,7 +188,7 @@ function colorPickerIni() {
 
     // Button zum switchen des colorpickers
     $("#switch").unbind().bind("click", function () {
-         $("#pickerBorder").css("display", "block");
+        $("#pickerBorder").css("display", "block");
         var img = new Image();
         var contentH = $("#colorPickerContent").outerHeight();
         $("#pickerBorder").toggleClass("border");
@@ -211,16 +213,16 @@ function colorPickerIni() {
             var canvas = document.getElementById('picker');
             var ctx = canvas.getContext('2d');
             var scrW = $(window).width();
-            var scrH =$(window).height();
+            var scrH = $(window).height();
             var pickedWidth = $("#btnImgUpload").offset().left;
             var bodyLeft = $("#sliderContentWrapper").offset().left;
             var distance = pickedWidth - bodyLeft;
-            console.info("Page W: " + scrW + " H: " + scrH );
-            var width = img.width/distance;
-            canvas.width = img.width/width;
-            canvas.height = img.height/width;
+            console.info("Page W: " + scrW + " H: " + scrH);
+            var width = img.width / distance;
+            canvas.width = img.width / width;
+            canvas.height = img.height / width;
             console.info("Img W: " + canvas.width + " H: " + canvas.height);
-            ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, (img.width/width), (img.height/width));
+            ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, (img.width / width), (img.height / width));
             $("#pickerWrapper").animate({
                 "margin-top": 50 + "%",
                 "top": -(screen.height / 2) + "px",
@@ -233,15 +235,14 @@ function colorPickerIni() {
             var width = img.width / 250;
             canvas.width = img.width / width;
             canvas.height = img.height / width;
-            
+
             ctx.drawImage(img, 0, 0, (img.width / width), (img.height / width));
             if (e.keyCode == 27) {
                 $("#pickerWrapper").animate({
                     "margin-top": 0 + "%",
                     "top": 0 + "px",
                     "left": 0 + "px",
-                }, "fast", function () {
-                });
+                }, "fast", function () {});
             }
         });
 
@@ -331,9 +332,6 @@ function colorPickerIni() {
 
                             img.src = evt.target.result;
                             img.onload = function () {
-                                /*  var parent = $("#pickedColorsContent").offsetTop();
-                            var child = $("canvas").offsetTop();
-                            console.info("PARENT: " + parent + " " + "CHILD: " + child);*/
                                 var width = img.width / 250;
                                 canvas.width = (img.width / width);
                                 canvas.height = (img.height / width);
@@ -388,7 +386,6 @@ function changeColor(picked, index) {
         } else if (setPixelColor == ($('#pColor' + i).css('background-color'))) {} else {
             $('#pColor' + i).css('backgroundColor', setPixelColor);
         }
-        /*console.log("Color: " + i + " = " + setPixelColor);*/
     }
     $('#pColor1').css('backgroundColor', thumbColor);
 }

@@ -160,7 +160,7 @@ function raumClicklistener() {
         } else {
             var clickedImg = $(this).closest('.roomImageWrapper').index('.roomImageWrapper');
         }
-
+        // Wenn Klick auf einen bereits ausgewählten Raum nichts machen, ansonsten Raum auswählen
         if (clickedImg == tmpClickedImg) {
             // nichts machen                    
         } else {
@@ -180,12 +180,10 @@ function raumClicklistener() {
     });
     // Raum ein- bzw. ausschalten
     $(".toggleOnOff").click(function () {
-
         var roomId = $(this).prev("div").attr("id");
         var roomIdLength = roomId.length;
         var roomIdSubstr = roomId.substring(3, roomIdLength);
         roomIdSubstr++;
-
         $(this).toggleClass("toggled");
         if ($(this).hasClass("toggled")) {
             sendMessage(JSON.stringify({
@@ -194,7 +192,6 @@ function raumClicklistener() {
                 "param": "state",
                 "value": "off",
             }));
-
         } else {
             sendMessage(JSON.stringify({
                 "action": "set",
@@ -202,9 +199,7 @@ function raumClicklistener() {
                 "param": "state",
                 "value": "on",
             }));
-
         }
-
     });
 }
 // clicklistener für klick auf Gebäudebild
@@ -238,20 +233,7 @@ function roomBtnAction() {
     });
     totalImgWidth = totalImgWidth + $("#raumImageContent").children().length;
     $("#raumImageContent").width(totalImgWidth);
-
     $(roomBtn).next().animate({
         width: 'toggle'
     }, 1000);
-}
-
-
-// evtl. für buttons mittig zu positionieren für jedes Bild
-function labelPositioning() {
-    var labelWidth = new Array();
-
-    for (var i = 0; i < roomamount; i++) {
-        labelWidth[i] = $("#img" + i + " .roomLabel").css("width");
-        console.warn(labelWidth[i]);
-        $("#img" + i + " .roomLabel").css("margin-right", -labelWidth[i]);
-    }
 }

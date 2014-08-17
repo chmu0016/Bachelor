@@ -28,8 +28,6 @@ function ciLogin() {
         });
 
     function JSONPCallback() {
-        /*
-         alert("callback");
-*/
+
     }
 }

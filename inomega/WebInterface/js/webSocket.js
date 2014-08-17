@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    console.log('websocketready');
+ //   console.log('websocketready');
     startwebsocket();
 });
 
@@ -11,14 +11,14 @@ function startwebsocket() {
     console.log('startwebsocket: ' + ipAdresse);
 
     ws.onopen = function () {
-        console.log("Websocket Ready!!");
+      //  console.log("Websocket Ready!!");
         //            sendMessage();
     }
     ws.onclose = function () {
-        console.log("Websocket Closed!!");
+       // console.log("Websocket Closed!!");
     }
     ws.onerror = function () {
-        console.log("Websocket Error!!");
+     //   console.log("Websocket Error!!");
         var output = document.getElementById('output');
         output.innerHTML = "Websocket Error!!";
     }
@@ -31,7 +31,9 @@ function startwebsocket() {
         console.warn(obj.code);
 */
         if (obj.code == 'ok') {
+/*
             console.info("Server -> Client:" + data.data);
+*/
 
             var dataParam = obj.param;
             var dataVal = obj.value;
@@ -54,7 +56,6 @@ function startwebsocket() {
                 var dataRoomId = obj.room;
                 $(".slider.ui-widget-content .ui-state-default").css("background", dataVal);
             } else if (Boolean(obj.lamp) && (dataParam == "state")) {
-                console.log("STATE LAMP");
                 var dataSliderId = "slider" + obj.lamp;
                 if (dataVal == "off") {
                     $("#" + dataSliderId).css("background", "black");
@@ -62,7 +63,6 @@ function startwebsocket() {
                     $("#" + dataSliderId).css("background", "rgb(180, 180, 180)");
                 }
             } else if (Boolean(obj.room) && (dataParam == "state")) {
-                console.log("STATE ROOM");
                 var dataRoomId = obj.room;
                 if (dataVal == "off") {
                     $(".slider").not("#sliderAllLamps").css("background", "black");
@@ -73,9 +73,13 @@ function startwebsocket() {
                 }
             }
         } else if (obj.code == 'error') {
+/*
             console.error("Server -> Client:" + data.data);
+*/
         } else {
+/*
             console.info("Server -> Client:" + data.data);
+*/
 
             var dataParam = obj.param;
             var dataVal = obj.value;
@@ -98,7 +102,6 @@ function startwebsocket() {
                 var dataRoomId = obj.room;
                 $(".slider.ui-widget-content .ui-state-default").css("background", dataVal);
             } else if (Boolean(obj.lamp) && (dataParam == "state")) {
-                console.log("STATE LAMP");
                 var dataSliderId = "slider" + obj.lamp;
                 if (dataVal == "off") {
                     $("#" + dataSliderId).css("background", "black");
@@ -106,7 +109,6 @@ function startwebsocket() {
                     $("#" + dataSliderId).css("background", "rgb(180, 180, 180)");
                 }
             } else if (Boolean(obj.room) && (dataParam == "state")) {
-                console.log("STATE ROOM");
                 var dataRoomId = obj.room;
                 if (dataVal == "off") {
                     $(".slider").not("#sliderAllLamps").css("background", "black");
@@ -122,5 +124,7 @@ function startwebsocket() {
 
 function sendMessage(temp) {
     ws.send(temp);
+/*
     console.info("Client -> Server:" + temp);
+*/
 }

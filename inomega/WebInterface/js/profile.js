@@ -96,8 +96,6 @@ function profileDelete() {
         var profID = $(this).closest("div").attr("id");
         var profIDLength = profID.length;
         var profIDSubstr = profID.substring(7, profIDLength);
-
-
         var url = "http://" + un + ":" + pw + "@" + ip + ":8080/inomega/api/rooms/" + clickedRoom + "/profiles/" + profIDSubstr + "?callback=JSONPCallback";
         $.ajax({
             type: 'DELETE',
@@ -110,9 +108,6 @@ function profileDelete() {
             jsonpCallback: "JSONPCallback",
             success: function (returnedData) {
 
-                console.info(returnedData);
-
-                console.log('Success');
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 console.error('xhr : ' + xhr + " ajaxOptions : " + ajaxOptions + " thrownError : " + thrownError);
@@ -123,6 +118,5 @@ function profileDelete() {
 
         }
         $("#" + profID).remove();
-        console.log("Delete Profile: " + profID);
     });
 }
