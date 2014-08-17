@@ -91,7 +91,7 @@ function imageSlider() {
         var bereichId = $(this).attr("id");
         var bereichIdLength = bereichId.length;
         var bereichIdSubstr = bereichId.substring(7, bereichIdLength);
-        addBuildings(bereichIdSubstr);
+        buildingAuth(bereichIdSubstr);
         $(depBtn).next().animate({
             width: 'toggle'
         }, 1000);
@@ -211,12 +211,13 @@ function raumClicklistener() {
 function clicklistener() {
     // Gebäudebild Klick
     $(".gebäude").click(function () {
+        deleteRoom();
         buildClicked = !buildClicked;
         $("#raumImageContent").empty();
         var gebäudeId = $(this).attr("id");
         var gebäudeIdLength = gebäudeId.length;
         var gebäudeIdSubstr = gebäudeId.substring(7, gebäudeIdLength);
-        addRoom(gebäudeIdSubstr);
+        addRoomImageslider(gebäudeIdSubstr);
         $(buildBtn).next().animate({
             width: 'toggle'
         }, 1000);

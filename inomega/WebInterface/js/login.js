@@ -7,6 +7,7 @@ var password = "";
 var ciName, ciColorPrim, ciColorSec;
 // Sprachauswahl und übermitteln der logindaten
 function login() {
+    
     // Klick auf Sprache
     $(".flaggen").bind("click", function () {
         langname = $(this).attr("id");
@@ -15,7 +16,7 @@ function login() {
     $("#submit").click(function () {
         username = $("#username").val();
         password = $("#passwort").val();
-        ipAdresse = "192.168.42.52";
+        ipAdresse = "192.168.178.49";
         localStorage.setItem("ip", ipAdresse);
         localStorage.setItem("username", username);
         localStorage.setItem("password", password);
