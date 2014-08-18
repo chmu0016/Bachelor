@@ -8,7 +8,7 @@ var allLanguagesAmount = 0; // Gesamtanzahl der verfügbaren Sprachen
 function langAuth() {
     $.ajax({
         type: "GET",
-        url: "http://192.168.178.49:8080/inomega/api/languages?callback=JSONPCallback",
+        url: "http://192.168.1.148:8080/inomega/api/languages?callback=JSONPCallback",
         dataType: 'jsonp',
         jsonp: false,
         jsonpCallback: 'JSONPCallback',

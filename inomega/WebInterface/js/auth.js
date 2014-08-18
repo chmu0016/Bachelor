@@ -156,17 +156,17 @@ function buildingAuth(depValue) {
         success: function (result) {
             $.each(result, function (key, val) {
                 // Nur die Gebäude anzeigen, die in dem ausgewählten bereich verfügbar sind
-                for (var i = 0; i < val.departments.length; i++) {
+/*                for (var i = 0; i < val.departments.length; i++) {
                     if (!isNaN(val.departments[i])) {
                         if (val.departments[i] == depValue) {
                             console.log(val.departments[i]);
+                        }
+                    }
+                }*/
                             buildnames[buildamount] = val.name;
                             buildId[buildamount] = val.id;
                             buildDep[buildamount] = val.departments;
                             buildamount++;
-                        }
-                    }
-                }
             });
             deleteBuildings();
             addBuildings();
@@ -372,7 +372,7 @@ function profileAuth(clickedRoomAuth) {
                 profileNames[profileAmount] = val.name;
                 profileId[profileAmount] = val.id;
                 profileType[profileAmount] = val.type;
-                profileImage[profileAmount] = val.img;
+                profileImage[profileAmount] = val.image;
                 profileAmount++;
             });
             removeProfiles(); // Profile des alten Raums löschen
@@ -397,7 +397,9 @@ function profileAuth(clickedRoomAuth) {
 function addProfiles() {
     $("#colorPickerContent").after('<div id="profileTopLabelContent" class="topLabel"><button id="profileAddBtn"></button> <label for="profileTopLabelContent" class="profileTopLabel">Profile</label> </div> <div id="profileContent"> </div>');
     for (var i = 0; i < profileAmount; i++) {
+        console.warn(profileImage[i]);
         $("#profileContent").append('<div id="profile' + profileId[i] + '" class="profileContentImg roomImage">');
+        $("#profile" + profileId[i]).css("background-image", "url(http://" + ip + ":8080/inomega" + profileImage[i] + ")")
         $("#profile" + profileId[i]).append('<label for="profile' + profileId[i] + '" class="profileLabel">' + profileNames[i] + '</label>');
         // Wenn das Profil ein Defaultprofil ist, dann keinen Löschen-Button hinzufügen, ansonsten Löschen-Button hinzufügen
         if (profileType[i] == "default") {

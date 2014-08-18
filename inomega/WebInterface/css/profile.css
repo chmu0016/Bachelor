@@ -31,7 +31,11 @@
     margin-left: 15px;
     margin-right: 10px;
     margin-top: 30px;
-    background: url(../img/slider/Relax.png);
+    background-color: #191919;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left;
+    box-shadow: inset 0px -25px 10px #000000;
 }
 .profileLabel {
     position: absolute;

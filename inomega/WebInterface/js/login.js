@@ -16,7 +16,7 @@ function login() {
     $("#submit").click(function () {
         username = $("#username").val();
         password = $("#passwort").val();
-        ipAdresse = "192.168.178.49";
+        ipAdresse = "192.168.1.130";
         localStorage.setItem("ip", ipAdresse);
         localStorage.setItem("username", username);
         localStorage.setItem("password", password);
