@@ -24,16 +24,16 @@ function startwebsocket() {
     }
     ws.onmessage = function (data) {
         var obj = jQuery.parseJSON(data.data);
-        /*    console.log(obj.param);
-        console.log(obj.value);
-        console.log(obj.lamp);*/
-        /*
-        console.warn(obj.code);
-*/
-        if (obj.code == 'ok') {
+           
 /*
-            console.info("Server -> Client:" + data.data);
+        console.log(obj.param);
+        console.log(obj.value);
+        console.log(obj.lamp);
 */
+
+        
+        if (obj.code == 'ok') {
+            console.info("Server -> Client:" + data.data);
 
             var dataParam = obj.param;
             var dataVal = obj.value;
@@ -73,13 +73,9 @@ function startwebsocket() {
                 }
             }
         } else if (obj.code == 'error') {
-/*
             console.error("Server -> Client:" + data.data);
-*/
         } else {
-/*
             console.info("Server -> Client:" + data.data);
-*/
 
             var dataParam = obj.param;
             var dataVal = obj.value;
@@ -124,7 +120,5 @@ function startwebsocket() {
 
 function sendMessage(temp) {
     ws.send(temp);
-/*
     console.info("Client -> Server:" + temp);
-*/
 }

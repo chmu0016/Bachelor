@@ -145,7 +145,15 @@ function imageSlider() {
 }
 // Imageslider Räume Clicklistener und Raum ein-/ausschalten
 function raumClicklistener() {
-    var tmpClickedImg = 0;
+    
+    var roomImageId = $(".roomImage").first().attr("id");
+    var roomImageIdLength = roomImageId.length;
+    var roomImageIdSubstr = roomImageId.substring(3, roomImageIdLength);
+    var tmpClickedImg = roomImageIdSubstr;
+    for(var i = 0; i < roomamount; i++){
+        $("#img" + roomId[i]).removeClass("toggle");
+        $("#imgAcc" + roomId[i]).removeClass("toggle");
+    }
     $("#img" + tmpClickedImg).addClass("toggle");
     $("#imgAcc" + tmpClickedImg).addClass("toggle");
 
@@ -154,11 +162,19 @@ function raumClicklistener() {
     sliderAuth(tmpClickedImg);
 
     // Klick und Auswahl eines Raumes
-    $(".roomImage").click(function (e) {
-        if ($(this).hasClass('roomImageAccordion')) {
-            var clickedImg = $(e.target).index();
-        } else {
-            var clickedImg = $(this).closest('.roomImageWrapper').index('.roomImageWrapper');
+    $(".roomImage").unbind().bind("click", function (e) {
+        if ($(this).hasClass('roomImageAccordion')) { // Klick auf Bild von Alle Räume
+            roomImageId = $(this).attr("id");
+            roomImageIdLength = roomImageId.length;
+            roomImageIdSubstr = roomImageId.substring(6, roomImageIdLength);
+            var clickedImg = parseInt(roomImageIdSubstr);
+            console.warn("if: " + clickedImg);
+        } else { // Klick auf Bild im Imageslider
+            roomImageId = $(this).attr("id");
+            roomImageIdLength = roomImageId.length;
+            roomImageIdSubstr = roomImageId.substring(3, roomImageIdLength);
+            var clickedImg = parseInt(roomImageIdSubstr);
+            console.warn("else: " + clickedImg + " tmpclick: " + tmpClickedImg);
         }
         // Wenn Klick auf einen bereits ausgewählten Raum nichts machen, ansonsten Raum auswählen
         if (clickedImg == tmpClickedImg) {
@@ -173,8 +189,9 @@ function raumClicklistener() {
             $("#imgAcc" + clickedImg).addClass("toggle");
             $("#img" + clickedImg + " .roomLabel").css("color", "rgba(255, 255, 255, 1)");
             $("#imgAcc" + clickedImg + " .labelimgAcc").css("color", "rgba(255, 255, 255, 1)");
+            console.warn("tmpclicked: " + tmpClickedImg);
             tmpClickedImg = clickedImg;
-            sliderAuth(tmpClickedImg);
+            sliderAuth(parseInt(clickedImg));
 
         }
     });

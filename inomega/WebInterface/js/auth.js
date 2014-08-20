@@ -7,6 +7,7 @@ var un = localStorage.getItem("username");
 var pw = localStorage.getItem("password");
 var ip = localStorage.getItem("ip");
 
+var roomId = new Array();
 var roomnames = new Array(); // Namen der Räume
 var roomBuild = new Array(); // Dem jeweiligen Raum zugewiesenen Gebäude
 var roomamount = 0; // Gesamtanzahl der Räume
@@ -156,17 +157,19 @@ function buildingAuth(depValue) {
         success: function (result) {
             $.each(result, function (key, val) {
                 // Nur die Gebäude anzeigen, die in dem ausgewählten bereich verfügbar sind
-/*                for (var i = 0; i < val.departments.length; i++) {
+                // Funktioniert nicht richtig, da die REST-API dies so nicht unterstützt, 
+                // d.h. momentan werden alle verfügbaren Gebäude, unabhängig vom gewählten bereich, dargestellt
+                /*                for (var i = 0; i < val.departments.length; i++) {
                     if (!isNaN(val.departments[i])) {
                         if (val.departments[i] == depValue) {
                             console.log(val.departments[i]);
                         }
                     }
                 }*/
-                            buildnames[buildamount] = val.name;
-                            buildId[buildamount] = val.id;
-                            buildDep[buildamount] = val.departments;
-                            buildamount++;
+                buildnames[buildamount] = val.name;
+                buildId[buildamount] = val.id;
+                buildDep[buildamount] = val.departments;
+                buildamount++;
             });
             deleteBuildings();
             addBuildings();
@@ -212,6 +215,7 @@ function roomAuth() {
         password: 'user1',
         success: function (result) {
             $.each(result, function (key, val) {
+                roomId[roomamount] = val.id;
                 roomnames[roomamount] = val.name;
                 roomBuild[roomamount] = val.building;
                 roomamount++;
@@ -238,15 +242,15 @@ function addRoom() {
         $("#currentLightName").after('<div id="allRoomsButton">  </div>');
         $("#colorPickerContent").after('<div id="allRoomsTopLabelContent" class="topLabel"> <button id="colorPickerSwitchBtn"></button> <label for="allRoomsTopLabelContent" class="allRoomsTopLabel">Alle Räume</label></div>   <div id="allRoomsImageContent"></div>');
         for (var i = 0; i < roomamount; i++) {
-            // Wenn der Raum dem angeklickten Gebäude entspricht, dann in dem imageslider hinzufügen. Asonstne nichts machen
+            // Wenn der Raum dem angeklickten Gebäude entspricht, dann in dem imageslider hinzufügen. Ansonsten nichts machen
             $("#raumImageContent").append('<div id="imgWrapper' + i + '" class="roomImageWrapper"> </div>');
-            $("#imgWrapper" + i).append('<div id="img' + i + '" class="roomImage"> </div>');
-            $("#img" + i).append('<label for="img' + i + '" class="roomLabel">' + roomnames[i] + '</label>');
+            $("#imgWrapper" + i).append('<div id="img' + roomId[i] + '" class="roomImage"> </div>');
+            $("#img" + roomId[i]).append('<label for="img' + roomId[i] + '" class="roomLabel">' + roomnames[i] + '</label>');
             $("#imgWrapper" + i).append('<div id="toggleOnOff' + i + '" class="toggleOnOff"> </div>');
             $("#imgWrapper" + i).append('<div id="profileBtn' + i + '" class="profileBtnClass"> </div>');
 
-            $("#allRoomsImageContent").append('<div id="imgAcc' + i + '" class="roomImageAccordion roomImage">');
-            $("#imgAcc" + i).append('<label for="imgAcc' + i + '" class="labelimgAcc">' + roomnames[i] + '</label>');
+            $("#allRoomsImageContent").append('<div id="imgAcc' + roomId[i] + '" class="roomImageAccordion roomImage">');
+            $("#imgAcc" + roomId[i]).append('<label for="imgAcc' + roomId[i] + '" class="labelimgAcc">' + roomnames[i] + '</label>');
 
         }
     } else {
@@ -257,18 +261,16 @@ function addRoom() {
 }
 // Räume in den Imageslider hinzufügen
 function addRoomImageslider(gebValue) {
-    console.warn(gebValue);
     var gebClicked = gebValue;
     for (var i = 0; i < roomamount; i++) {
         if (gebClicked == roomBuild[i]) {
             // Wenn der Raum dem angeklickten Gebäude entspricht, dann in dem imageslider hinzufügen. Asonstne nichts machen
             $("#raumImageContent").append('<div id="imgWrapper' + i + '" class="roomImageWrapper"> </div>');
-            $("#imgWrapper" + i).append('<div id="img' + i + '" class="roomImage"> </div>');
-            $("#img" + i).append('<label for="img' + i + '" class="roomLabel">' + roomnames[i] + '</label>');
+            $("#imgWrapper" + i).append('<div id="img' + roomId[i] + '" class="roomImage"> </div>');
+            $("#img" + roomId[i]).append('<label for="img' + roomId[i] + '" class="roomLabel">' + roomnames[i] + '</label>');
             $("#imgWrapper" + i).append('<div id="toggleOnOff' + i + '" class="toggleOnOff"> </div>');
             $("#imgWrapper" + i).append('<div id="profileBtn' + i + '" class="profileBtnClass"> </div>');
         }
-
     }
     // Clicklistener für die Räume
     raumClicklistener();
@@ -294,7 +296,8 @@ function unsubscribe() {
 
 // Leuchten vom Server beziehen und Variablen zuweisen
 function sliderAuth(clickedRoomAuth) {
-    clickedRoom = clickedRoomAuth + 1; // +1 addieren, weil id der Raumobjekte bei 1 anfängt (indize clickedroom bei 0)
+    clickedRoom = clickedRoomAuth ; // +1 addieren, weil id der Raumobjekte bei 1 anfängt (indize clickedroom bei 0)
+
     $.ajax({
         type: "GET",
         url: "http://" + un + ":" + pw + "@" + ip + ":8080/inomega/api/rooms/" + clickedRoom + "/lamps?callback=JSONPCallback",
@@ -397,7 +400,6 @@ function profileAuth(clickedRoomAuth) {
 function addProfiles() {
     $("#colorPickerContent").after('<div id="profileTopLabelContent" class="topLabel"><button id="profileAddBtn"></button> <label for="profileTopLabelContent" class="profileTopLabel">Profile</label> </div> <div id="profileContent"> </div>');
     for (var i = 0; i < profileAmount; i++) {
-        console.warn(profileImage[i]);
         $("#profileContent").append('<div id="profile' + profileId[i] + '" class="profileContentImg roomImage">');
         $("#profile" + profileId[i]).css("background-image", "url(http://" + ip + ":8080/inomega" + profileImage[i] + ")")
         $("#profile" + profileId[i]).append('<label for="profile' + profileId[i] + '" class="profileLabel">' + profileNames[i] + '</label>');
