@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    ciLogin();
+    
 });
 // Corporate Identity vom Server beziehen und den Eigenschaften in CSS zuweisen
 function ciLogin() {

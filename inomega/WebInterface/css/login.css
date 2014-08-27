@@ -21,7 +21,10 @@ html {
     left:50%;
     width:1200px;
     margin-left:-600px;
-        background-color: rgba(0,0,0,0);
+    background-color:rgba(0,
+    0,
+    0,
+    0);
     top:0;
     bottom:0;
     height:100%;
@@ -44,6 +47,12 @@ html {
     margin-top:-15px;
     margin-bottom:10px;
     margin-left:-15px;
+    -moz-border-top-left-radius:8px;
+    -webkit-border-top-left-radius:8px;
+    border-top-left-radius:8px;
+    -moz-border-top-right-radius:8px;
+    -webkit-border-top-right-radius:8px;
+    border-top-right-radius:8px;
 }
 #loginContent {
     position:relative;
@@ -56,11 +65,37 @@ html {
     color:black;
     box-shadow:0px 1px 2px 0px black;
     padding:15px 15px 0px 15px;
+    -moz-border-top-left-radius:8px;
+    -webkit-border-top-left-radius:8px;
+    border-top-left-radius:8px;
+    -moz-border-top-right-radius:8px;
+    -webkit-border-top-right-radius:8px;
+    border-top-right-radius:8px;
 }
 input {
     margin-bottom:10px;
-    height:25px;
+    margin-top:10px;
+    height:30px;
     width:300px;
+    border:solid 3px rgba(0,
+    0,
+    0,
+    0);
+    font-size:1.3em;
+    background-color:#242424;
+    color:white;
+}
+hr {
+    margin-bottom:10px;
+    margin-top:10px;
+    margin-left:35px;
+    width:345px;
+    border:solid 1px #343434;
+}
+.loginIcons {
+    margin-bottom:-10px;
+    margin-right:10px;
+    height:35px;
 }
 #submit {
     margin-top:20px;
@@ -77,10 +112,13 @@ input {
     border-bottom:0px solid black;
 }
 #submit:hover {
-    background-color: rgba(92, 92, 92, 0.5);
+    background-color:rgba(92,
+    92,
+    92,
+    0.5);
 }
 #sprachContent {
-    margin-left:55px;
+    margin-left:30px;
     height:auto;
     width:300px;
     border-radius:5px;
@@ -88,16 +126,20 @@ input {
     text-align:left;
     font-size:1.3em;
 }
+a {
+    color:white;
+}
 .flaggen {
-    margin-top:5px;
+    margin-top:0px;
     float:left;
-    width:70px;
+    width:auto;
     height:30px;
     margin-right:10px;
 }
 .flaggen:hover {
-    background-color: rgba(92, 92, 92, 0.5);
+    opacity:0.8;
 }
 .flaggen:focus {
-    border:solid blue 5px;
+
+    color: blue;
 }

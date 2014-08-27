@@ -1,6 +1,7 @@
 #topBox {
     position: relative;
     float: left;
+    background-color: #313131;
     height: 150px;
     width: 100%;
     z-index: 2;

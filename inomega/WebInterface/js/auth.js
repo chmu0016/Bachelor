@@ -1,5 +1,7 @@
 $(document).ready(function () {
     langSelectAuth(lang);
+                console.warn(langname);
+
 });
 // Zuweisung Login Daten
 var lang = localStorage.getItem("lang");
@@ -159,13 +161,15 @@ function buildingAuth(depValue) {
                 // Nur die Gebäude anzeigen, die in dem ausgewählten bereich verfügbar sind
                 // Funktioniert nicht richtig, da die REST-API dies so nicht unterstützt, 
                 // d.h. momentan werden alle verfügbaren Gebäude, unabhängig vom gewählten bereich, dargestellt
-                /*                for (var i = 0; i < val.departments.length; i++) {
+                /*                
+                for (var i = 0; i < val.departments.length; i++) {
                     if (!isNaN(val.departments[i])) {
                         if (val.departments[i] == depValue) {
                             console.log(val.departments[i]);
                         }
                     }
-                }*/
+                }
+                */
                 buildnames[buildamount] = val.name;
                 buildId[buildamount] = val.id;
                 buildDep[buildamount] = val.departments;
@@ -296,7 +300,7 @@ function unsubscribe() {
 
 // Leuchten vom Server beziehen und Variablen zuweisen
 function sliderAuth(clickedRoomAuth) {
-    clickedRoom = clickedRoomAuth ; // +1 addieren, weil id der Raumobjekte bei 1 anfängt (indize clickedroom bei 0)
+    clickedRoom = clickedRoomAuth; // +1 addieren, weil id der Raumobjekte bei 1 anfängt (indize clickedroom bei 0)
 
     $.ajax({
         type: "GET",
@@ -331,11 +335,13 @@ function sliderAuth(clickedRoomAuth) {
             oldClickedRoom = clickedRoom;
             subscribe(clickedRoom); // Im aktuellen Raum anmelden um Leuchten zu steuern
             profileAuth(clickedRoom); // Profile des aktuellen Raums laden
+
             // Wenn es mehr als 10 Leuchten sind, wird der Scrollbare content aktiviert
             if (lampamount > 10) {
                 sliderOverflow();
             }
             sliderThumbClick(); // Klick auf den Thumb des Sliders aktivieren
+
         },
         error: function (a, b, c) {
             console.log(a + " " + b + " " + c);
@@ -381,7 +387,7 @@ function profileAuth(clickedRoomAuth) {
             removeProfiles(); // Profile des alten Raums löschen
             addProfiles(); // Profile des aktuellen Raums hinzufügen
             profileIni(); // Verwaltung der neuen Profile ermöglichen (Clicklistener etc.)
-
+            $(".topLabel").css("background-color", ciColorSec); // 
         },
         error: function (a, b, c) {
             console.log(a + " " + b + " " + c);

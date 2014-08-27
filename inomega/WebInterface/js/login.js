@@ -7,10 +7,13 @@ var password = "";
 var ciName, ciColorPrim, ciColorSec;
 // Sprachauswahl und übermitteln der logindaten
 function login() {
-    
+    $('a[href="#"]').click(function(e) {
+   e.preventDefault();
+});
     // Klick auf Sprache
-    $(".flaggen").bind("click", function () {
+    $(".flaggen").click(function () {
         langname = $(this).attr("id");
+        console.warn(langname);
     });
     // Logindaten speichern und im localstorage speichern
     $("#submit").click(function () {

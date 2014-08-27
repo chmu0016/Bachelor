@@ -46,25 +46,42 @@ function imageSlider() {
             buildClicked = !buildClicked;
             $(buildBtn).next().animate({
                 width: 'toggle'
-            }, 500);
+            }, {
+                duration: 700,
+                queue: false
+            });
             $("#buildBtn").animate({
                 "margin-left": "0px"
-            }, 500);
+            }, {
+                duration: 900,
+                queue: false
+            });
             $("#roomBtn").animate({
                 "margin-left": "0px"
-            }, 500, function () {
-                depBtnAction();
+            }, {
+                duration: 900,
+                queue: false,
+                complete: function () {
+                    depBtnAction();
+                }
             });
 
         } else if (roomClicked == true) {
             roomClicked = !roomClicked;
             $(roomBtn).next().animate({
                 width: 'toggle'
-            }, 500);
+            }, {
+                duration: 900,
+                queue: false
+            });
             $("#roomBtn").animate({
                 "margin-left": "0px"
-            }, 500, function () {
-                depBtnAction();
+            }, {
+                duration: 700,
+                queue: false,
+                complete: function () {
+                    depBtnAction();
+                }
             });
         } else {
             // nichts machen
@@ -80,10 +97,16 @@ function imageSlider() {
         $("#bereichImageContent").width(totalImgWidth);
         $("#buildBtn").animate({
             "margin-left": totalImgWidth + "px"
-        }, 1000);
+        }, {
+            duration: 700,
+            queue: false
+        });
         $(depBtn).next().animate({
             width: 'toggle'
-        }, 1000);
+        }, {
+            duration: 900,
+            queue: false
+        });
     }
     // Klick auf ein Bereichsbild und zuweisung der Gebäude
     $(".bereiche").click(function () {
@@ -92,16 +115,22 @@ function imageSlider() {
         var bereichIdLength = bereichId.length;
         var bereichIdSubstr = bereichId.substring(7, bereichIdLength);
         buildingAuth(bereichIdSubstr);
+
         $(depBtn).next().animate({
             width: 'toggle'
-        }, 1000);
-
+        }, {
+            duration: 700,
+            queue: false
+        });
         $("#buildBtn").animate({
             "margin-left": "0px"
-        }, 1000, function () {
-            buildBtnAction();
+        }, {
+            duration: 900,
+            queue: false,
+            complete: function () {
+                buildBtnAction();
+            }
         });
-
     });
 
     //////////////////////////// Gebäude ////////////////////////////
@@ -113,10 +142,13 @@ function imageSlider() {
             roomClicked = !roomClicked;
             $(roomBtn).next().animate({
                 width: 'toggle'
-            }, 1000, function () {
-                buildBtnAction();
+            }, {
+                duration: 1000,
+                queue: false,
+                complete: function () {
+                    buildBtnAction();
+                }
             });
-
         }
     });
     // Gebäudecontent ausfahren
@@ -131,26 +163,35 @@ function imageSlider() {
         if (buildClicked == true) {
             $("#roomBtn").animate({
                 "margin-left": totalImgWidth + "px"
-            }, 1000);
+            }, {
+                duration: 500,
+                queue: false
+            });
         } else {
             $("#roomBtn").animate({
                 "margin-left": "0px"
-            }, 1000);
+            }, {
+                duration: 500,
+                queue: false
+            });
         }
         $(buildBtn).next().animate({
             width: 'toggle'
-        }, 1000);
+        }, {
+            duration: 700,
+            queue: false
+        });
     }
     depBtnAction();
 }
 // Imageslider Räume Clicklistener und Raum ein-/ausschalten
 function raumClicklistener() {
-    
+
     var roomImageId = $(".roomImage").first().attr("id");
     var roomImageIdLength = roomImageId.length;
     var roomImageIdSubstr = roomImageId.substring(3, roomImageIdLength);
     var tmpClickedImg = roomImageIdSubstr;
-    for(var i = 0; i < roomamount; i++){
+    for (var i = 0; i < roomamount; i++) {
         $("#img" + roomId[i]).removeClass("toggle");
         $("#imgAcc" + roomId[i]).removeClass("toggle");
     }
@@ -232,11 +273,18 @@ function clicklistener() {
         addRoomImageslider(gebäudeIdSubstr);
         $(buildBtn).next().animate({
             width: 'toggle'
-        }, 1000);
+        }, {
+            duration: 700,
+            queue: false
+        });
         $("#roomBtn").animate({
             "margin-left": "0px"
-        }, 1000, function () {
-            roomBtnAction();
+        }, {
+            duration: 900,
+            queue: false,
+            complete: function () {
+                roomBtnAction();
+            }
         });
     });
 }
@@ -252,5 +300,8 @@ function roomBtnAction() {
     $("#raumImageContent").width(totalImgWidth);
     $(roomBtn).next().animate({
         width: 'toggle'
-    }, 1000);
+    }, {
+        duration: 700,
+        queue: false
+    });
 }

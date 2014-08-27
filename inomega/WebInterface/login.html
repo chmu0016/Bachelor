@@ -16,7 +16,7 @@
         <script src="framework/jquery-1.11.1.min.js"></script>
         <script src="framework/jquery-ui.min.js"></script>
 
-         <!--<script src="js/sprachauswahl.js"></script>-->
+        <script src="js/sprachauswahl.js"></script>
         <script src="js/login.js"></script>
         <script src="js/globalVariable.js"></script>
         <script src="js/CI.js"></script>
@@ -25,6 +25,7 @@
     </head>
 
     <body>
+        <div class="bg"></div>
         <div id="ciWrapper">
             <div id="ciName">Name</div>
             <label for="ciWrapper" id="ciLabel">Beleuchtungssteuerung</label>
@@ -36,17 +37,17 @@
                 <form id="loginContent">
                     <div id="loginTopContent">
                         Login</div>
+                    <img src="img/icons/us.svg" id="usIcon" class="loginIcons">
                     <input type="text" id="username" value="user1" placeholder="Nutzername" />
                     <br>
+                    <hr noshade>
+                    <img src="img/icons/pw.svg" id="pwIcon" class="loginIcons">
                     <input type="password" id="passwort" value="user1" placeholder="Passwort" />
                     <br>
                     <div id="sprachContent">
                         <label for="sprachContent" id="sprachContentLabel">Sprache auswählen:</label>
                         <br/>
-                        <img src="img/languages/de.png" id="de" class="flaggen">
-
-                        <img src="img/languages/en.png" id="en" class="flaggen">
-
+      
                     </div>
                     <button type="button" id="submit">Login</button>
                 </form>

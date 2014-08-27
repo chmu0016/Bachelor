@@ -7,7 +7,6 @@ function profilUpload() {
     var base64str, profilname;
 
     $("#profilBildUploadBtn").click(function () {
-        console.warn("Click profilbild");
         $("#profileToUpload").trigger('click');
     });
 
@@ -150,6 +149,7 @@ function profilUpload() {
                 });
 
                 uploadConfig();
+                
             },
             error: function (a, b, c) {
                 console.log(a + " " + b + " " + c);
@@ -165,11 +165,8 @@ function profilUpload() {
         }
 
         function uploadConfig() {
-
-
             var uplConfig = [];
             for (var i = 0; i < lampamount; i++) {
-
                 uplConfig.push({
                     "lamp": lampId[i],
                     "color": lampColor[i],
@@ -178,7 +175,6 @@ function profilUpload() {
                 });
 
                 console.info("up: " + JSON.stringify(uplConfig));
-
             }
             var profileJsonObj = {
                 "name": profilname,
@@ -200,8 +196,7 @@ function profilUpload() {
                 jsonpCallback: "JSONPCallback",
                 data: jsonStrObj,
                 success: function (returnedData) {
-                    console.info(returnedData);
-                    console.log('Success');
+                    profileAuth(parseInt(clickedRoom));
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     console.error('xhr : ' + xhr + " ajaxOptions : " + ajaxOptions + " thrownError : " + thrownError);
@@ -212,6 +207,7 @@ function profilUpload() {
 
             }
         }
+        
     });
 
 }
